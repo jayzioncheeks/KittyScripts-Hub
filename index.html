@@ -242,7 +242,8 @@ print('Hello, ' .. player.Name)"></textarea>
                 'Players', 'Workspace', 'ReplicatedStorage', 'ServerStorage', 'StarterGui',
                 'task', 'os', 'debug', 'coroutine', 'require', 'getfenv', 'setfenv',
                 'loadstring', 'char', 'byte', 'len', 'sub', 'gsub', 'find', 'match',
-                'LocalPlayer', 'Name', 'Character', 'Humanoid', 'WalkSpeed', 'Health'
+                'LocalPlayer', 'Name', 'Character', 'Humanoid', 'WalkSpeed', 'Health',
+                'HttpService', 'TweenService', 'RunService', 'UserInputService'
             ];
 
             // Collect variables
@@ -268,19 +269,20 @@ print('Hello, ' .. player.Name)"></textarea>
                 code = code.replace(regex, newVar);
             }
 
-            // Obfuscate strings
+            // Obfuscate strings - Fixed for Delta executor
             code = code.replace(/'([^'\\]*(\\.[^'\\]*)*)'/g, (match, p1) => {
-                return '(string.char(' + strToCharArray(p1) + '))';
+                if (p1.length === 0) return "''";
+                return 'string.char(' + strToCharArray(p1) + ')';
             });
             code = code.replace(/"([^"\\]*(\\.[^"\\]*)*)"/g, (match, p1) => {
-                return '(string.char(' + strToCharArray(p1) + '))';
+                if (p1.length === 0) return '""';
+                return 'string.char(' + strToCharArray(p1) + ')';
             });
 
-            // Create wrapper
+            // Simple wrapper that actually works
             const wrapVar = generateVar();
-            const funcVar = generateVar();
             
-            let wrapped = `local ${wrapVar}=function()${code};end;${wrapVar}()`;
+            let wrapped = `local ${wrapVar}=function() ${code} end;${wrapVar}()`;
 
             document.getElementById('output').value = wrapped;
         }
