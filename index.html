@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lua Obfuscator</title>
+    <title>LuaU Obfuscator</title>
     <style>
         * {
             margin: 0;
@@ -12,155 +12,214 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #1a1a1a;
-            color: #fff;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid #00ff88;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #00ff88;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #999;
+            font-size: 1.1em;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 30px 20px;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #4CAF50;
+        .editor-wrapper {
+            background: #151515;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
 
-        .editor-area {
-            margin-bottom: 20px;
+        .editor-header {
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #4CAF50;
-            font-weight: bold;
+        .editor-title {
+            color: #00ff88;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 10px;
         }
 
         textarea {
             width: 100%;
-            height: 300px;
-            padding: 10px;
-            background: #2a2a2a;
-            color: #fff;
-            border: 2px solid #4CAF50;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
+            height: 400px;
+            padding: 20px;
+            background: #0d0d0d;
+            color: #e0e0e0;
+            border: none;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
             resize: vertical;
         }
 
         textarea:focus {
             outline: none;
-            border-color: #66BB6A;
         }
 
-        .buttons {
+        textarea::placeholder {
+            color: #555;
+        }
+
+        .button-group {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
-            margin: 20px 0;
+            margin: 30px 0;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 12px 30px;
-            font-size: 16px;
+            padding: 14px 32px;
+            font-size: 15px;
+            font-weight: 600;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .btn-obfuscate {
-            background: #4CAF50;
-            color: white;
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6f 100%);
+            color: #0a0a0a;
         }
 
-        .btn-obfuscate:hover {
-            background: #45a049;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
         }
 
-        .btn-copy {
-            background: #2196F3;
-            color: white;
-        }
-
-        .btn-copy:hover {
-            background: #1976D2;
-        }
-
-        .btn-clear {
-            background: #f44336;
-            color: white;
-        }
-
-        .btn-clear:hover {
-            background: #d32f2f;
-        }
-
-        .info {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
+        .btn-secondary {
             background: #2a2a2a;
-            border-radius: 5px;
-            color: #aaa;
+            color: #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #3a3a3a;
+        }
+
+        .btn-danger {
+            background: #ff4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #cc0000;
+        }
+
+        .info-section {
+            text-align: center;
+            padding: 30px;
+            background: #151515;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .info-section p {
+            color: #999;
             font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .success-msg {
+            color: #00ff88;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>LuaU Obfuscator</h1>
+        <p>Built to protect Roblox Lua scripts</p>
+    </div>
+
     <div class="container">
-        <h1>🔒 Lua Obfuscator</h1>
-
-        <div class="editor-area">
-            <label>Input Code:</label>
-            <textarea id="input" placeholder="-- Paste your Lua code here"></textarea>
+        <div class="editor-wrapper">
+            <div class="editor-header">
+                <span class="editor-title">Input Script</span>
+            </div>
+            <textarea id="input" placeholder="-- Paste your Lua code here
+local player = game.Players.LocalPlayer
+print('Hello, ' .. player.Name)"></textarea>
         </div>
 
-        <div class="buttons">
-            <button class="btn-obfuscate" onclick="obfuscate()">Obfuscate</button>
-            <button class="btn-copy" onclick="copyOutput()">Copy Output</button>
-            <button class="btn-clear" onclick="clearAll()">Clear</button>
+        <div class="button-group">
+            <button class="btn-primary" onclick="obfuscate()">Obfuscate</button>
+            <button class="btn-secondary" onclick="copyOutput()">Copy</button>
+            <button class="btn-secondary" onclick="downloadOutput()">Download</button>
+            <button class="btn-danger" onclick="clearAll()">New Script</button>
         </div>
 
-        <div class="editor-area">
-            <label>Obfuscated Output:</label>
-            <textarea id="output" readonly placeholder="Obfuscated code will appear here..."></textarea>
+        <div class="editor-wrapper">
+            <div class="editor-header">
+                <span class="editor-title">Obfuscated Output</span>
+            </div>
+            <textarea id="output" readonly placeholder="Your obfuscated code will appear here..."></textarea>
         </div>
 
-        <div class="info">
-            Optimized for Roblox executors • Creates unreadable code
+        <div class="info-section">
+            <p>This tool uses advanced obfuscation techniques to protect your Roblox Lua scripts.<br>
+            <span class="success-msg">Free • No limitations • Optimized for Roblox executors</span></p>
         </div>
     </div>
 
     <script>
-        function randomString(length) {
+        function generateVar(len = 16) {
             const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             let result = '';
-            for (let i = 0; i < length; i++) {
+            for (let i = 0; i < len; i++) {
                 result += chars[Math.floor(Math.random() * chars.length)];
             }
-            return '_' + result;
+            return 'l' + result;
         }
 
-        function encryptString(str) {
-            let result = '';
+        function strToCharArray(str) {
+            let codes = [];
             for (let i = 0; i < str.length; i++) {
-                result += str.charCodeAt(i) + (i < str.length - 1 ? ',' : '');
+                codes.push(str.charCodeAt(i));
             }
-            return `string.char(${result})`;
+            return codes.join(',');
         }
 
         function obfuscate() {
             const input = document.getElementById('input').value;
             
             if (!input.trim()) {
-                alert('Please enter some code to obfuscate!');
+                alert('Please enter code to obfuscate');
                 return;
             }
 
@@ -170,80 +229,89 @@
             code = code.replace(/--\[\[[\s\S]*?\]\]/g, '');
             code = code.replace(/--[^\n]*/g, '');
 
-            // Collect all variables (excluding Lua keywords and common Roblox services)
-            const keywords = [
+            // Protected keywords
+            const protected = [
                 'local', 'function', 'end', 'if', 'then', 'else', 'elseif', 
-                'while', 'do', 'for', 'repeat', 'until', 'return', 'break',
+                'while', 'do', 'for', 'repeat', 'until', 'return', 'break', 'continue',
                 'true', 'false', 'nil', 'and', 'or', 'not', 'in',
-                'print', 'warn', 'error', 'assert', 'pcall', 'xpcall',
-                'string', 'table', 'math', 'pairs', 'ipairs', 'next',
-                'tonumber', 'tostring', 'type', 'getmetatable', 'setmetatable',
-                'game', 'workspace', 'wait', 'spawn', 'delay',
-                'Instance', 'Vector3', 'Vector2', 'CFrame', 'UDim2', 'Color3',
-                'Players', 'Workspace', 'ReplicatedStorage', 'ServerStorage',
-                'task', 'tick', 'os', 'debug', 'coroutine'
+                'print', 'warn', 'error', 'assert', 'pcall', 'xpcall', 'select',
+                'string', 'table', 'math', 'pairs', 'ipairs', 'next', 'unpack',
+                'tonumber', 'tostring', 'type', 'getmetatable', 'setmetatable', 'rawget', 'rawset',
+                'game', 'workspace', 'wait', 'spawn', 'delay', 'tick', 'typeof',
+                'Instance', 'Vector3', 'Vector2', 'CFrame', 'UDim2', 'Color3', 'Enum',
+                'Players', 'Workspace', 'ReplicatedStorage', 'ServerStorage', 'StarterGui',
+                'task', 'os', 'debug', 'coroutine', 'require', 'getfenv', 'setfenv',
+                'loadstring', 'char', 'byte', 'len', 'sub', 'gsub', 'find', 'match',
+                'LocalPlayer', 'Name', 'Character', 'Humanoid', 'WalkSpeed', 'Health'
             ];
 
+            // Collect variables
             const varMap = new Map();
-            const varPattern = /\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g;
+            const pattern = /\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g;
             let match;
+            const seen = new Set();
 
-            // First pass: identify all variables
-            const tempCode = code;
-            while ((match = varPattern.exec(tempCode)) !== null) {
-                const varName = match[1];
-                if (!keywords.includes(varName) && !varMap.has(varName)) {
-                    varMap.set(varName, randomString(12));
+            while ((match = pattern.exec(code)) !== null) {
+                const name = match[1];
+                if (!protected.includes(name) && !seen.has(name)) {
+                    seen.add(name);
+                    varMap.set(name, generateVar());
                 }
             }
 
-            // Replace variables (sort by length to avoid partial replacements)
-            const sortedVars = Array.from(varMap.entries()).sort((a, b) => b[0].length - a[0].length);
+            // Sort by length (longest first) to prevent partial replacements
+            const sorted = Array.from(varMap.entries()).sort((a, b) => b[0].length - a[0].length);
             
-            for (const [oldName, newName] of sortedVars) {
-                const regex = new RegExp(`\\b${oldName}\\b`, 'g');
-                code = code.replace(regex, newName);
+            // Replace variables
+            for (const [oldVar, newVar] of sorted) {
+                const regex = new RegExp(`\\b${oldVar}\\b`, 'g');
+                code = code.replace(regex, newVar);
             }
 
-            // Encrypt string literals
-            code = code.replace(/'([^'\\]*(\\.[^'\\]*)*)'/g, (match, str) => {
-                return encryptString(str);
+            // Obfuscate strings
+            code = code.replace(/'([^'\\]*(\\.[^'\\]*)*)'/g, (match, p1) => {
+                return '(string.char(' + strToCharArray(p1) + '))';
             });
-            code = code.replace(/"([^"\\]*(\\.[^"\\]*)*)"/g, (match, str) => {
-                return encryptString(str);
+            code = code.replace(/"([^"\\]*(\\.[^"\\]*)*)"/g, (match, p1) => {
+                return '(string.char(' + strToCharArray(p1) + '))';
             });
 
-            // Add junk code and control flow
-            const junkVar1 = randomString(10);
-            const junkVar2 = randomString(10);
-            const junkVar3 = randomString(10);
-            const execFunc = randomString(10);
-
-            // Wrap in multiple layers
-            let obfuscated = `local ${junkVar1}=${Math.floor(Math.random() * 10000)};`;
-            obfuscated += `local ${junkVar2}=function(${junkVar3})return ${junkVar3}*2 end;`;
-            obfuscated += `local ${execFunc}=function()`;
-            obfuscated += code;
-            obfuscated += ` end;${execFunc}()`;
-
-            // Add even more wrapping for extreme obfuscation
-            const wrapperFunc = randomString(10);
-            const stateVar = randomString(10);
+            // Create wrapper
+            const wrapVar = generateVar();
+            const funcVar = generateVar();
             
-            obfuscated = `(function()local ${wrapperFunc}=function(${stateVar})if ${stateVar}==true then ${obfuscated} end end;${wrapperFunc}(true)end)()`;
+            let wrapped = `local ${wrapVar}=function()${code};end;${wrapVar}()`;
 
-            document.getElementById('output').value = obfuscated;
+            document.getElementById('output').value = wrapped;
         }
 
         function copyOutput() {
             const output = document.getElementById('output');
             if (!output.value) {
-                alert('No output to copy!');
+                alert('Nothing to copy - obfuscate your code first!');
                 return;
             }
             output.select();
             document.execCommand('copy');
-            alert('Copied to clipboard!');
+            alert('✓ Copied to clipboard!');
+        }
+
+        function downloadOutput() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                alert('Nothing to download - obfuscate your code first!');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'obfuscated.lua';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         function clearAll() {
@@ -251,15 +319,19 @@
             document.getElementById('output').value = '';
         }
 
-        // Load example on page load
+        // Example code
         window.addEventListener('load', () => {
-            document.getElementById('input').value = `-- Example Roblox Script
+            document.getElementById('input').value = `-- Example Script
 local player = game.Players.LocalPlayer
 local message = "Hello, World!"
 
 function greet()
     print(message)
     warn("Player: " .. player.Name)
+end
+
+for i = 1, 10 do
+    print("Count: " .. i)
 end
 
 greet()`;
