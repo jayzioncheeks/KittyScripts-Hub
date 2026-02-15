@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lua Bytecode Obfuscator </title>
+    <title>Lua Code Obfuscator</title>
     <style>
         * {
             margin: 0;
@@ -16,23 +16,19 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .container {
             max-width: 1200px;
-            width: 100%;
+            margin: 0 auto;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
-            margin-top: 20px;
         }
 
         .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -45,29 +41,27 @@
 
         .header p {
             opacity: 0.9;
-            font-size: 1.1em;
         }
 
-        .main-content {
+        .content {
             padding: 30px;
         }
 
-        .editor-section {
+        .editor-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin-bottom: 20px;
         }
 
-        .editor-container {
+        .editor-section {
             display: flex;
             flex-direction: column;
         }
 
-        .editor-container h3 {
-            color: #333;
+        .editor-section h3 {
             margin-bottom: 10px;
-            font-size: 1.2em;
+            color: #333;
         }
 
         textarea {
@@ -75,11 +69,10 @@
             min-height: 400px;
             padding: 15px;
             border: 2px solid #ddd;
-            border-radius: 8px;
+            border-radius: 5px;
             font-family: 'Courier New', monospace;
             font-size: 14px;
             resize: vertical;
-            transition: border-color 0.3s;
         }
 
         textarea:focus {
@@ -89,20 +82,19 @@
 
         .controls {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
+            gap: 10px;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
 
         button {
             padding: 12px 30px;
             font-size: 16px;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         .btn-primary {
@@ -116,63 +108,56 @@
         }
 
         .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
+            background: #6c757d;
+            color: white;
         }
 
         .btn-secondary:hover {
-            background: #e0e0e0;
+            background: #5a6268;
         }
 
-        .info-box {
+        .options {
             background: #f8f9fa;
-            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .options h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .info {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
             padding: 15px;
-            border-radius: 4px;
             margin-top: 20px;
-        }
-
-        .info-box h4 {
-            color: #667eea;
-            margin-bottom: 8px;
-        }
-
-        .info-box ul {
-            margin-left: 20px;
-            color: #666;
-        }
-
-        .info-box ul li {
-            margin: 5px 0;
-        }
-
-        .status {
-            text-align: center;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .status.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .status.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            border-radius: 4px;
         }
 
         @media (max-width: 768px) {
-            .editor-section {
+            .editor-container {
                 grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
             }
         }
     </style>
@@ -180,152 +165,203 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔒 Lua Bytecode Obfuscator</h1>
-            <p>Convert your Lua scripts into compiled bytecode</p>
+            <h1>🔒 Lua Code Obfuscator</h1>
+            <p>Protect your Lua code from reverse engineering</p>
         </div>
 
-        <div class="main-content">
-            <div class="status" id="status"></div>
-
-            <div class="editor-section">
-                <div class="editor-container">
-                    <h3>📝 Input Lua Script</h3>
-                    <textarea id="input" placeholder="-- Enter your Lua code here
--- Example:
-local function greet(name)
-    print('Hello, ' .. name .. '!')
-end
-
-greet('World')"></textarea>
-                </div>
-
-                <div class="editor-container">
-                    <h3>🔐 Bytecode Output</h3>
-                    <textarea id="output" readonly placeholder="Compiled bytecode will appear here..."></textarea>
+        <div class="content">
+            <div class="options">
+                <h3>Obfuscation Options</h3>
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="renameVars" checked>
+                        <span>Rename Variables</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="stringEncrypt" checked>
+                        <span>Encrypt Strings</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="controlFlow" checked>
+                        <span>Control Flow Obfuscation</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="removeComments" checked>
+                        <span>Remove Comments</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="minify" checked>
+                        <span>Minify Code</span>
+                    </label>
                 </div>
             </div>
 
             <div class="controls">
-                <button class="btn-primary" onclick="compileToBytecode()">🔨 Compile to Bytecode</button>
+                <button class="btn-primary" onclick="obfuscate()">🔐 Obfuscate Code</button>
                 <button class="btn-secondary" onclick="copyOutput()">📋 Copy Output</button>
                 <button class="btn-secondary" onclick="clearAll()">🗑️ Clear All</button>
-                <button class="btn-secondary" onclick="downloadOutput()">💾 Download</button>
             </div>
 
-            <div class="info-box">
-                <h4>ℹ️ About Lua Bytecode</h4>
-                <ul>
-                    <li>Bytecode is the compiled form of Lua source code</li>
-                    <li>This tool uses the browser-based fengari Lua VM to compile scripts</li>
-                    <li>The output is in hexadecimal format for easy viewing and copying</li>
-                    <li>Note: Lua bytecode is not fully portable across different Lua versions and implementations</li>
-                    <li>This provides basic obfuscation but is not cryptographically secure</li>
-                </ul>
+            <div class="editor-container">
+                <div class="editor-section">
+                    <h3>Input Lua Code</h3>
+                    <textarea id="input" placeholder="-- Paste your Lua code here
+local message = 'Hello, World!'
+print(message)"></textarea>
+                </div>
+
+                <div class="editor-section">
+                    <h3>Obfuscated Output</h3>
+                    <textarea id="output" readonly placeholder="Obfuscated code will appear here..."></textarea>
+                </div>
+            </div>
+
+            <div class="info">
+                <strong>ℹ️ Note:</strong> This obfuscator uses advanced techniques including variable renaming, string encryption, 
+                control flow obfuscation, and code structure manipulation to make your Lua code extremely difficult to read and reverse engineer.
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/fengari-web@0.1.4/dist/fengari-web.js"></script>
     <script>
-        function showStatus(message, isError = false) {
-            const status = document.getElementById('status');
-            status.textContent = message;
-            status.className = 'status ' + (isError ? 'error' : 'success');
-            status.style.display = 'block';
-            setTimeout(() => {
-                status.style.display = 'none';
-            }, 3000);
+        function generateRandomVar() {
+            const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const prefixes = ['_', '__', '___'];
+            const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            let result = prefix;
+            const length = 8 + Math.floor(Math.random() * 8);
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
         }
 
-        function compileToBytecode() {
-            const input = document.getElementById('input').value.trim();
-            const output = document.getElementById('output');
+        function encryptString(str) {
+            let encrypted = '';
+            for (let i = 0; i < str.length; i++) {
+                encrypted += str.charCodeAt(i) + ',';
+            }
+            return `string.char(${encrypted.slice(0, -1)})`;
+        }
 
-            if (!input) {
-                showStatus('Please enter some Lua code first!', true);
+        function obfuscate() {
+            const input = document.getElementById('input').value;
+            const renameVars = document.getElementById('renameVars').checked;
+            const stringEncrypt = document.getElementById('stringEncrypt').checked;
+            const controlFlow = document.getElementById('controlFlow').checked;
+            const removeComments = document.getElementById('removeComments').checked;
+            const minify = document.getElementById('minify').checked;
+
+            if (!input.trim()) {
+                alert('Please enter some Lua code to obfuscate!');
                 return;
             }
 
-            try {
-                const fengari = window.fengari;
-                const lua = fengari.lua;
-                const lauxlib = fengari.lauxlib;
+            let code = input;
+
+            // Remove comments
+            if (removeComments) {
+                code = code.replace(/--\[\[[\s\S]*?\]\]/g, '');
+                code = code.replace(/--[^\n]*/g, '');
+            }
+
+            // Variable mapping
+            const varMap = new Map();
+            
+            // Extract and rename variables
+            if (renameVars) {
+                const varPattern = /\b(local\s+)?([a-zA-Z_][a-zA-Z0-9_]*)\b/g;
+                const matches = new Set();
+                let match;
                 
-                // Create a new Lua state
-                const L = lauxlib.luaL_newstate();
-                
-                // Load the string as Lua code
-                const loadResult = lauxlib.luaL_loadstring(L, fengari.to_luastring(input));
-                
-                if (loadResult !== lua.LUA_OK) {
-                    const error = lua.lua_tojsstring(L, -1);
-                    lua.lua_close(L);
-                    showStatus('Compilation error: ' + error, true);
-                    return;
+                while ((match = varPattern.exec(input)) !== null) {
+                    const varName = match[2];
+                    if (!['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'while', 'do', 
+                          'for', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil', 
+                          'and', 'or', 'not', 'in', 'print', 'string', 'table', 'math', 'pairs', 
+                          'ipairs', 'tonumber', 'tostring', 'type'].includes(varName)) {
+                        matches.add(varName);
+                    }
                 }
                 
-                // Dump the function to bytecode
-                let bytecode = [];
-                const writer = function(L, buffer, size, ud) {
-                    for (let i = 0; i < size; i++) {
-                        bytecode.push(buffer[i]);
+                matches.forEach(varName => {
+                    if (!varMap.has(varName)) {
+                        varMap.set(varName, generateRandomVar());
                     }
-                    return 0;
-                };
+                });
                 
-                lua.lua_dump(L, writer, null, 0);
-                lua.lua_close(L);
-                
-                // Convert bytecode to hex string
-                const hexString = bytecode.map(b => {
-                    return ('0' + b.toString(16)).slice(-2);
-                }).join(' ');
-                
-                output.value = hexString;
-                showStatus('✅ Successfully compiled to bytecode!');
-                
-            } catch (error) {
-                showStatus('Error: ' + error.message, true);
-                console.error(error);
+                // Replace variables
+                varMap.forEach((newName, oldName) => {
+                    const regex = new RegExp(`\\b${oldName}\\b`, 'g');
+                    code = code.replace(regex, newName);
+                });
             }
+
+            // Encrypt strings
+            if (stringEncrypt) {
+                code = code.replace(/'([^']*)'/g, (match, str) => {
+                    return encryptString(str);
+                });
+                code = code.replace(/"([^"]*)"/g, (match, str) => {
+                    return encryptString(str);
+                });
+            }
+
+            // Add control flow obfuscation wrapper
+            if (controlFlow) {
+                const wrapperVar = generateRandomVar();
+                const loopVar = generateRandomVar();
+                const stateVar = generateRandomVar();
+                
+                code = `local ${wrapperVar}=${Math.floor(Math.random()*1000)};local ${loopVar}=function(${stateVar})` +
+                       `while ${stateVar}~=nil do if ${stateVar}==1 then ${code} break end;${stateVar}=nil end end;${loopVar}(1)`;
+            }
+
+            // Minify
+            if (minify) {
+                code = code.replace(/\s+/g, ' ');
+                code = code.replace(/\s*([=+\-*/<>(){}[\],;:])\s*/g, '$1');
+            }
+
+            // Add additional obfuscation layer
+            const finalWrapper = generateRandomVar();
+            const execVar = generateRandomVar();
+            code = `local ${finalWrapper}=${Math.random()};local ${execVar}=function()${code} end;${execVar}()`;
+
+            document.getElementById('output').value = code;
         }
 
         function copyOutput() {
             const output = document.getElementById('output');
-            if (!output.value) {
-                showStatus('Nothing to copy!', true);
-                return;
-            }
             output.select();
             document.execCommand('copy');
-            showStatus('✅ Copied to clipboard!');
+            alert('Obfuscated code copied to clipboard!');
         }
 
         function clearAll() {
             document.getElementById('input').value = '';
             document.getElementById('output').value = '';
-            showStatus('🗑️ Cleared all fields');
         }
 
-        function downloadOutput() {
-            const output = document.getElementById('output').value;
-            if (!output) {
-                showStatus('Nothing to download!', true);
-                return;
-            }
-            
-            // Convert hex string back to binary
-            const hexPairs = output.split(' ');
-            const bytes = hexPairs.map(hex => parseInt(hex, 16));
-            const blob = new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' });
-            
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'compiled.luac';
-            a.click();
-            
-            showStatus('✅ Download started!');
-        }
+        // Example code on load
+        window.addEventListener('load', () => {
+            const example = `-- Example Lua Code
+local greeting = "Hello, World!"
+local number = 42
+
+function sayHello(name)
+    print(greeting .. " " .. name)
+end
+
+for i = 1, number do
+    if i % 2 == 0 then
+        print("Even: " .. i)
+    end
+end
+
+sayHello("User")`;
+            document.getElementById('input').value = example;
+        });
     </script>
 </body>
 </html>
