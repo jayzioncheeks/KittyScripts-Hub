@@ -996,21 +996,37 @@
             }
 
             try {
-                const response = await fetch(`https://scriptblox.com/api/script/search?q=${SCRIPTBLOX_USER}&mode=free&max=100`);
+                let allScripts = [];
+                let page = 1;
+                let hasMore = true;
+                const maxPages = 50; // Safety limit
                 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch scripts');
-                }
+                while (hasMore && page <= maxPages) {
+                    const response = await fetch(`https://scriptblox.com/api/script/search?q=${SCRIPTBLOX_USER}&mode=free&max=100&page=${page}`);
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch scripts');
+                    }
 
-                const data = await response.json();
-                
-                if (data.result && data.result.scripts) {
-                    cachedScripts = data.result.scripts;
-                    cacheTimestamp = Date.now();
-                    return cachedScripts;
+                    const data = await response.json();
+                    
+                    if (data.result && data.result.scripts && data.result.scripts.length > 0) {
+                        allScripts = allScripts.concat(data.result.scripts);
+                        
+                        // Check if there are more pages
+                        if (data.result.scripts.length < 100) {
+                            hasMore = false;
+                        } else {
+                            page++;
+                        }
+                    } else {
+                        hasMore = false;
+                    }
                 }
                 
-                return [];
+                cachedScripts = allScripts;
+                cacheTimestamp = Date.now();
+                return cachedScripts;
             } catch (error) {
                 console.error('Error fetching scripts:', error);
                 showToast('Error fetching scripts from ScriptBlox', 'error');
@@ -1146,12 +1162,16 @@
                 <div class="loading-state">
                     <div class="loading-spinner"></div>
                     <h3>Loading scripts...</h3>
-                    <p>Fetching from ScriptBlox</p>
+                    <p>Fetching all scripts from ScriptBlox</p>
                 </div>
             `;
             
             const scripts = await fetchScriptBloxScripts(forceRefresh);
             renderScripts(scripts);
+            
+            if (scripts.length > 0) {
+                showToast(`Loaded ${scripts.length} scripts!`, 'success');
+            }
         }
 
         document.querySelectorAll('.tab').forEach(tab => {
@@ -1187,4 +1207,4 @@
         }, CACHE_DURATION);
     </script>
 </body>
-    </html>
+</html>
