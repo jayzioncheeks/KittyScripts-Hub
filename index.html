@@ -219,7 +219,7 @@
         
         .social-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
         }
         
         .discord-icon-btn, .youtube-icon-btn, .tiktok-icon-btn, .keysystem-icon-btn {
@@ -253,8 +253,9 @@
         }
 
         .keysystem-icon-btn {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+            background: transparent;
+            box-shadow: none;
+            border: 1px solid var(--border-subtle);
         }
         
         .discord-icon-btn::before, .youtube-icon-btn::before, .tiktok-icon-btn::before, .keysystem-icon-btn::before {
@@ -289,7 +290,8 @@
 
         .keysystem-icon-btn:hover {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 4px 12px var(--accent-glow);
+            border-color: var(--accent-primary);
         }
         
         .discord-icon-btn:active, .youtube-icon-btn:active, .tiktok-icon-btn:active, .keysystem-icon-btn:active {
@@ -915,9 +917,7 @@
                 </svg>
             </button>
             <button class="keysystem-icon-btn" onclick="window.open('https://zxkuhl.github.io/KEY-system/', '_blank')" aria-label="Key System">
-                <svg class="keysystem-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm0-4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm12.93 0c-.59-.59-1.52-.59-2.12 0l-1.42 1.42-1.41-1.41 1.41-1.42c.59-.59.59-1.53 0-2.12s-1.52-.59-2.12 0l-3.54 3.54c-.59.59-.59 1.53 0 2.12.59.59 1.52.59 2.12 0l1.42-1.42 1.41 1.41-1.41 1.42c-.59.59-.59 1.53 0 2.12.29.29.68.44 1.06.44s.77-.15 1.06-.44l3.54-3.54c.59-.59.59-1.53 0-2.12z" fill="white"/>
-                </svg>
+                <img src="https://raw.githubusercontent.com/jayzioncheeks/KittyScripts-Hub/refs/heads/main/X%20logo.png" alt="Key System" style="width: 28px; height: 28px; object-fit: contain;">
             </button>
         </div>
     </nav>
@@ -1130,11 +1130,17 @@
                     ${script.game ? `<p style="color: var(--text-muted); margin-bottom: 1rem;">Game: ${escapeHtml(script.game.name || 'Unknown')}</p>` : ''}
                     <pre>${escapeHtml(script.script || 'No script content available')}</pre>
                     <div class="script-actions">
-                        <button class="copy-btn" onclick="copyScript(\`${escapeHtml(script.script || '').replace(/`/g, '\\`')}\`)">
+                        <button class="copy-btn">
                             Copy Script
                         </button>
                     </div>
                 `;
+
+                // Add event listener for copy button
+                const copyBtn = scriptCard.querySelector('.copy-btn');
+                copyBtn.addEventListener('click', () => {
+                    copyScript(script.script || '');
+                });
 
                 scriptsContainer.appendChild(scriptCard);
             });
