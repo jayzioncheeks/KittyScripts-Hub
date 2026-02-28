@@ -186,7 +186,7 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
-        .discord-icon-btn:hover::before, .youtube-icon-btn:hover::before { left: 100%; }
+        .discord-icon-btn:hover::before, .youtube-icon-btn::before { left: 100%; }
         .discord-icon-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(88,101,242,0.4); }
         .youtube-icon-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(255,0,0,0.4); }
         .discord-icon, .youtube-icon { width: 20px; height: 20px; fill: white; }
@@ -289,7 +289,7 @@
         .scriptblox-attr a:hover { text-decoration: underline; }
 
         /* ===== SCRIPTS TAB ===== */
-        #scriptsTab, #logsTab { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        #scriptsTab { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .script-header {
             display: flex;
@@ -523,84 +523,6 @@
         }
         .view-btn:hover { background: rgba(124, 58, 237, 0.15); border-color: var(--accent-primary); transform: translateY(-2px); }
         
-        /* ===== LOGS TAB ===== */
-        .logs-header-actions { display: flex; gap: 0.75rem; align-items: center; }
-        .add-btn {
-            width: 54px; height: 54px;
-            border-radius: 50%; border: none;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: white; font-size: 28px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 24px var(--accent-glow);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .add-btn:hover { transform: scale(1.1); }
-        
-        .select-all-btn, .delete-selected-btn, .cancel-edit-btn {
-            padding: 0.625rem 1.25rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-subtle);
-            border-radius: 10px;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Syne', sans-serif;
-            font-weight: 600; font-size: 0.9rem;
-            display: none;
-        }
-        .logs-header-actions.edit-mode .select-all-btn,
-        .logs-header-actions.edit-mode .delete-selected-btn,
-        .logs-header-actions.edit-mode .cancel-edit-btn { display: block; }
-        .select-all-btn:hover, .cancel-edit-btn:hover { border-color: var(--accent-primary); background: rgba(124,58,237,0.1); }
-        .select-all-btn.active { background: var(--accent-primary); border-color: var(--accent-primary); color: white; }
-        .delete-selected-btn { background: var(--danger); border-color: var(--danger); color: white; }
-        .delete-selected-btn:hover { background: #dc2626; transform: translateY(-2px); }
-        
-        .logs-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 1.5rem;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-        .logs-container::-webkit-scrollbar { width: 8px; }
-        .logs-container::-webkit-scrollbar-track { background: var(--bg-elevated); border-radius: 4px; }
-        .logs-container::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 4px; }
-        
-        .log-entry {
-            padding: 1rem; margin-bottom: 0.75rem;
-            background: var(--bg-elevated);
-            border-left: 3px solid var(--accent-primary);
-            border-radius: 8px;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.9rem;
-            animation: slideInLeft 0.3s ease;
-            position: relative; transition: all 0.3s;
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .log-entry.selectable { cursor: pointer; }
-        .log-entry.selectable:hover { background: var(--bg-card); transform: translateX(4px); }
-        .log-entry.selected { background: rgba(239,68,68,0.1); border-left-color: var(--danger); }
-        .log-entry.selected::before {
-            content: '✓'; position: absolute; right: 1rem; top: 50%;
-            transform: translateY(-50%); color: var(--danger); font-weight: bold; font-size: 1.2rem;
-        }
-        .log-entry.created { border-left-color: var(--success); }
-        .log-entry.edited { border-left-color: var(--warning); }
-        .log-entry.deleted { border-left-color: var(--danger); }
-        .log-timestamp { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .log-action { font-weight: 700; margin-bottom: 0.25rem; }
-        .log-entry.created .log-action { color: var(--success); }
-        .log-entry.edited .log-action { color: var(--warning); }
-        .log-entry.deleted .log-action { color: var(--danger); }
-        .log-details { color: var(--text-muted); font-size: 0.85rem; }
-        .empty-logs { text-align: center; padding: 4rem 2rem; color: var(--text-dim); }
-        
         /* ===== FILTER POPUP ===== */
         .popup {
             position: fixed; inset: 0;
@@ -755,7 +677,6 @@
         <div class="tabs">
             <div class="tab active" data-tab="main">Main</div>
             <div class="tab" data-tab="scripts">Scripts</div>
-            <div class="tab" data-tab="logs">Logs</div>
         </div>
         <div class="social-buttons">
             <button class="discord-icon-btn" onclick="window.open('https://discord.gg/KPUPp4m9pJ','_blank')" aria-label="Discord">
@@ -823,25 +744,6 @@
             </div>
             <div class="pagination" id="pagination" style="display:none;"></div>
         </section>
-
-        <!-- LOGS TAB -->
-        <section id="logsTab" style="display:none;">
-            <div class="script-header">
-                <h2>Activity Logs</h2>
-                <div class="logs-header-actions" id="logsHeaderActions">
-                    <button class="add-btn" id="clearLogsBtn" aria-label="Edit logs" style="font-size:20px;">🗑️</button>
-                    <button class="select-all-btn" id="selectAllBtn">Select All</button>
-                    <button class="delete-selected-btn" id="deleteSelectedBtn">Delete Selected</button>
-                    <button class="cancel-edit-btn" id="cancelEditBtn">Cancel</button>
-                </div>
-            </div>
-            <div class="logs-container" id="logsContainer">
-                <div class="empty-logs">
-                    <h3>No activity logs yet</h3>
-                    <p>Actions will appear here</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Filter Popup -->
@@ -873,23 +775,8 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyA7sKnlRbrecC-K591ELNJb27Wl_kwZXAc",
-            authDomain: "kittyscriptsweb.firebaseapp.com",
-            projectId: "kittyscriptsweb",
-            storageBucket: "kittyscriptsweb.appspot.com",
-            messagingSenderId: "866548422450",
-            appId: "1:866548422450:web:a327c122f0d8e57fa1e92b"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
         // ===== SCRIPTBLOX API =====
-        const SCRIPTBLOX_USER = 'KittyScriptsRBLX';
+        const SCRIPT_QUERY = 'kitty';
         // Direct ScriptBlox API (has CORS headers for browser requests)
         const API_BASE = 'https://scriptblox.com/api/script';
         const PROXY_BASE = 'https://scriptblox-api-proxy.vercel.app/api';
@@ -926,9 +813,9 @@
             pagination.style.display = 'none';
 
             try {
-                // Build params — search by username
+                // Build params — search by query
                 const params = new URLSearchParams({
-                    q: SCRIPTBLOX_USER,
+                    q: SCRIPT_QUERY,
                     page: page,
                     max: SCRIPTS_PER_PAGE
                 });
@@ -938,8 +825,8 @@
                 else if (filters.keySystem === 'no') params.set('key', '0');
                 if (filters.verified === 'yes') params.set('verified', '1');
 
-                const primaryUrl = `${PROXY_BASE}/search?${params.toString()}`;
-                const fallbackUrl = `${API_BASE}/search?${params.toString()}`;
+                const primaryUrl = `\( {PROXY_BASE}/search? \){params.toString()}`;
+                const fallbackUrl = `\( {API_BASE}/search? \){params.toString()}`;
 
                 const data = await fetchWithFallback(primaryUrl, fallbackUrl);
 
@@ -960,7 +847,7 @@
                         <div style="font-size:3rem">⚠️</div>
                         <h3>Couldn't load scripts</h3>
                         <p style="margin-bottom:1rem">ScriptBlox API is temporarily unavailable.</p>
-                        <a href="https://scriptblox.com/u/${SCRIPTBLOX_USER}" target="_blank" 
+                        <a href="https://scriptblox.com/search?q=kitty" target="_blank" 
                            style="color:var(--accent-bright);text-decoration:none;border:1px solid var(--accent-primary);padding:0.5rem 1.25rem;border-radius:10px;">
                            View on ScriptBlox →
                         </a>
@@ -1018,7 +905,7 @@
                 if (imgSrc && imgSrc.startsWith('/')) imgSrc = 'https://scriptblox.com' + imgSrc;
 
                 const imgHtml = imgSrc
-                    ? `<img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(script.title || '')}" class="script-thumbnail" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    ? `<img src="\( {escapeHtml(imgSrc)}" alt=" \){escapeHtml(script.title || '')}" class="script-thumbnail" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                        <div class="script-thumbnail-placeholder" style="display:none">🐾</div>`
                     : `<div class="script-thumbnail-placeholder">🐾</div>`;
 
@@ -1037,7 +924,7 @@
                     <div class="script-game-name">🎮 ${escapeHtml(gameName)}</div>
                     <pre>${escapeHtml(scriptCode)}</pre>
                     <div class="script-meta">
-                        ${views ? `<span>${views}</span>` : ''}
+                        \( {views ? `<span> \){views}</span>` : ''}
                         ${dateStr ? `<span>📅 ${dateStr}</span>` : ''}
                     </div>
                     <div class="script-actions">
@@ -1097,7 +984,6 @@
                     ta.remove();
                 }
                 showToast('Script copied to clipboard!', 'success');
-                addLog('copied', text.substring(0, 40) + '...');
             } catch {
                 showToast('Failed to copy script', 'error');
             }
@@ -1122,7 +1008,6 @@
                 tab.classList.add('active');
                 document.getElementById('mainTab').style.display = name === 'main' ? 'block' : 'none';
                 document.getElementById('scriptsTab').style.display = name === 'scripts' ? 'block' : 'none';
-                document.getElementById('logsTab').style.display = name === 'logs' ? 'block' : 'none';
                 
                 if (name === 'scripts' && !scriptsLoaded) {
                     scriptsLoaded = true;
@@ -1185,89 +1070,6 @@
             }
         });
 
-        // ===== LOGS (Firebase) =====
-        let selectedLogs = new Set();
-        let isEditMode = false;
-
-        function addLog(action, details = '') {
-            push(ref(db, 'logs'), { action, details, timestamp: Date.now() });
-        }
-
-        function formatTimestamp(ts) {
-            const diff = Date.now() - ts;
-            const mins = Math.floor(diff / 60000);
-            const hours = Math.floor(mins / 60);
-            if (mins < 1) return 'Just now';
-            if (mins < 60) return `${mins}m ago`;
-            if (hours < 24) return `${hours}h ago`;
-            return new Date(ts).toLocaleString();
-        }
-
-        function renderLogs() {
-            onValue(ref(db, 'logs'), (snapshot) => {
-                const container = document.getElementById('logsContainer');
-                container.innerHTML = '';
-                if (!snapshot.exists()) {
-                    container.innerHTML = `<div class="empty-logs"><h3>No activity logs yet</h3><p>Actions will appear here</p></div>`;
-                    return;
-                }
-                const logs = [];
-                snapshot.forEach(c => logs.push({ key: c.key, ...c.val() }));
-                logs.sort((a,b) => b.timestamp - a.timestamp);
-                logs.forEach(log => {
-                    const el = document.createElement('div');
-                    el.className = `log-entry ${log.action}`;
-                    el.dataset.key = log.key;
-                    if (isEditMode) {
-                        el.classList.add('selectable');
-                        if (selectedLogs.has(log.key)) el.classList.add('selected');
-                        el.addEventListener('click', () => {
-                            if (selectedLogs.has(log.key)) { selectedLogs.delete(log.key); el.classList.remove('selected'); }
-                            else { selectedLogs.add(log.key); el.classList.add('selected'); }
-                        });
-                    }
-                    el.innerHTML = `
-                        <div class="log-timestamp">${formatTimestamp(log.timestamp)}</div>
-                        <div class="log-action">${log.action.toUpperCase()}</div>
-                        <div class="log-details">${log.details || ''}</div>
-                    `;
-                    container.appendChild(el);
-                });
-            });
-        }
-
-        renderLogs();
-
-        document.getElementById('clearLogsBtn').addEventListener('click', () => {
-            isEditMode = true;
-            selectedLogs.clear();
-            document.getElementById('logsHeaderActions').classList.add('edit-mode');
-            renderLogs();
-        });
-        document.getElementById('cancelEditBtn').addEventListener('click', () => {
-            isEditMode = false;
-            selectedLogs.clear();
-            document.getElementById('logsHeaderActions').classList.remove('edit-mode');
-            renderLogs();
-        });
-        document.getElementById('selectAllBtn').addEventListener('click', () => {
-            const all = document.querySelectorAll('.log-entry');
-            if (selectedLogs.size === all.length) {
-                selectedLogs.clear();
-                all.forEach(l => l.classList.remove('selected'));
-            } else {
-                all.forEach(l => { selectedLogs.add(l.dataset.key); l.classList.add('selected'); });
-            }
-        });
-        document.getElementById('deleteSelectedBtn').addEventListener('click', () => {
-            if (!selectedLogs.size) { showToast('No logs selected', 'error'); return; }
-            selectedLogs.forEach(key => remove(ref(db, 'logs/' + key)));
-            showToast(`${selectedLogs.size} log(s) deleted`, 'success');
-            selectedLogs.clear();
-            isEditMode = false;
-            document.getElementById('logsHeaderActions').classList.remove('edit-mode');
-        });
-
         // ===== TOAST =====
         function showToast(msg, type = 'success') {
             const t = document.getElementById('toast');
@@ -1281,12 +1083,6 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 document.getElementById('filterPopup').classList.remove('show');
-                if (isEditMode) {
-                    isEditMode = false;
-                    selectedLogs.clear();
-                    document.getElementById('logsHeaderActions').classList.remove('edit-mode');
-                    renderLogs();
-                }
             }
         });
     </script>
