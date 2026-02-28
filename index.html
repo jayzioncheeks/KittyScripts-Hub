@@ -186,7 +186,7 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
-        .discord-icon-btn:hover::before, .youtube-icon-btn::before { left: 100%; }
+        .discord-icon-btn:hover::before, .youtube-icon-btn:hover::before { left: 100%; }
         .discord-icon-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(88,101,242,0.4); }
         .youtube-icon-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(255,0,0,0.4); }
         .discord-icon, .youtube-icon { width: 20px; height: 20px; fill: white; }
@@ -776,7 +776,7 @@
 
     <script type="module">
         // ===== SCRIPTBLOX API =====
-        const SCRIPT_QUERY = 'kitty';
+        const SCRIPT_OWNER = 'KittyScriptsRBLX';
         // Direct ScriptBlox API (has CORS headers for browser requests)
         const API_BASE = 'https://scriptblox.com/api/script';
         const PROXY_BASE = 'https://scriptblox-api-proxy.vercel.app/api';
@@ -813,20 +813,20 @@
             pagination.style.display = 'none';
 
             try {
-                // Build params — search by query
+                // Build params — fetch by owner
                 const params = new URLSearchParams({
-                    q: SCRIPT_QUERY,
                     page: page,
                     max: SCRIPTS_PER_PAGE
                 });
+                params.set('owner', SCRIPT_OWNER);
                 if (filters.universal === 'yes') params.set('universal', '1');
                 else if (filters.universal === 'no') params.set('universal', '0');
                 if (filters.keySystem === 'yes') params.set('key', '1');
                 else if (filters.keySystem === 'no') params.set('key', '0');
                 if (filters.verified === 'yes') params.set('verified', '1');
 
-                const primaryUrl = `\( {PROXY_BASE}/search? \){params.toString()}`;
-                const fallbackUrl = `\( {API_BASE}/search? \){params.toString()}`;
+                const primaryUrl = `\( {PROXY_BASE}/fetch? \){params.toString()}`;
+                const fallbackUrl = `\( {API_BASE}/fetch? \){params.toString()}`;
 
                 const data = await fetchWithFallback(primaryUrl, fallbackUrl);
 
@@ -847,7 +847,7 @@
                         <div style="font-size:3rem">⚠️</div>
                         <h3>Couldn't load scripts</h3>
                         <p style="margin-bottom:1rem">ScriptBlox API is temporarily unavailable.</p>
-                        <a href="https://scriptblox.com/search?q=kitty" target="_blank" 
+                        <a href="https://scriptblox.com/u/${SCRIPT_OWNER}" target="_blank" 
                            style="color:var(--accent-bright);text-decoration:none;border:1px solid var(--accent-primary);padding:0.5rem 1.25rem;border-radius:10px;">
                            View on ScriptBlox →
                         </a>
