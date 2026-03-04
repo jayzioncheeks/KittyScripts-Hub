@@ -1117,6 +1117,8 @@
                 let thumbnailHtml = '';
                 if (script.game && script.game.imageUrl) {
                     thumbnailHtml = `<img src="${script.game.imageUrl}" alt="${escapeHtml(script.title || 'Script')}" class="script-thumbnail" onerror="this.style.display='none'">`;
+                } else if (script.scriptImage) {
+                    thumbnailHtml = `<img src="${script.scriptImage}" alt="${escapeHtml(script.title || 'Script')}" class="script-thumbnail" onerror="this.style.display='none'">`;
                 }
 
                 scriptCard.innerHTML = `
