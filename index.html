@@ -1003,7 +1003,7 @@
             <div class="tab" data-tab="scripts">Scripts</div>
             <div class="tab" data-tab="executors">Executors</div>
             <div class="tab" data-tab="keytut">🔑 Key Guide</div>
-            <div class="tab" data-tab="obfuscator">🔒 Obfuscator <span style="font-size:0.6rem;background:var(--accent-primary);color:white;padding:0.1rem 0.35rem;border-radius:4px;font-weight:800;vertical-align:middle;">BETA</span></div>
+            <div class="tab" data-tab="obfuscator">🔒 Obfuscator</div>
         </div>
     </nav>
     <div class="social-bar">
@@ -1203,8 +1203,8 @@
         <div class="obf-container">
             <div class="obf-header">
                 <div>
-                    <h2>Lua Obfuscator <span style="font-size:0.55em;background:var(--accent-primary);color:white;padding:0.2em 0.55em;border-radius:6px;vertical-align:middle;letter-spacing:0.08em;">BETA</span></h2>
-                    <p class="obf-subtitle">--[[ KittyScripts Obfuscator BETA ]] — decimal encoding + loadstring() wrapping</p>
+                    <h2>Lua Obfuscator</h2>
+                    <p class="obf-subtitle">--[[ KittyScripts Obfuscator ]] — loadstring() wrapping</p>
                 </div>
                 <div class="obf-level-wrap">
                     <label class="obf-level-label">Intensity</label>
@@ -1876,7 +1876,7 @@
                         strLiteral = `[[${current}]]`;
                     }
                     current = [
-                        `--[[ KittyScripts Obfuscator BETA ]]`,
+                        `--[[ KittyScripts Obfuscator ]]`,
                         `local ${sv}=${strLiteral}`,
                         `local ${fv}=loadstring(${sv})`,
                         `if ${fv} then ${fv}() end`,
