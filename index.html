@@ -79,7 +79,6 @@
             66% { transform: translate(-5%, 5%) rotate(240deg); }
         }
 
-        /* ── Theme Toggle ── */
         .theme-toggle {
             position: fixed;
             bottom: 2rem; right: 2rem;
@@ -100,7 +99,6 @@
         [data-theme="light"] .theme-toggle .sun-icon { display: block; }
         [data-theme="light"] .theme-toggle .moon-icon { display: none; }
 
-        /* ── Navbar ── */
         .navbar {
             position: sticky; top: 0; z-index: 100;
             display: flex; align-items: center; justify-content: space-between;
@@ -145,7 +143,6 @@
             border-left: none;
         }
 
-        /* ── Social Bar — left-aligned ── */
         .social-bar {
             position: sticky; top: 57px; z-index: 99;
             display: flex; align-items: center; justify-content: flex-start;
@@ -173,14 +170,12 @@
         .keysystem-icon-btn:hover { border-color: var(--accent-primary); transform: scale(1.1); }
         .discord-icon, .youtube-icon, .tiktok-icon { width: 18px; height: 18px; fill: white; }
 
-        /* ── Content ── */
         .content {
             max-width: 1400px; margin: 0 auto;
             padding: 3rem 2rem;
             position: relative; z-index: 1;
         }
 
-        /* ── Main Tab ── */
         #mainTab {
             text-align: center; padding: 6rem 2rem;
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -213,12 +208,11 @@
         .tagline { font-size: 1.25rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2rem; }
         .tagline span { display: inline-block; animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards; }
         .tagline span:nth-child(1) { animation-delay: 0.2s; }
-        .tagline span:nth-child(2) { animation-delay: 0.3s; color: var(--accent-bright); }
+        .tagline span:nth-child(2) { animation-delay: 0.3s; }
         .tagline span:nth-child(3) { animation-delay: 0.4s; }
         .tagline span:nth-child(4) { animation-delay: 0.5s; color: var(--accent-bright); }
         .tagline span:nth-child(5) { animation-delay: 0.6s; }
 
-        /* ── Scripts Tab ── */
         #scriptsTab { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .script-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -255,10 +249,8 @@
         .refresh-btn.loading svg { animation: spin 1s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* ── Script Grid (masonry) ── */
         #scriptsContainer { columns: 3; column-gap: 1.5rem; }
 
-        /* ── Script Card (clickable preview) ── */
         .script-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
@@ -286,11 +278,7 @@
             box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--border-bright);
         }
 
-        /* Thumbnail */
-        .card-thumb-wrap {
-            width: 100%; overflow: hidden;
-            border-radius: 15px 15px 0 0;
-        }
+        .card-thumb-wrap { width: 100%; overflow: hidden; border-radius: 15px 15px 0 0; }
         .script-thumbnail {
             width: 100%; height: 160px;
             object-fit: cover; display: block;
@@ -298,9 +286,7 @@
         }
         .script-card:hover .script-thumbnail { transform: scale(1.04); }
 
-        /* Card body */
         .card-body { padding: 1.4rem 1.5rem 1.5rem; }
-
         .card-top {
             display: flex; align-items: flex-start;
             justify-content: space-between; gap: 0.5rem;
@@ -308,7 +294,6 @@
         }
         .card-title { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
         .card-game { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem; }
-
         .card-snippet {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.78rem;
@@ -324,11 +309,7 @@
             line-height: 1.5;
             margin-bottom: 1rem;
         }
-
-        .card-footer {
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 0.5rem;
-        }
+        .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
         .script-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
         .badge {
             padding: 0.2rem 0.6rem; border-radius: 6px;
@@ -338,7 +319,6 @@
         .badge.universal { background: linear-gradient(135deg, #10b981, #059669); color: white; }
         .badge.key-system { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
         .badge.verified { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
-
         .view-btn {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-bright));
             color: white; border: none; border-radius: 8px;
@@ -351,7 +331,6 @@
         }
         .view-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px var(--accent-glow); }
 
-        /* ── MODAL ── */
         .modal-overlay {
             position: fixed; inset: 0;
             background: rgba(5, 2, 10, 0.82);
@@ -363,7 +342,6 @@
             transition: opacity 0.3s ease;
         }
         .modal-overlay.open { opacity: 1; pointer-events: all; }
-
         .modal {
             background: var(--bg-card);
             border: 1px solid var(--border-bright);
@@ -376,22 +354,16 @@
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
-        .modal-overlay.open .modal {
-            transform: translateY(0) scale(1);
-        }
-
+        .modal-overlay.open .modal { transform: translateY(0) scale(1); }
         .modal::-webkit-scrollbar { width: 5px; }
         .modal::-webkit-scrollbar-track { background: transparent; }
         .modal::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 3px; }
-
-        /* Top glow stripe */
         .modal::before {
             content: '';
             display: block; height: 3px;
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-bright), var(--accent-primary));
             border-radius: 20px 20px 0 0;
         }
-
         .modal-close {
             position: absolute; top: 1.1rem; right: 1.1rem;
             width: 36px; height: 36px;
@@ -405,17 +377,8 @@
             z-index: 10;
         }
         .modal-close:hover { background: var(--danger); color: white; border-color: var(--danger); transform: rotate(90deg); }
-
-        .modal-thumb {
-            width: 100%; height: 220px;
-            object-fit: cover; display: block;
-        }
-        .modal-thumb-placeholder {
-            width: 100%; height: 6px;
-        }
-
+        .modal-thumb { width: 100%; height: 220px; object-fit: cover; display: block; }
         .modal-body { padding: 1.75rem 2rem 2rem; }
-
         .modal-title-row {
             display: flex; align-items: flex-start;
             justify-content: space-between; gap: 1rem;
@@ -426,8 +389,7 @@
             display: inline-flex; align-items: center; gap: 0.4rem;
             font-size: 0.88rem; color: var(--accent-bright); font-weight: 600;
             margin-bottom: 1.25rem;
-            text-decoration: none;
-            cursor: pointer;
+            text-decoration: none; cursor: pointer;
             padding: 0.35rem 0.75rem;
             background: rgba(124, 58, 237, 0.1);
             border: 1px solid rgba(167, 139, 250, 0.2);
@@ -442,19 +404,13 @@
         }
         .modal-game svg { width: 14px; height: 14px; fill: var(--accent-bright); }
         .modal-game .external-icon { fill: none; stroke: var(--accent-bright); width: 12px; height: 12px; opacity: 0.7; }
-
         .modal-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-
         .modal-section-label {
             font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
             text-transform: uppercase; color: var(--text-dim);
             margin-bottom: 0.6rem;
         }
-
-        .modal-code-wrap {
-            position: relative;
-            margin-bottom: 1.75rem;
-        }
+        .modal-code-wrap { position: relative; margin-bottom: 1.75rem; }
         .modal-code {
             background: var(--bg-elevated);
             border: 1px solid var(--border-subtle);
@@ -472,9 +428,7 @@
         .modal-code::-webkit-scrollbar { width: 5px; height: 5px; }
         .modal-code::-webkit-scrollbar-track { background: transparent; }
         .modal-code::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 3px; }
-
         .modal-actions { display: flex; gap: 0.75rem; }
-
         .btn-copy-modal {
             flex: 1;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-bright));
@@ -498,7 +452,6 @@
         .btn-copy-modal:active::before { width: 400px; height: 400px; }
         .btn-copy-modal:hover { transform: translateY(-2px); box-shadow: 0 10px 28px var(--accent-glow); }
         .btn-copy-modal svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; }
-
         .btn-close-modal {
             background: var(--bg-elevated); border: 1px solid var(--border-bright);
             color: var(--text-muted); border-radius: 12px;
@@ -509,7 +462,6 @@
         }
         .btn-close-modal:hover { border-color: var(--accent-primary); color: var(--text-primary); }
 
-        /* ── Toast ── */
         .toast {
             position: fixed; bottom: 2rem; left: 2rem;
             background: var(--bg-card); border: 1px solid var(--border-bright);
@@ -525,7 +477,6 @@
         .toast.success { border-color: var(--success); }
         .toast.error { border-color: var(--danger); }
 
-        /* ── Loading / Empty ── */
         .loading-spinner { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
         .spinner {
             width: 50px; height: 50px; margin: 0 auto 1rem;
@@ -541,15 +492,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── Responsive ── */
-        @media (max-width: 1100px) {
-            #scriptsContainer { columns: 2; }
-        }
+        @media (max-width: 1100px) { #scriptsContainer { columns: 2; } }
         @media (max-width: 768px) {
             .navbar { padding: 0.6rem 1rem; gap: 0.4rem; }
             .tabs { gap: 0.3rem; }
             .tab { padding: 0.35rem 0.6rem; font-size: 0.72rem; white-space: nowrap; flex-shrink: 0; }
-
             .discord-icon-btn, .youtube-icon-btn, .tiktok-icon-btn, .keysystem-icon-btn { width: 34px; height: 34px; padding: 0.4rem; }
             .discord-icon, .youtube-icon, .tiktok-icon, .keysystem-icon { width: 16px; height: 16px; }
             #mainTab { padding: 3rem 1rem; }
@@ -570,9 +517,8 @@
             .modal-thumb { height: 160px; }
             .social-bar { padding: 0.4rem 1rem; }
         }
-        /* ── Sort Dropdown ── */
-        .sort-wrap { position: relative; }
 
+        .sort-wrap { position: relative; }
         .sort-btn {
             background: var(--bg-elevated); border: 1px solid var(--border-subtle);
             border-radius: 10px; padding: 0.75rem 1rem;
@@ -584,10 +530,8 @@
         }
         .sort-btn:hover { border-color: var(--accent-primary); box-shadow: 0 4px 12px var(--accent-glow); }
         .sort-btn.open { border-color: var(--accent-primary); box-shadow: 0 4px 12px var(--accent-glow); }
-
         .sort-chevron { transition: transform 0.25s ease; flex-shrink: 0; }
         .sort-btn.open .sort-chevron { transform: rotate(180deg); }
-
         .sort-menu {
             position: absolute; top: calc(100% + 0.5rem); left: 0;
             min-width: 180px;
@@ -601,11 +545,7 @@
             transform: translateY(-8px) scale(0.97);
             transition: opacity 0.2s ease, transform 0.2s ease;
         }
-        .sort-menu.open {
-            opacity: 1; pointer-events: all;
-            transform: translateY(0) scale(1);
-        }
-
+        .sort-menu.open { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
         .sort-option {
             padding: 0.7rem 1.1rem;
             font-size: 0.9rem; font-weight: 600;
@@ -616,30 +556,17 @@
         }
         .sort-option:hover { background: var(--bg-elevated); color: var(--text-primary); }
         .sort-option.active { color: var(--accent-bright); background: rgba(124,58,237,0.08); }
-        .sort-option.active::after {
-            content: '✓';
-            font-size: 0.8rem;
-            color: var(--accent-bright);
-        }
+        .sort-option.active::after { content: '✓'; font-size: 0.8rem; color: var(--accent-bright); }
+        @media (max-width: 768px) { .sort-menu { right: 0; left: auto; } }
 
-        @media (max-width: 768px) {
-            .sort-menu { right: 0; left: auto; }
-        }
-        /* ── Executors Tab ── */
-        .exec-filter-bar {
-            display: flex; gap: 0.5rem; flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
+        .exec-filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
         .exec-filter-btn {
-            padding: 0.5rem 1.1rem;
-            border-radius: 20px;
+            padding: 0.5rem 1.1rem; border-radius: 20px;
             border: 1px solid var(--border-subtle);
             background: var(--bg-elevated);
             color: var(--text-muted);
-            font-family: 'Syne', sans-serif;
-            font-size: 0.85rem; font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s ease;
         }
         .exec-filter-btn:hover { border-color: var(--accent-primary); color: var(--text-primary); }
         .exec-filter-btn.active {
@@ -647,344 +574,125 @@
             border-color: transparent; color: white;
             box-shadow: 0 4px 12px var(--accent-glow);
         }
-
-        #executorsContainer {
-            columns: 3; column-gap: 1.5rem;
-        }
-
+        #executorsContainer { columns: 3; column-gap: 1.5rem; }
         .exec-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            break-inside: avoid;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            width: 100%;
-            overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border-subtle);
+            border-radius: 16px; break-inside: avoid; margin-bottom: 1.5rem;
+            display: inline-block; width: 100%; overflow: hidden;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
             position: relative;
         }
         .exec-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
             opacity: 0; transition: opacity 0.4s;
         }
         .exec-card:hover::before { opacity: 1; }
-        .exec-card:hover {
-            border-color: var(--border-bright);
-            transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-        }
+        .exec-card:hover { border-color: var(--border-bright); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
         .exec-card.discontinued { opacity: 0.6; }
         .exec-card.pending { opacity: 0.75; }
-
-        .exec-thumb-wrap {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.25rem 1.25rem 0;
-        }
-        .exec-thumbnail {
-            max-width: 100%;
-            height: auto;
-            max-height: 120px;
-            object-fit: contain;
-            display: block;
-            border-radius: 8px;
-        }
-
+        .exec-thumb-wrap { width: 100%; display: flex; align-items: center; justify-content: center; padding: 1.25rem 1.25rem 0; }
+        .exec-thumbnail { max-width: 100%; height: auto; max-height: 120px; object-fit: contain; display: block; border-radius: 8px; }
         .exec-body { padding: 1.25rem 1.4rem 1.4rem; }
-
-        .exec-status-bar {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 0.6rem;
-        }
-        .exec-status {
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
-            text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 6px;
-        }
+        .exec-status-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
+        .exec-status { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 6px; }
         .exec-status.active { background: rgba(16,185,129,0.15); color: #10b981; }
         .exec-status.discontinued { background: rgba(239,68,68,0.15); color: #ef4444; }
         .exec-status.pending { background: rgba(245,158,11,0.15); color: #f59e0b; }
-
-        .exec-downloads {
-            font-size: 0.78rem; color: var(--text-dim); font-weight: 600;
-            display: flex; align-items: center; gap: 0.3rem;
-        }
-
+        .exec-downloads { font-size: 0.78rem; color: var(--text-dim); font-weight: 600; display: flex; align-items: center; gap: 0.3rem; }
         .exec-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .exec-desc {
-            font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;
-            margin-bottom: 1.1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .exec-platform-btns {
-            display: flex; flex-direction: column; gap: 0.5rem;
-        }
-        .exec-platform-btn {
-            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-            padding: 0.65rem 1rem;
-            border-radius: 10px;
-            font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700;
-            text-decoration: none; cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .exec-platform-windows {
-            background: #0078d4;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0,120,212,0.3);
-        }
+        .exec-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.1rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .exec-platform-btns { display: flex; flex-direction: column; gap: 0.5rem; }
+        .exec-platform-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.65rem 1rem; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; text-decoration: none; cursor: pointer; transition: all 0.25s ease; }
+        .exec-platform-windows { background: #0078d4; color: white; box-shadow: 0 4px 12px rgba(0,120,212,0.3); }
         .exec-platform-windows:hover { background: #106ebe; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,120,212,0.45); }
-        .exec-platform-android {
-            background: #3ddc84;
-            color: #1a1a1a;
-            box-shadow: 0 4px 12px rgba(61,220,132,0.3);
-        }
+        .exec-platform-android { background: #3ddc84; color: #1a1a1a; box-shadow: 0 4px 12px rgba(61,220,132,0.3); }
         .exec-platform-android:hover { background: #2fc870; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(61,220,132,0.45); }
-        .exec-platform-ios {
-            background: #555;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
+        .exec-platform-ios { background: #555; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .exec-platform-ios:hover { background: #444; transform: translateY(-2px); }
-        .exec-platform-mac {
-            background: #555;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
+        .exec-platform-mac { background: #555; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .exec-platform-mac:hover { background: #444; transform: translateY(-2px); }
-        .exec-download-btn.disabled {
-            display: flex; align-items: center; justify-content: center;
-            padding: 0.65rem 1rem; border-radius: 10px;
-            background: var(--bg-elevated); color: var(--text-dim);
-            border: 1px solid var(--border-subtle);
-            font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700;
-        }
-
+        .exec-download-btn.disabled { display: flex; align-items: center; justify-content: center; padding: 0.65rem 1rem; border-radius: 10px; background: var(--bg-elevated); color: var(--text-dim); border: 1px solid var(--border-subtle); font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; }
         @media (max-width: 1100px) { #executorsContainer { columns: 2; } }
         @media (max-width: 768px)  { #executorsContainer { columns: 1; } }
-        /* ── Key Tutorial Tab ── */
-        .keytut-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-            max-width: 720px;
-            margin: 0 auto;
-        }
 
+        .keytut-layout { display: flex; flex-direction: column; gap: 3rem; max-width: 720px; margin: 0 auto; }
         .keytut-video-wrap { display: flex; flex-direction: column; gap: 0.75rem; }
-        .keytut-video-label, .keytut-steps-label {
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
-            text-transform: uppercase; color: var(--text-dim);
-            margin-bottom: 0.25rem;
-        }
-
-        .keytut-video-container {
-            position: relative; width: 100%; padding-top: 177.77%;
-            border-radius: 16px; overflow: hidden;
-            border: 1px solid var(--border-bright);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-            max-height: 560px;
-        }
-        @media (min-width: 480px) {
-            .keytut-video-container {
-                padding-top: 0;
-                height: 560px;
-            }
-        }
-
-        .keytut-video-container iframe {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-            border: none;
-        }
-
-        .keytut-video-note {
-            font-size: 0.85rem; color: var(--text-dim);
-            text-align: center; font-weight: 600;
-            margin-top: 0.25rem;
-        }
-
+        .keytut-video-label, .keytut-steps-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.25rem; }
+        .keytut-video-container { position: relative; width: 100%; padding-top: 177.77%; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-bright); box-shadow: 0 16px 48px rgba(0,0,0,0.5); max-height: 560px; }
+        @media (min-width: 480px) { .keytut-video-container { padding-top: 0; height: 560px; } }
+        .keytut-video-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+        .keytut-video-note { font-size: 0.85rem; color: var(--text-dim); text-align: center; font-weight: 600; margin-top: 0.25rem; }
         .keytut-steps { display: flex; flex-direction: column; gap: 1rem; }
-
-        .keytut-step {
-            display: flex; gap: 1.25rem; align-items: flex-start;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.25rem 1.4rem;
-            transition: border-color 0.2s ease;
-            animation: fadeInUp 0.5s cubic-bezier(0.4,0,0.2,1) backwards;
-        }
+        .keytut-step { display: flex; gap: 1.25rem; align-items: flex-start; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem 1.4rem; transition: border-color 0.2s ease; animation: fadeInUp 0.5s cubic-bezier(0.4,0,0.2,1) backwards; }
         .keytut-step:hover { border-color: var(--border-bright); }
-        .keytut-step:nth-child(1) { animation-delay: 0.05s; }
-        .keytut-step:nth-child(2) { animation-delay: 0.1s; }
-        .keytut-step:nth-child(3) { animation-delay: 0.15s; }
-        .keytut-step:nth-child(4) { animation-delay: 0.2s; }
-
-        .step-num {
-            min-width: 36px; height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-bright));
-            color: white; font-weight: 800; font-size: 0.95rem;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px var(--accent-glow);
-            flex-shrink: 0;
-        }
-
+        .keytut-step:nth-child(1){animation-delay:0.05s}.keytut-step:nth-child(2){animation-delay:0.1s}.keytut-step:nth-child(3){animation-delay:0.15s}.keytut-step:nth-child(4){animation-delay:0.2s}
+        .step-num { min-width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-primary), var(--accent-bright)); color: white; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px var(--accent-glow); flex-shrink: 0; }
         .step-content { display: flex; flex-direction: column; gap: 0.3rem; }
         .step-title { font-size: 1rem; font-weight: 700; }
         .step-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
         .step-desc a { color: var(--accent-bright); text-decoration: none; }
         .step-desc a:hover { text-decoration: underline; }
-        .step-desc code {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.85rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-bright);
-            color: var(--accent-bright);
-            padding: 0.1rem 0.45rem;
-            border-radius: 5px;
-        }
-
-        .keytut-tip {
-            display: flex; gap: 0.75rem; align-items: flex-start;
-            background: rgba(124,58,237,0.08);
-            border: 1px solid rgba(124,58,237,0.25);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;
-            margin-top: 0.5rem;
-        }
+        .step-desc code { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; background: var(--bg-elevated); border: 1px solid var(--border-bright); color: var(--accent-bright); padding: 0.1rem 0.45rem; border-radius: 5px; }
+        .keytut-tip { display: flex; gap: 0.75rem; align-items: flex-start; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.25); border-radius: 12px; padding: 1rem 1.25rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem; }
         .keytut-tip span:first-child { font-size: 1.1rem; flex-shrink: 0; }
-        /* ── Favorites ── */
-        .fav-count-badge {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: #f59e0b; color: white;
-            font-size: 0.65rem; font-weight: 800;
-            width: 18px; height: 18px; border-radius: 50%;
-            margin-left: 0.2rem;
-        }
 
-        .fav-filter-btn {
-            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
-            border-radius: 10px; padding: 0.75rem 1rem;
-            color: var(--text-muted); cursor: pointer;
-            display: flex; align-items: center; gap: 0.5rem;
-            font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem;
-            transition: all 0.2s ease; white-space: nowrap;
-        }
+        .fav-count-badge { display: inline-flex; align-items: center; justify-content: center; background: #f59e0b; color: white; font-size: 0.65rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; margin-left: 0.2rem; }
+        .fav-filter-btn { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.75rem 1rem; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; transition: all 0.2s ease; white-space: nowrap; }
         .fav-filter-btn svg { width: 16px; height: 16px; stroke: var(--text-muted); fill: none; transition: all 0.2s ease; }
         .fav-filter-btn:hover { border-color: #f59e0b; color: #f59e0b; }
         .fav-filter-btn:hover svg { stroke: #f59e0b; }
-        .fav-filter-btn.active {
-            border-color: #f59e0b;
-            background: rgba(245,158,11,0.1);
-            color: #f59e0b;
-            box-shadow: 0 4px 12px rgba(245,158,11,0.2);
-        }
+        .fav-filter-btn.active { border-color: #f59e0b; background: rgba(245,158,11,0.1); color: #f59e0b; box-shadow: 0 4px 12px rgba(245,158,11,0.2); }
         .fav-filter-btn.active svg { stroke: #f59e0b; fill: #f59e0b; }
-
-        /* Star button on card */
-        .fav-star-btn {
-            background: none; border: none; cursor: pointer;
-            padding: 0.3rem; border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s ease; flex-shrink: 0;
-        }
+        .fav-star-btn { background: none; border: none; cursor: pointer; padding: 0.3rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; }
         .fav-star-btn svg { width: 18px; height: 18px; stroke: var(--text-dim); fill: none; transition: all 0.2s ease; }
         .fav-star-btn:hover svg { stroke: #f59e0b; }
         .fav-star-btn.active svg { stroke: #f59e0b; fill: #f59e0b; }
-
-        /* Star button in modal */
-        .btn-fav-modal {
-            background: var(--bg-elevated); border: 1px solid var(--border-bright);
-            color: var(--text-muted); border-radius: 12px;
-            padding: 0.9rem 1rem;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s ease; flex-shrink: 0;
-        }
+        .btn-fav-modal { background: var(--bg-elevated); border: 1px solid var(--border-bright); color: var(--text-muted); border-radius: 12px; padding: 0.9rem 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; }
         .btn-fav-modal svg { width: 20px; height: 20px; stroke: var(--text-muted); fill: none; transition: all 0.2s ease; }
         .btn-fav-modal:hover svg { stroke: #f59e0b; }
         .btn-fav-modal.active { border-color: #f59e0b; background: rgba(245,158,11,0.1); }
         .btn-fav-modal.active svg { stroke: #f59e0b; fill: #f59e0b; }
+
         /* ── Obfuscator ── */
-        #obfuscatorTab { padding: 0; }
-        .obf-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; padding: 0 0.5rem; }
+        #obfuscatorTab { display:none; }
+        .obf-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; padding: 3rem 2rem; }
         .obf-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
         .obf-header h2 { margin: 0 0 0.25rem; font-size: 1.6rem; }
         .obf-subtitle { color: var(--text-dim); font-size: 0.9rem; margin: 0; }
         .obf-level-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; }
         .obf-level-label { font-size: 0.75rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
         .obf-level-btns { display: flex; gap: 0.4rem; }
-        .obf-level-btn {
-            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
-            color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.8rem;
-            font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem;
-            cursor: pointer; transition: all 0.2s;
-        }
+        .obf-level-btn { background: var(--bg-elevated); border: 1px solid var(--border-subtle); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.8rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
         .obf-level-btn:hover { border-color: var(--accent-primary); color: var(--accent-bright); }
         .obf-level-btn.active { background: var(--accent-primary); border-color: var(--accent-primary); color: white; }
-
         .obf-editors { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
         @media (max-width: 768px) { .obf-editors { grid-template-columns: 1fr; } .obf-arrow { transform: rotate(90deg); margin: 0 auto; } }
         .obf-panel { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: var(--bg-elevated); }
-        .obf-panel-header { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-subtle); background: var(--bg-raised); }
+        .obf-panel-header { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-subtle); }
         .obf-panel-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); }
-        .obf-panel-btn {
-            background: none; border: 1px solid var(--border-subtle); color: var(--text-muted);
-            border-radius: 6px; padding: 0.25rem 0.65rem; font-size: 0.8rem; font-weight: 600;
-            cursor: pointer; transition: all 0.2s; font-family: 'Syne', sans-serif;
-        }
+        .obf-panel-btn { background: none; border: 1px solid var(--border-subtle); color: var(--text-muted); border-radius: 6px; padding: 0.25rem 0.65rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Syne', sans-serif; }
         .obf-panel-btn:hover:not(:disabled) { border-color: var(--accent-bright); color: var(--accent-bright); }
         .obf-panel-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-        .obf-textarea {
-            flex: 1; min-height: 320px; resize: vertical;
-            background: transparent; border: none; outline: none;
-            color: var(--text-primary); font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
-            line-height: 1.6; padding: 1rem; tab-size: 4;
-        }
+        .obf-textarea { flex: 1; min-height: 320px; resize: vertical; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; line-height: 1.6; padding: 1rem; tab-size: 4; }
         .obf-textarea::placeholder { color: var(--text-dim); }
         .obf-textarea[readonly] { color: var(--accent-bright); }
-
         .obf-arrow { display: flex; align-items: center; justify-content: center; width: 40px; flex-shrink: 0; }
         .obf-arrow svg { width: 28px; height: 28px; stroke: var(--accent-primary); }
-
         .obf-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
         .obf-stats { font-size: 0.85rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; }
         .obf-stats span { color: var(--accent-bright); font-weight: 700; }
-        .obf-run-btn {
-            background: linear-gradient(135deg, var(--accent-primary), #6d28d9);
-            border: none; color: white; border-radius: 12px;
-            padding: 0.85rem 2rem; font-family: 'Syne', sans-serif; font-weight: 800;
-            font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
-            transition: all 0.2s; box-shadow: 0 4px 20px rgba(124,58,237,0.4);
-        }
+        .obf-run-btn { background: linear-gradient(135deg, var(--accent-primary), #6d28d9); border: none; color: white; border-radius: 12px; padding: 0.85rem 2rem; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s; box-shadow: 0 4px 20px rgba(124,58,237,0.4); }
         .obf-run-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.5); }
         .obf-run-btn:active { transform: translateY(0); }
         .obf-run-btn.running { opacity: 0.7; cursor: not-allowed; }
-        .obf-clear-btn {
-            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
-            color: var(--text-muted); border-radius: 12px; padding: 0.85rem 1.25rem;
-            font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
-            cursor: pointer; transition: all 0.2s;
-        }
+        .obf-clear-btn { background: var(--bg-elevated); border: 1px solid var(--border-subtle); color: var(--text-muted); border-radius: 12px; padding: 0.85rem 1.25rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
         .obf-clear-btn:hover { border-color: var(--danger); color: var(--danger); }
-
         .obf-layers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
         @media (max-width: 900px) { .obf-layers { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 500px) { .obf-layers { grid-template-columns: 1fr; } }
-        .obf-layer-card {
-            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
-            border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.4rem;
-        }
+        .obf-layer-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
         .obf-layer-icon { font-size: 1.4rem; }
         .obf-layer-title { font-weight: 800; font-size: 0.9rem; color: var(--text-primary); }
         .obf-layer-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; }
@@ -1005,7 +713,6 @@
         </svg>
     </button>
 
-    <!-- ── Navbar: brand removed, tabs fill the row ── -->
     <nav class="navbar">
         <div class="nav-tabs">
             <div class="tab active" data-tab="main">Main</div>
@@ -1016,7 +723,6 @@
         </div>
     </nav>
 
-    <!-- ── Social Bar: left-aligned ── -->
     <div class="social-bar">
         <button class="discord-icon-btn" onclick="window.open('https://discord.gg/TdaWNwNAMa','_blank')" aria-label="Discord">
             <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
@@ -1066,10 +772,7 @@
                         </div>
                     </div>
                     <button class="refresh-btn" id="refreshBtn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="23 4 23 10 17 10"></polyline>
-                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
                         Refresh
                     </button>
                     <button class="fav-filter-btn" id="favFilterBtn" title="Show favorites only">
@@ -1080,15 +783,14 @@
                 </div>
             </div>
             <div id="scriptsContainer">
-                <div class="loading-spinner">
-                    <div class="spinner"></div>
-                    <p>Loading scripts from ScriptBlox…</p>
-                </div>
+                <div class="loading-spinner"><div class="spinner"></div><p>Loading scripts from ScriptBlox…</p></div>
             </div>
         </section>
 
         <section id="executorsTab" style="display:none;">
             <div class="script-header">
+                <div class="header-left">
+                    <h2>Executors</h2>
                     <input id="execSearchInput" class="search-input" placeholder="Search executors…" type="search">
                 </div>
                 <div style="display:flex;align-items:center;gap:0.5rem;">
@@ -1096,124 +798,58 @@
                     <a href="https://wearedevs.net/exploits" target="_blank" rel="noopener" style="color:var(--accent-bright);font-size:0.85rem;font-weight:700;text-decoration:none;">WeAreDevs ↗</a>
                 </div>
             </div>
-
             <div class="exec-filter-bar" id="execFilterBar">
                 <button class="exec-filter-btn active" data-filter="all">All</button>
                 <button class="exec-filter-btn" data-filter="active">✅ Active</button>
                 <button class="exec-filter-btn" data-filter="discontinued">🚫 Discontinued</button>
                 <button class="exec-filter-btn" data-filter="pending">⚠️ Pending Fixes</button>
             </div>
-
             <div id="executorsContainer">
-                <div class="loading-spinner">
-                    <div class="spinner"></div>
-                    <p>Loading executors from WeAreDevs…</p>
-                </div>
+                <div class="loading-spinner"><div class="spinner"></div><p>Loading executors…</p></div>
             </div>
         </section>
 
         <section id="keytutTab" style="display:none;">
-            <div class="script-header">
-                <div class="header-left">
-                    <h2>Key Guide</h2>
-                </div>
-            </div>
-
+            <div class="script-header"><div class="header-left"><h2>Key Guide</h2></div></div>
             <div class="keytut-layout">
                 <div class="keytut-video-wrap">
                     <div class="keytut-video-label">Watch the tutorial</div>
                     <div class="keytut-video-container">
-                        <iframe
-                            src="https://www.youtube.com/embed/9WFLMbdrJ9M"
-                            title="How to get a KittyScripts key"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube.com/embed/9WFLMbdrJ9M" title="How to get a KittyScripts key" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <p class="keytut-video-note">Can't watch? Scroll down for written steps ↓</p>
                 </div>
-
                 <div class="keytut-steps" id="writtenSteps">
                     <div class="keytut-steps-label">Step-by-step written guide</div>
-
-                    <div class="keytut-step">
-                        <div class="step-num">1</div>
-                        <div class="step-content">
-                            <div class="step-title">Open the key link</div>
-                            <div class="step-desc">Click the 🔑 key icon button in the top navbar, or go to <a href="https://zxkuhl.github.io/KEY-system/" target="_blank" rel="noopener">zxkuhl.github.io/KEY-system</a>.</div>
-                        </div>
-                    </div>
-
-                    <div class="keytut-step">
-                        <div class="step-num">2</div>
-                        <div class="step-content">
-                            <div class="step-title">Choose your method</div>
-                            <div class="step-desc">You'll be given 3 options — <strong>join the Discord</strong>, complete a <strong>Linkvertise</strong> link, or complete a <strong>Shrinkme.io</strong> link. Pick whichever works best for you.</div>
-                        </div>
-                    </div>
-
-                    <div class="keytut-step">
-                        <div class="step-num">3</div>
-                        <div class="step-content">
-                            <div class="step-title">Complete the steps</div>
-                            <div class="step-desc">Follow the on-screen instructions for the method you chose. Just click through and do what it asks.</div>
-                        </div>
-                    </div>
-
-                    <div class="keytut-step">
-                        <div class="step-num">4</div>
-                        <div class="step-content">
-                            <div class="step-title">You'll be brought to another website</div>
-                            <div class="step-desc">After completing the steps you'll be redirected automatically. Don't close the page!</div>
-                        </div>
-                    </div>
-
-                    <div class="keytut-step">
-                        <div class="step-num">5</div>
-                        <div class="step-content">
-                            <div class="step-title">Generate your key and save it</div>
-                            <div class="step-desc">Hit the generate button and copy your key. Save it somewhere safe — you'll need it every time you use a script.</div>
-                        </div>
-                    </div>
-
-                    <div class="keytut-step">
-                        <div class="step-num">6</div>
-                        <div class="step-content">
-                            <div class="step-title">Execute your script and paste the key</div>
-                            <div class="step-desc">Run the script in your executor. When the key prompt pops up, paste your key <strong>exactly</strong> as shown — for example: <code>FREE-1234</code></div>
-                        </div>
-                    </div>
-
-                    <div class="keytut-step">
-                        <div class="step-num">7</div>
-                        <div class="step-content">
-                            <div class="step-title">Enjoy your scripts! 🎉</div>
-                            <div class="step-desc">You're all set. Have fun and don't forget to check back for new scripts!</div>
-                        </div>
-                    </div>
-
-                    <div class="keytut-tip">
-                        <span>💡</span>
-                        <span>Keys expire every <strong>24 hours</strong>. If a script says your key is invalid, just go back to the key system and grab a fresh one.</span>
-                    </div>
-
-                    <div class="keytut-tip" style="border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.08);">
-                        <span>⏰</span>
-                        <span>Your key is only valid for <strong>24 hours</strong> from when you generated it. After that it expires and you'll need to get a new one — just repeat the steps above!</span>
-                    </div>
+                    <div class="keytut-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Open the key link</div><div class="step-desc">Click the 🔑 key icon button in the top navbar, or go to <a href="https://zxkuhl.github.io/KEY-system/" target="_blank" rel="noopener">zxkuhl.github.io/KEY-system</a>.</div></div></div>
+                    <div class="keytut-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Choose your method</div><div class="step-desc">You'll be given 3 options — <strong>join the Discord</strong>, complete a <strong>Linkvertise</strong> link, or complete a <strong>Shrinkme.io</strong> link. Pick whichever works best for you.</div></div></div>
+                    <div class="keytut-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Complete the steps</div><div class="step-desc">Follow the on-screen instructions for the method you chose. Just click through and do what it asks.</div></div></div>
+                    <div class="keytut-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">You'll be brought to another website</div><div class="step-desc">After completing the steps you'll be redirected automatically. Don't close the page!</div></div></div>
+                    <div class="keytut-step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Generate your key and save it</div><div class="step-desc">Hit the generate button and copy your key. Save it somewhere safe — you'll need it every time you use a script.</div></div></div>
+                    <div class="keytut-step"><div class="step-num">6</div><div class="step-content"><div class="step-title">Execute your script and paste the key</div><div class="step-desc">Run the script in your executor. When the key prompt pops up, paste your key <strong>exactly</strong> as shown — for example: <code>FREE-1234</code></div></div></div>
+                    <div class="keytut-step"><div class="step-num">7</div><div class="step-content"><div class="step-title">Enjoy your scripts! 🎉</div><div class="step-desc">You're all set. Have fun and don't forget to check back for new scripts!</div></div></div>
+                    <div class="keytut-tip"><span>💡</span><span>Keys expire every <strong>24 hours</strong>. If a script says your key is invalid, just go back to the key system and grab a fresh one.</span></div>
+                    <div class="keytut-tip" style="border-color:rgba(239,68,68,0.25);background:rgba(239,68,68,0.08);"><span>⏰</span><span>Your key is only valid for <strong>24 hours</strong> from when you generated it. After that it expires and you'll need to get a new one — just repeat the steps above!</span></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ── Obfuscator ── -->
-    <section id="obfuscatorTab" style="display:none;">
+    <!-- ── Obfuscator Tab (outside .content so it's full-width) ── -->
+    <section id="obfuscatorTab">
         <div class="obf-container">
             <div class="obf-header">
                 <div>
                     <h2>Lua Obfuscator</h2>
-                    <p class="obf-subtitle">--[[ KittyScripts Obfuscator ]] — loadstring() wrapping</p>
+                    <p class="obf-subtitle">--[[ KittyScripts Obfuscator ]] — XOR + shift encoding, split tables, junk injection</p>
+                </div>
+                <div class="obf-level-wrap">
+                    <span class="obf-level-label">Layers</span>
+                    <div class="obf-level-btns">
+                        <button class="obf-level-btn" data-level="1">1</button>
+                        <button class="obf-level-btn active" data-level="2">2</button>
+                        <button class="obf-level-btn" data-level="3">3</button>
+                    </div>
                 </div>
             </div>
 
@@ -1250,6 +886,13 @@
                     </button>
                 </div>
             </div>
+
+            <div class="obf-layers">
+                <div class="obf-layer-card"><div class="obf-layer-icon">🔀</div><div class="obf-layer-title">Split Tables</div><div class="obf-layer-desc">Byte array split into <code>3–6</code> randomly named sub-tables merged at runtime.</div></div>
+                <div class="obf-layer-card"><div class="obf-layer-icon">🔐</div><div class="obf-layer-title">XOR + Shift</div><div class="obf-layer-desc">Each byte encoded with two independent keys: <code>(b XOR k1 + k2) % 256</code>.</div></div>
+                <div class="obf-layer-card"><div class="obf-layer-icon">🗑️</div><div class="obf-layer-title">Junk Injection</div><div class="obf-layer-desc">Dead <code>math</code>, <code>string</code> and <code>type()</code> calls scattered between every section.</div></div>
+                <div class="obf-layer-card"><div class="obf-layer-icon">🏷️</div><div class="obf-layer-title">Name Mangling</div><div class="obf-layer-desc">All variables use <code>l1IlI</code> / <code>_0xhex</code> mixed names — visually unreadable.</div></div>
+            </div>
         </div>
     </section>
 
@@ -1268,12 +911,10 @@
                     <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 </a>
                 <div class="modal-badges" id="modalBadges"></div>
-
                 <div class="modal-section-label">Script</div>
                 <div class="modal-code-wrap">
                     <pre class="modal-code" id="modalCode"></pre>
                 </div>
-
                 <div class="modal-actions">
                     <button class="btn-copy-modal" id="modalCopyBtn">
                         <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -1295,84 +936,60 @@
 
     <script>
         // ── Elements ──
-        const mainTab        = document.getElementById('mainTab');
-        const scriptsTab     = document.getElementById('scriptsTab');
+        const mainTab          = document.getElementById('mainTab');
+        const scriptsTab       = document.getElementById('scriptsTab');
         const scriptsContainer = document.getElementById('scriptsContainer');
-        const toast          = document.getElementById('toast');
-        const searchInput    = document.getElementById('searchInput');
-        const refreshBtn     = document.getElementById('refreshBtn');
-        const themeToggle    = document.getElementById('themeToggle');
+        const toast            = document.getElementById('toast');
+        const searchInput      = document.getElementById('searchInput');
+        const refreshBtn       = document.getElementById('refreshBtn');
+        const themeToggle      = document.getElementById('themeToggle');
+        const modalOverlay     = document.getElementById('modalOverlay');
+        const modalClose       = document.getElementById('modalClose');
+        const modalCloseBtn    = document.getElementById('modalCloseBtn');
+        const modalCopyBtn     = document.getElementById('modalCopyBtn');
+        const modalThumb       = document.getElementById('modalThumb');
+        const modalTitle       = document.getElementById('modalTitle');
+        const modalGame        = document.getElementById('modalGame');
+        const modalGameName    = document.getElementById('modalGameName');
+        const modalBadges      = document.getElementById('modalBadges');
+        const modalCode        = document.getElementById('modalCode');
 
-        const modalOverlay   = document.getElementById('modalOverlay');
-        const modalClose     = document.getElementById('modalClose');
-        const modalCloseBtn  = document.getElementById('modalCloseBtn');
-        const modalCopyBtn   = document.getElementById('modalCopyBtn');
-        const modalThumb     = document.getElementById('modalThumb');
-        const modalTitle     = document.getElementById('modalTitle');
-        const modalGame      = document.getElementById('modalGame');
-        const modalGameName  = document.getElementById('modalGameName');
-        const modalBadges    = document.getElementById('modalBadges');
-        const modalCode      = document.getElementById('modalCode');
-
-        let allScripts = [];
+        let allScripts   = [];
         let currentScript = null;
-        let currentSort = 'default';
+        let currentSort  = 'default';
 
         // ── Sort Dropdown ──
-        const sortBtn    = document.getElementById('sortBtn');
-        const sortMenu   = document.getElementById('sortMenu');
-        const sortLabel  = document.getElementById('sortLabel');
+        const sortBtn   = document.getElementById('sortBtn');
+        const sortMenu  = document.getElementById('sortMenu');
+        const sortLabel = document.getElementById('sortLabel');
+        const sortLabels = { default:'Sort: Default', az:'Sort: A → Z', za:'Sort: Z → A', views:'Sort: Most Viewed', verified:'Sort: Verified', universal:'Sort: Universal' };
 
-        const sortLabels = {
-            default:   'Sort: Default',
-            az:        'Sort: A → Z',
-            za:        'Sort: Z → A',
-            views:     'Sort: Most Viewed',
-            verified:  'Sort: Verified',
-            universal: 'Sort: Universal',
-        };
-
-        sortBtn.addEventListener('click', (e) => {
+        sortBtn.addEventListener('click', e => {
             e.stopPropagation();
             const open = sortMenu.classList.toggle('open');
             sortBtn.classList.toggle('open', open);
             sortBtn.setAttribute('aria-expanded', open);
         });
-
-        document.addEventListener('click', () => {
-            sortMenu.classList.remove('open');
-            sortBtn.classList.remove('open');
-            sortBtn.setAttribute('aria-expanded', false);
-        });
-
-        sortMenu.addEventListener('click', (e) => {
+        document.addEventListener('click', () => { sortMenu.classList.remove('open'); sortBtn.classList.remove('open'); sortBtn.setAttribute('aria-expanded', false); });
+        sortMenu.addEventListener('click', e => {
             const opt = e.target.closest('.sort-option');
             if (!opt) return;
             currentSort = opt.dataset.sort;
             sortLabel.textContent = sortLabels[currentSort];
             document.querySelectorAll('.sort-option').forEach(o => o.classList.toggle('active', o.dataset.sort === currentSort));
-            sortMenu.classList.remove('open');
-            sortBtn.classList.remove('open');
+            sortMenu.classList.remove('open'); sortBtn.classList.remove('open');
             applyFiltersAndSort();
         });
 
         function sortScripts(scripts) {
             const arr = [...scripts];
             switch (currentSort) {
-                case 'az':        return arr.sort((a,b) => {
-                    const ka = a.isUniversal ? (a.title||'') : (a.game?.name || a.title || '');
-                    const kb = b.isUniversal ? (b.title||'') : (b.game?.name || b.title || '');
-                    return ka.localeCompare(kb);
-                });
-                case 'za':        return arr.sort((a,b) => {
-                    const ka = a.isUniversal ? (a.title||'') : (a.game?.name || a.title || '');
-                    const kb = b.isUniversal ? (b.title||'') : (b.game?.name || b.title || '');
-                    return kb.localeCompare(ka);
-                });
-                case 'views':     return arr.sort((a,b) => (b.views||b.viewCount||0) - (a.views||a.viewCount||0));
-                case 'verified':  return arr.sort((a,b) => (b.verified?1:0) - (a.verified?1:0));
-                case 'universal': return arr.sort((a,b) => (b.isUniversal?1:0) - (a.isUniversal?1:0));
-                default:          return arr;
+                case 'az': return arr.sort((a,b) => { const ka = a.isUniversal?(a.title||''):(a.game?.name||a.title||''); const kb = b.isUniversal?(b.title||''):(b.game?.name||b.title||''); return ka.localeCompare(kb); });
+                case 'za': return arr.sort((a,b) => { const ka = a.isUniversal?(a.title||''):(a.game?.name||a.title||''); const kb = b.isUniversal?(b.title||''):(b.game?.name||b.title||''); return kb.localeCompare(ka); });
+                case 'views': return arr.sort((a,b) => (b.views||b.viewCount||0)-(a.views||a.viewCount||0));
+                case 'verified': return arr.sort((a,b) => (b.verified?1:0)-(a.verified?1:0));
+                case 'universal': return arr.sort((a,b) => (b.isUniversal?1:0)-(a.isUniversal?1:0));
+                default: return arr;
             }
         }
 
@@ -1386,95 +1003,57 @@
         });
 
         // ── Utilities ──
-        function escapeHtml(text) {
-            const d = document.createElement('div');
-            d.textContent = text;
-            return d.innerHTML;
-        }
-
+        function escapeHtml(text) { const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
         function showToast(message, type = 'success') {
-            const msg  = toast.querySelector('.toast-message');
+            const msg = toast.querySelector('.toast-message');
             const icon = toast.querySelector('.toast-icon');
-            msg.textContent  = message;
+            msg.textContent = message;
             icon.textContent = type === 'success' ? '✓' : '✕';
-            toast.className  = 'toast show ' + type;
+            toast.className = 'toast show ' + type;
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
-
         async function copyScript(code) {
             try {
                 if (navigator.clipboard && window.isSecureContext) {
                     await navigator.clipboard.writeText(code);
                 } else {
                     const ta = document.createElement('textarea');
-                    ta.value = code;
-                    ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px';
-                    document.body.appendChild(ta);
-                    ta.focus(); ta.select();
-                    document.execCommand('copy');
-                    ta.remove();
+                    ta.value = code; ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px';
+                    document.body.appendChild(ta); ta.focus(); ta.select();
+                    document.execCommand('copy'); ta.remove();
                 }
                 showToast('Script copied to clipboard!', 'success');
-
                 const orig = modalCopyBtn.innerHTML;
                 modalCopyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:white;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
                 modalCopyBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-                setTimeout(() => {
-                    modalCopyBtn.innerHTML = orig;
-                    modalCopyBtn.style.background = '';
-                }, 2000);
-            } catch {
-                showToast('Failed to copy script', 'error');
-            }
+                setTimeout(() => { modalCopyBtn.innerHTML = orig; modalCopyBtn.style.background = ''; }, 2000);
+            } catch { showToast('Failed to copy script', 'error'); }
         }
 
         // ── Modal ──
         function openModal(script) {
             currentScript = script;
-
             const imageUrl = (script.game && script.game.imageUrl) || script.scriptImage || script.image || script.imageUrl;
-            if (imageUrl) {
-                modalThumb.src = imageUrl;
-                modalThumb.style.display = 'block';
-                modalThumb.onerror = () => { modalThumb.style.display = 'none'; };
-            } else {
-                modalThumb.style.display = 'none';
-            }
-
+            if (imageUrl) { modalThumb.src = imageUrl; modalThumb.style.display = 'block'; modalThumb.onerror = () => { modalThumb.style.display = 'none'; }; }
+            else { modalThumb.style.display = 'none'; }
             modalTitle.textContent = script.title || 'Untitled Script';
-
             if (script.game && script.game.name) {
                 modalGameName.textContent = script.game.name;
                 const gameId = script.game.id || script.game.gameId || script.gameId;
-                if (gameId) {
-                    modalGame.href = `https://www.roblox.com/games/${gameId}`;
-                } else {
-                    modalGame.removeAttribute('href');
-                }
+                if (gameId) modalGame.href = `https://www.roblox.com/games/${gameId}`; else modalGame.removeAttribute('href');
                 modalGame.style.display = 'inline-flex';
-            } else {
-                modalGame.style.display = 'none';
-            }
-
+            } else { modalGame.style.display = 'none'; }
             let badges = '';
             if (script.isUniversal) badges += '<span class="badge universal">Universal</span>';
             if (script.key)         badges += '<span class="badge key-system">Key System</span>';
             if (script.verified)    badges += '<span class="badge verified">Verified</span>';
             modalBadges.innerHTML = badges;
-
             modalCode.textContent = script.script || 'No script content available.';
-
             modalOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
             updateModalFavBtn();
         }
-
-        function closeModal() {
-            modalOverlay.classList.remove('open');
-            document.body.style.overflow = '';
-            currentScript = null;
-        }
-
+        function closeModal() { modalOverlay.classList.remove('open'); document.body.style.overflow = ''; currentScript = null; }
         modalClose.addEventListener('click', closeModal);
         modalCloseBtn.addEventListener('click', closeModal);
         modalCopyBtn.addEventListener('click', () => currentScript && copyScript(currentScript.script || ''));
@@ -1488,11 +1067,7 @@
             try {
                 const res  = await fetch('https://scriptblox.com/api/script/search?q=KSRxQmBvZ');
                 const data = await res.json();
-                if (!data.result?.scripts?.length) {
-                    scriptsContainer.innerHTML = `<div class="empty-state"><h3>No scripts found</h3><p>No scripts available from this search</p></div>`;
-                    allScripts = [];
-                    return;
-                }
+                if (!data.result?.scripts?.length) { scriptsContainer.innerHTML = `<div class="empty-state"><h3>No scripts found</h3><p>No scripts available from this search</p></div>`; allScripts = []; return; }
                 allScripts = data.result.scripts;
                 renderScripts(sortScripts(allScripts));
                 showToast(`Loaded ${allScripts.length} scripts!`, 'success');
@@ -1501,33 +1076,23 @@
                 scriptsContainer.innerHTML = `<div class="empty-state"><h3>Error loading scripts</h3><p>Failed to fetch from ScriptBlox. Please try again.</p></div>`;
                 showToast('Failed to load scripts', 'error');
                 allScripts = [];
-            } finally {
-                refreshBtn.classList.remove('loading');
-            }
+            } finally { refreshBtn.classList.remove('loading'); }
         }
 
         // ── Render ──
         function renderScripts(scripts) {
             scriptsContainer.innerHTML = '';
-            if (!scripts.length) {
-                scriptsContainer.innerHTML = `<div class="empty-state"><h3>No scripts match your search</h3><p>Try a different search term</p></div>`;
-                return;
-            }
-
+            if (!scripts.length) { scriptsContainer.innerHTML = `<div class="empty-state"><h3>No scripts match your search</h3><p>Try a different search term</p></div>`; return; }
             scripts.forEach((script, i) => {
                 const card = document.createElement('div');
                 card.className = 'script-card';
                 card.style.animationDelay = `${i * 0.04}s`;
-
                 const imageUrl = (script.game && script.game.imageUrl) || script.scriptImage || script.image || script.imageUrl;
-
                 let badges = '';
                 if (script.isUniversal) badges += '<span class="badge universal">Universal</span>';
                 if (script.key)         badges += '<span class="badge key-system">Key System</span>';
                 if (script.verified)    badges += '<span class="badge verified">Verified</span>';
-
                 const snippet = (script.script || 'No content').split('\n').slice(0, 3).join('\n');
-
                 card.innerHTML = `
                     ${imageUrl ? `<div class="card-thumb-wrap"><img class="script-thumbnail" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(script.title || '')}" onerror="this.closest('.card-thumb-wrap').remove()"></div>` : ''}
                     <div class="card-body">
@@ -1543,95 +1108,44 @@
                             <div class="script-badges">${badges}</div>
                             <button class="view-btn">View Script →</button>
                         </div>
-                    </div>
-                `;
-
+                    </div>`;
                 const starBtn = card.querySelector('.fav-star-btn');
-                starBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    toggleFav(script);
-                    starBtn.classList.toggle('active', isFav(script));
-                    starBtn.title = isFav(script) ? 'Remove from favorites' : 'Add to favorites';
-                });
-
+                starBtn.addEventListener('click', e => { e.stopPropagation(); toggleFav(script); starBtn.classList.toggle('active', isFav(script)); starBtn.title = isFav(script) ? 'Remove from favorites' : 'Add to favorites'; });
                 card.addEventListener('click', () => openModal(script));
                 scriptsContainer.appendChild(card);
             });
         }
 
-        // ── Search + Sort ──
         function applyFiltersAndSort() {
             const q = searchInput.value.toLowerCase().trim();
             let results = allScripts;
             if (showFavsOnly) results = results.filter(s => isFav(s));
-            if (q) results = results.filter(s =>
-                (s.title || '').toLowerCase().includes(q) ||
-                (s.game?.name || '').toLowerCase().includes(q) ||
-                (s.script || '').toLowerCase().includes(q));
-            if (showFavsOnly && !results.length) {
-                scriptsContainer.innerHTML = `<div class="empty-state"><div style="font-size:3rem;">⭐</div><h3>No favorites yet</h3><p>Star scripts to save them here</p></div>`;
-                return;
-            }
+            if (q) results = results.filter(s => (s.title||'').toLowerCase().includes(q) || (s.game?.name||'').toLowerCase().includes(q) || (s.script||'').toLowerCase().includes(q));
+            if (showFavsOnly && !results.length) { scriptsContainer.innerHTML = `<div class="empty-state"><div style="font-size:3rem;">⭐</div><h3>No favorites yet</h3><p>Star scripts to save them here</p></div>`; return; }
             renderScripts(sortScripts(results));
         }
 
         // ── Favorites ──
-        const favCountBadge  = document.getElementById('favCountBadge');
-        const favFilterBtn   = document.getElementById('favFilterBtn');
-        const modalFavBtn    = document.getElementById('modalFavBtn');
-        let showFavsOnly     = false;
+        const favCountBadge = document.getElementById('favCountBadge');
+        const favFilterBtn  = document.getElementById('favFilterBtn');
+        const modalFavBtn   = document.getElementById('modalFavBtn');
+        let showFavsOnly    = false;
 
-        function getFavs() {
-            try { return JSON.parse(localStorage.getItem('ks_favs') || '[]'); } catch { return []; }
-        }
-        function saveFavs(favs) {
-            localStorage.setItem('ks_favs', JSON.stringify(favs));
-            updateFavBadge();
-        }
-        function isFav(script) {
-            return getFavs().some(f => f._id === script._id || f.title === script.title);
-        }
+        function getFavs() { try { return JSON.parse(localStorage.getItem('ks_favs') || '[]'); } catch { return []; } }
+        function saveFavs(favs) { localStorage.setItem('ks_favs', JSON.stringify(favs)); updateFavBadge(); }
+        function isFav(script) { return getFavs().some(f => f._id === script._id || f.title === script.title); }
         function toggleFav(script) {
             let favs = getFavs();
-            if (isFav(script)) {
-                favs = favs.filter(f => f._id !== script._id && f.title !== script.title);
-                showToast('Removed from favorites', 'success');
-            } else {
-                favs.push(script);
-                showToast('⭐ Added to favorites!', 'success');
-            }
+            if (isFav(script)) { favs = favs.filter(f => f._id !== script._id && f.title !== script.title); showToast('Removed from favorites', 'success'); }
+            else { favs.push(script); showToast('⭐ Added to favorites!', 'success'); }
             saveFavs(favs);
-            if (currentScript && (currentScript._id === script._id || currentScript.title === script.title)) {
-                updateModalFavBtn();
-            }
+            if (currentScript && (currentScript._id === script._id || currentScript.title === script.title)) updateModalFavBtn();
             if (showFavsOnly) applyFiltersAndSort();
         }
-        function updateFavBadge() {
-            const count = getFavs().length;
-            if (count > 0) {
-                favCountBadge.textContent = count;
-                favCountBadge.style.display = 'inline-flex';
-            } else {
-                favCountBadge.style.display = 'none';
-            }
-        }
-        function updateModalFavBtn() {
-            if (!currentScript) return;
-            const faved = isFav(currentScript);
-            modalFavBtn.classList.toggle('active', faved);
-            modalFavBtn.title = faved ? 'Remove from favorites' : 'Add to favorites';
-        }
-
-        favFilterBtn.addEventListener('click', () => {
-            showFavsOnly = !showFavsOnly;
-            favFilterBtn.classList.toggle('active', showFavsOnly);
-            applyFiltersAndSort();
-        });
-
-        modalFavBtn.addEventListener('click', () => {
-            if (currentScript) toggleFav(currentScript);
-        });
-
+        function updateFavBadge() { const count = getFavs().length; if (count > 0) { favCountBadge.textContent = count; favCountBadge.style.display = 'inline-flex'; } else { favCountBadge.style.display = 'none'; } }
+        function updateModalFavBtn() { if (!currentScript) return; const faved = isFav(currentScript); modalFavBtn.classList.toggle('active', faved); modalFavBtn.title = faved ? 'Remove from favorites' : 'Add to favorites'; }
+        favFilterBtn.addEventListener('click', () => { showFavsOnly = !showFavsOnly; favFilterBtn.classList.toggle('active', showFavsOnly); applyFiltersAndSort(); });
+        modalFavBtn.addEventListener('click', () => { if (currentScript) toggleFav(currentScript); });
         updateFavBadge();
 
         // ── Tab switching ──
@@ -1640,85 +1154,257 @@
                 const name = tab.dataset.tab;
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-                mainTab.style.display        = name === 'main'        ? 'block' : 'none';
-                scriptsTab.style.display     = name === 'scripts'     ? 'block' : 'none';
-                document.getElementById('executorsTab').style.display   = name === 'executors'   ? 'block' : 'none';
-                document.getElementById('keytutTab').style.display      = name === 'keytut'      ? 'block' : 'none';
-                document.getElementById('obfuscatorTab').style.display  = name === 'obfuscator'  ? 'block' : 'none';
+                mainTab.style.display       = name === 'main'       ? 'block' : 'none';
+                scriptsTab.style.display    = name === 'scripts'    ? 'block' : 'none';
+                document.getElementById('executorsTab').style.display  = name === 'executors'  ? 'block' : 'none';
+                document.getElementById('keytutTab').style.display     = name === 'keytut'     ? 'block' : 'none';
+                document.getElementById('obfuscatorTab').style.display = name === 'obfuscator' ? 'block' : 'none';
                 if (name === 'scripts'   && !allScripts.length) fetchScripts();
                 if (name === 'executors') renderExecutors();
             });
         });
 
-        // ── Obfuscator Engine ──
-        (function() {
-            const input    = document.getElementById('obfInput');
-            const output   = document.getElementById('obfOutput');
-            const runBtn   = document.getElementById('obfRunBtn');
-            const clearBtn = document.getElementById('obfClearBtn');
+        // ── Executors ──
+        const execSearchInput    = document.getElementById('execSearchInput');
+        const executorsContainer = document.getElementById('executorsContainer');
+        const execFilterBtns     = document.querySelectorAll('.exec-filter-btn');
+        const EXECUTORS = [
+            { name:'JJSploit',       downloads:'66.7m+', desc:'Undetected Lua executor with click teleport, ESP, speed, fly, infinite jump, aimbot, and more.',                                          img:'https://wearedevs.net/images/thumbnails/JJSploit.webp',                            status:'active',       platforms:['windows','android'], urls:{windows:'https://wearedevs.net/d/JJSploit',android:'https://wearedevs.net/d/JJSploit-Android'} },
+            { name:'Solara',         downloads:'11.3m+', desc:'Free and keyless executor — the first & best external executor after Hyperion.',                                                          img:'https://obj.wearedevs.net/images/software/solara/solara-011026.webp',              status:'active',       platforms:['windows'],           urls:{windows:'https://getsolara.dev/download/'} },
+            { name:'Ronix',          downloads:'1.5m+',  desc:'100% UNC, free powerful script executor for Windows, Android, iOS, macOS & Linux. Fast, stable, advanced bypass.',                       img:'https://obj.wearedevs.net/images/software/ronix/ronix-020426.webp',                status:'active',       platforms:['windows','android','ios','mac'], urls:{windows:'https://ronix-executor.com/ronix-windows-download/',android:'https://ronix-executor.com/ronix-android/',ios:'https://wearedevs.net/d/Ronix',mac:'https://wearedevs.net/d/Ronix'} },
+            { name:'Delta',          downloads:'1.6m+',  desc:"ALL SCRIPTS WORK! Free and easy to use with 1 AD ONLY! Everyone's favourite choice on Mobile!",                                          img:'https://wearedevs.net/images/thumbnails/delta-120425.webp',                        status:'active',       platforms:['android','ios'],      urls:{android:'https://deltaexploits.gg/delta-executor-android',ios:'https://deltaexploits.gg/delta-executor-ios'} },
+            { name:'Xeno',           downloads:'443.9k+',desc:'An original Lua executor that brought back the scene in full bloom.',                                                                     img:'https://wearedevs.net/images/thumbnails/xeno-112025.webp',                         status:'active',       platforms:['windows'],           urls:{windows:'https://getxeno.net/'} },
+            { name:'Fluxus Z',       downloads:'348.9k+',desc:'90% UNC, fast executor, easy to use, 1-step 40-hour key system. Free to use, clean UI.',                                                img:'https://wearedevs.net/images/thumbnails/fluxus-z-111125.webp',                     status:'active',       platforms:['windows'],           urls:{windows:'https://wearedevs.net/d/Fluxus Z'} },
+            { name:'LX63',           downloads:'110.7k+',desc:'The only free keyless 100% UNC executor right now. Fast, secure, powerful, less crashes.',                                               img:'https://wearedevs.net/images/thumbnails/lx6-080225.webp',                          status:'active',       platforms:['windows'],           urls:{windows:'https://wearedevs.net/d/LX63'} },
+            { name:'Valex',          downloads:'124.1k+',desc:'Undetected external with aimbot, ESP, kill-all, player exploits, and 24/7 anti-cheat protection.',                                      img:'https://wearedevs.net/images/thumbnails/valex.webp',                               status:'active',       platforms:['windows'],           urls:{windows:'https://valex.io/'} },
+            { name:'Pluto',          downloads:'93.9k+', desc:'Seamless FREE external. Undetected, overpowered features, aimbot and ESP, game explorer.',                                               img:'https://obj.wearedevs.net/images/software/pluto/pluto.webp',                       status:'active',       platforms:['windows'],           urls:{windows:'https://pluto.ad/'} },
+            { name:'CheatHub',       downloads:'85.7k+', desc:'ESP, aimbot, and walkspeed changer. Fully external and undetected!',                                                                     img:'https://obj.wearedevs.net/images/software/general/cheathub-012826.webp',           status:'active',       platforms:['windows'],           urls:{windows:'https://wearedevs.net/d/CheatHub'} },
+            { name:'Multiple Games', downloads:'21.1m+', desc:'Usually you are limited to one game open at a time — with this you can open as many as you want.',                                       img:'https://wearedevs.net/images/thumbnails/multiple rbx games.webp',                  status:'active',       platforms:['windows'],           urls:{windows:'https://wearedevs.net/d/Multiple Games'} },
+            { name:'Bunni',          downloads:'144.5k+',desc:'Undetected from CM bans! Free keyed Lua executor with high UNC and amazing script compatibility.',                                       img:'https://wearedevs.net/images/thumbnails/bunni-080125.webp',                        status:'discontinued', platforms:['windows'],           urls:{} },
+            { name:'Drift',          downloads:'395.7k+',desc:'Undetected external and executor. Always work.',                                                                                         img:'https://wearedevs.net/images/thumbnails/drift.webp',                               status:'pending',      platforms:['windows'],           urls:{windows:'https://wearedevs.net/d/Drift'} },
+            { name:'Hydrogen',       downloads:'15.9k+', desc:'Achieves a 96% sUNC score, supporting most scripts, and blocks dangerous functions.',                                                    img:'https://wearedevs.net/images/thumbnails/hydrogen.webp',                            status:'pending',      platforms:['android'],           urls:{android:'https://hydrogenexecutor.com/download/'} },
+            { name:'Punk X',         downloads:'25.3k+', desc:'High-performance executor. Undetected, no lag, stable, & optimized for heavy scripts.',                                                  img:'https://obj.wearedevs.net/images/software/punkx/punkx-012126.webp',                status:'discontinued', platforms:['windows'],           urls:{} },
+            { name:'Nihon',          downloads:'446.6k+',desc:'Nihon — Discontinued.',                                                                                                                  img:'https://wearedevs.net/images/thumbnails/nihon-102325.webp',                        status:'discontinued', platforms:['windows'],           urls:{} },
+            { name:'Krnl',           downloads:'37.4m+', desc:'UNDETECTED, 100 sUNC, 24-hour keys, getconnections, saveinstance, and gethiddenproperty. Runs any script!',                            img:'https://wearedevs.net/images/thumbnails/krnl.jpeg',                                status:'discontinued', platforms:['windows'],           urls:{} },
+        ];
+        let execFilter = 'all', execSearch = '';
+        function renderExecutors() {
+            let list = EXECUTORS;
+            if (execFilter !== 'all') list = list.filter(e => e.status === execFilter);
+            if (execSearch) { const q = execSearch.toLowerCase(); list = list.filter(e => e.name.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q)); }
+            if (!list.length) { executorsContainer.innerHTML = `<div class="empty-state"><h3>No executors found</h3><p>Try a different filter or search term</p></div>`; return; }
+            executorsContainer.innerHTML = '';
+            const platformIcons = {
+                windows: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.548H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg> Windows`,
+                android: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1367 1.0989L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.1185-9.4396"/></svg> Android`,
+                ios:     `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> iOS`,
+                mac:     `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> macOS`,
+            };
+            list.forEach((ex, i) => {
+                const statusLabel = { active:'✅ Active', discontinued:'🚫 Discontinued', pending:'⚠️ Pending Fixes' }[ex.status];
+                const canDownload = ex.status !== 'discontinued';
+                const dlButtons = canDownload
+                    ? ex.platforms.map(p => `<button class="exec-platform-btn exec-platform-${p}" onclick="window.open('${ex.urls[p]||'https://wearedevs.net/exploits'}','_blank')">${platformIcons[p]||p}</button>`).join('')
+                    : `<span class="exec-download-btn disabled">Unavailable</span>`;
+                const card = document.createElement('div');
+                card.className = `exec-card ${ex.status}`;
+                card.style.animationDelay = `${i*0.04}s`;
+                card.innerHTML = `
+                    <div class="exec-thumb-wrap"><img class="exec-thumbnail" src="${ex.img}" alt="${ex.name}" onerror="this.closest('.exec-thumb-wrap').remove()"></div>
+                    <div class="exec-body">
+                        <div class="exec-status-bar">
+                            <span class="exec-status ${ex.status}">${statusLabel}</span>
+                            <span class="exec-downloads"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>${ex.downloads}</span>
+                        </div>
+                        <div class="exec-title">${ex.name}</div>
+                        <div class="exec-desc">${ex.desc}</div>
+                        <div class="exec-platform-btns">${dlButtons}</div>
+                    </div>`;
+                executorsContainer.appendChild(card);
+            });
+        }
+        execFilterBtns.forEach(btn => { btn.addEventListener('click', () => { execFilterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); execFilter = btn.dataset.filter; renderExecutors(); }); });
+        execSearchInput.addEventListener('input', () => { execSearch = execSearchInput.value.trim(); renderExecutors(); });
+
+        searchInput.addEventListener('input', applyFiltersAndSort);
+        refreshBtn.addEventListener('click', fetchScripts);
+
+        // ════════════════════════════════════════════════════════════
+        // ── IMPROVED OBFUSCATOR ENGINE ──────────────────────────────
+        // ════════════════════════════════════════════════════════════
+        (function () {
+            const input     = document.getElementById('obfInput');
+            const output    = document.getElementById('obfOutput');
+            const runBtn    = document.getElementById('obfRunBtn');
+            const clearBtn  = document.getElementById('obfClearBtn');
             const copyBtn   = document.getElementById('obfCopyBtn');
             const selectBtn = document.getElementById('obfSelectBtn');
-            const pasteBtn = document.getElementById('obfPasteBtn');
-            const statsEl  = document.getElementById('obfStats');
-            let obfLevel   = 2;
+            const pasteBtn  = document.getElementById('obfPasteBtn');
+            const statsEl   = document.getElementById('obfStats');
+            let obfLevel    = 2;
 
+            // ── Level button wiring ──
+            document.querySelectorAll('.obf-level-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.obf-level-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    obfLevel = parseInt(btn.dataset.level) || 2;
+                });
+            });
+
+            // ── Utilities ──
             function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-            function randHex(len) { let s=''; for(let i=0;i<len;i++) s+='0123456789abcdef'[rand(0,15)]; return s; }
+            function randHex(len)   { let s=''; for (let i=0;i<len;i++) s+='0123456789abcdef'[rand(0,15)]; return s; }
+
+            // Name generator — mix of _0xhex and l1IlI-style names
+            const PREFIXES = ['_0x','_L','_R','__','_x','lI','Il','l1'];
+            const CONFUSE   = 'lI1lIl1IlI1lI1Il'.split('');
             function randIdent() {
-                const prefixes = ['_0','_x','_L','_R','__'];
-                return prefixes[rand(0,prefixes.length-1)] + randHex(rand(8,14));
+                const p = PREFIXES[rand(0, PREFIXES.length - 1)];
+                const useHex = rand(0, 1);
+                const body = useHex
+                    ? randHex(rand(6, 12))
+                    : [...CONFUSE].sort(() => Math.random() - 0.5).join('').slice(0, rand(8, 14));
+                return p + body;
             }
 
-            function wrapLoad(src, level) {
-                let current = src;
-                const enc = new TextEncoder();
-                for (let i = 0; i < level; i++) {
-                    const shift = rand(40, 90);
-                    const utf8 = enc.encode(current);
-                    const bytes = Array.from(utf8).map(b => (b + shift) % 256);
-                    const fv = randIdent();
-                    const tv = randIdent();
-                    const rv = randIdent();
-                    const iv = randIdent();
-                    const vv = randIdent();
-                    const sv = randIdent();
-                    const rows = [];
-                    for (let j = 0; j < bytes.length; j += 100) {
-                        rows.push(bytes.slice(j, j + 100).join(','));
+            // ── Junk line generator ──
+            // Produces valid Lua that does nothing useful
+            function junkLine() {
+                const flavors = [
+                    () => `local ${randIdent()} = ${rand(0,9999)} * ${rand(1,99)} + ${rand(0,99)}`,
+                    () => `local ${randIdent()} = math.floor(${rand(1,999)} + ${rand(0,99)})`,
+                    () => `local ${randIdent()} = string.len("${randHex(rand(3,8))}")`,
+                    () => `local ${randIdent()} = type(${rand(0,1) ? '"'+randHex(4)+'"' : rand(0,255)})`,
+                    () => `-- ${randHex(rand(6,14))}`,
+                    () => `local ${randIdent()} = tostring(${rand(100,9999)})`,
+                    () => `local ${randIdent()} = (${rand(1,50)} > ${rand(1,50)}) and ${rand(0,9)} or ${rand(0,9)}`,
+                ];
+                return flavors[rand(0, flavors.length - 1)]();
+            }
+            function addJunk(n) { return Array.from({ length: n }, junkLine); }
+
+            // ── XOR helper emitted into Lua ──
+            // Pure bit-loop XOR — compatible with all Roblox Lua versions (no bit32 needed)
+            function emitXorHelper(fnName) {
+                const a=randIdent(), b=randIdent(), r=randIdent(), i=randIdent(), ba=randIdent(), bb=randIdent();
+                return [
+                    `local function ${fnName}(${a},${b})`,
+                    `  local ${r}=0`,
+                    `  for ${i}=0,7 do`,
+                    `    local ${ba}=math.floor(${a}/(2^${i}))%2`,
+                    `    local ${bb}=math.floor(${b}/(2^${i}))%2`,
+                    `    if ${ba}~=${bb} then ${r}=${r}+(2^${i}) end`,
+                    `  end`,
+                    `  return ${r}`,
+                `end`,
+                ];
+            }
+
+            // ── Encode bytes with XOR + shift ──
+            // Encoded value = (byte XOR xorKey + shift) % 256
+            // Lua decode:   byte = XOR( (val - shift + 256) % 256, xorKey )
+            function encodeBytes(utf8Bytes, shift, xorKey) {
+                return utf8Bytes.map(b => ((b ^ xorKey) + shift) % 256);
+            }
+
+            // ── Split encoded array into N named sub-tables, emit merge loop ──
+            function emitSplitTables(encoded) {
+                const numParts = rand(3, 6);
+                const partSize = Math.ceil(encoded.length / numParts);
+                const names    = Array.from({ length: numParts }, randIdent);
+                const lines    = [];
+
+                for (let i = 0; i < numParts; i++) {
+                    const chunk = encoded.slice(i * partSize, (i + 1) * partSize);
+                    const rows  = [];
+                    for (let j = 0; j < chunk.length; j += 80) {
+                        rows.push(chunk.slice(j, j + 80).join(','));
                     }
-                    current = [
-                        `--[[ KittyScripts Obfuscator ]]`,
-                        `local ${tv}={${rows.join(',')}}`,
-                        `local ${rv}={}`,
-                        `for ${iv},${vv} in ipairs(${tv}) do ${rv}[${iv}]=string.char((${vv}-${shift})%256) end`,
-                        `local ${sv}=table.concat(${rv})`,
-                        `local ${fv}=loadstring(${sv})`,
-                        `if ${fv} then ${fv}() end`,
-                    ].join('\n');
+                    lines.push(`local ${names[i]}={${rows.join(',')}}`);
+                }
+
+                const merged = randIdent();
+                lines.push(`local ${merged}={}`);
+                names.forEach(name => {
+                    const idx = randIdent(), val = randIdent();
+                    lines.push(`for ${idx},${val} in ipairs(${name}) do ${merged}[#${merged}+1]=${val} end`);
+                });
+
+                return { lines, merged };
+            }
+
+            // ── Build one obfuscation layer ──
+            function buildLayer(src, junkDensity) {
+                const enc    = new TextEncoder();
+                const utf8   = Array.from(enc.encode(src));
+                const shift  = rand(30, 110);
+                const xorKey = rand(1, 127);
+                const encoded = encodeBytes(utf8, shift, xorKey);
+
+                const xorFn   = randIdent();
+                const outVar  = randIdent();
+                const idxVar  = randIdent();
+                const valVar  = randIdent();
+                const byteVar = randIdent();
+                const catVar  = randIdent();
+                const loadVar = randIdent();
+
+                const { lines: tableLines, merged } = emitSplitTables(encoded);
+                const xorLines = emitXorHelper(xorFn);
+
+                const decodeLines = [
+                    `local ${outVar}={}`,
+                    `for ${idxVar},${valVar} in ipairs(${merged}) do`,
+                    `  local ${byteVar}=(${valVar}-${shift}+256)%256`,
+                    `  ${outVar}[${idxVar}]=string.char(${xorFn}(${byteVar},${xorKey}))`,
+                    `end`,
+                ];
+
+                const allLines = [
+                    `--[[ KittyScripts Obfuscator ]]`,
+                    ...addJunk(junkDensity),
+                    ...xorLines,
+                    ...addJunk(junkDensity),
+                    ...tableLines,
+                    ...addJunk(junkDensity),
+                    ...decodeLines,
+                    ...addJunk(Math.ceil(junkDensity / 2)),
+                    `local ${catVar}=table.concat(${outVar})`,
+                    ...addJunk(Math.ceil(junkDensity / 2)),
+                    `local ${loadVar}=loadstring(${catVar})`,
+                    `if ${loadVar} then ${loadVar}() end`,
+                ];
+
+                return allLines.join('\n');
+            }
+
+            // ── Multi-layer entry ──
+            function obfuscate(src, levels) {
+                let current = src;
+                for (let i = 0; i < levels; i++) {
+                    const junk = i === 0 ? rand(2, 5) : rand(1, 3);
+                    current = buildLayer(current, junk);
                 }
                 return current;
             }
 
-            function obfuscate(src, level) {
-                return wrapLoad(src, level);
-            }
-
+            // ── Button handlers ──
             runBtn.addEventListener('click', () => {
                 const src = input.value.trim();
                 if (!src) { showToast('Paste a script first!', 'error'); return; }
                 runBtn.classList.add('running');
-                runBtn.textContent = 'Obfuscating...';
-
+                runBtn.textContent = 'Obfuscating…';
                 setTimeout(() => {
                     try {
                         const result = obfuscate(src, obfLevel);
-                        output.value = result;
-                        copyBtn.disabled = false;
+                        output.value       = result;
+                        copyBtn.disabled   = false;
                         selectBtn.disabled = false;
                         const ratio = ((result.length / src.length) * 100).toFixed(0);
-                        statsEl.innerHTML = `Input: <span>${src.length.toLocaleString()}</span> chars → Output: <span>${result.length.toLocaleString()}</span> chars (<span>${ratio}%</span> size)`;
+                        statsEl.innerHTML  = `Input: <span>${src.length.toLocaleString()}</span> chars → Output: <span>${result.length.toLocaleString()}</span> chars (<span>${ratio}%</span> size)`;
                         showToast('🔒 Script obfuscated!', 'success');
-                    } catch(e) {
+                    } catch (e) {
                         showToast('Error: ' + e.message, 'error');
                     }
                     runBtn.classList.remove('running');
@@ -1729,169 +1415,40 @@
             selectBtn.addEventListener('click', () => {
                 output.focus();
                 output.setSelectionRange(0, output.value.length);
-                if (window.getSelection) {
-                    const sel = window.getSelection();
-                    sel.removeAllRanges();
-                }
                 selectBtn.textContent = 'Selected! ✓';
                 selectBtn.style.color = 'var(--accent-bright)';
-                setTimeout(() => {
-                    selectBtn.textContent = 'Select All';
-                    selectBtn.style.color = '';
-                }, 2000);
+                setTimeout(() => { selectBtn.textContent = 'Select All'; selectBtn.style.color = ''; }, 2000);
             });
 
             clearBtn.addEventListener('click', () => {
-                input.value = '';
-                output.value = '';
-                copyBtn.disabled = true;
-                selectBtn.disabled = true;
+                input.value = ''; output.value = '';
+                copyBtn.disabled = true; selectBtn.disabled = true;
                 statsEl.innerHTML = '';
             });
 
             copyBtn.addEventListener('click', () => {
                 const text = output.value;
-                const doFallback = () => {
+                const fallback = () => {
                     const ta = document.createElement('textarea');
-                    ta.value = text;
-                    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
-                    document.body.appendChild(ta);
-                    ta.focus();
-                    ta.select();
-                    try {
-                        document.execCommand('copy');
-                        copyBtn.textContent = 'Copied!';
-                    } catch(e) {
-                        copyBtn.textContent = 'Failed';
-                    }
+                    ta.value = text; ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+                    document.body.appendChild(ta); ta.focus(); ta.select();
+                    try { document.execCommand('copy'); copyBtn.textContent = 'Copied!'; } catch { copyBtn.textContent = 'Failed'; }
                     document.body.removeChild(ta);
                     setTimeout(() => copyBtn.textContent = 'Copy', 2000);
                 };
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(text).then(() => {
-                        copyBtn.textContent = 'Copied!';
-                        setTimeout(() => copyBtn.textContent = 'Copy', 2000);
-                    }).catch(() => doFallback());
-                } else {
-                    doFallback();
-                }
+                    navigator.clipboard.writeText(text)
+                        .then(() => { copyBtn.textContent = 'Copied!'; setTimeout(() => copyBtn.textContent = 'Copy', 2000); })
+                        .catch(fallback);
+                } else { fallback(); }
             });
 
             pasteBtn.addEventListener('click', async () => {
-                try {
-                    const text = await navigator.clipboard.readText();
-                    input.value = text;
-                } catch(e) {
-                    showToast('Clipboard access denied — paste manually', 'error');
-                }
+                try { input.value = await navigator.clipboard.readText(); }
+                catch { showToast('Clipboard access denied — paste manually', 'error'); }
             });
         })();
-
-        searchInput.addEventListener('input', applyFiltersAndSort);
-        refreshBtn.addEventListener('click', fetchScripts);
-
-        // ── Executors ──
-        const execSearchInput    = document.getElementById('execSearchInput');
-        const executorsContainer = document.getElementById('executorsContainer');
-        const execFilterBtns     = document.querySelectorAll('.exec-filter-btn');
-
-        const EXECUTORS = [
-            { name: 'JJSploit',       downloads: '66.7m+', desc: 'Undetected Lua executor with click teleport, ESP, speed, fly, infinite jump, aimbot, and more. A powerful all-in-one package.', img: 'https://wearedevs.net/images/thumbnails/JJSploit.webp',                                 wadUrl: 'https://wearedevs.net/d/JJSploit',       status: 'active',       platforms: ['windows','android'], urls: { windows: 'https://wearedevs.net/d/JJSploit', android: 'https://wearedevs.net/d/JJSploit-Android' } },
-            { name: 'Solara',         downloads: '11.3m+', desc: 'Free and keyless executor — the first & best external executor after Hyperion.',                                                img: 'https://obj.wearedevs.net/images/software/solara/solara-011026.webp',                wadUrl: 'https://wearedevs.net/d/Solara',         status: 'active',       platforms: ['windows'],              urls: { windows: 'https://getsolara.dev/download/' } },
-            { name: 'Ronix',          downloads: '1.5m+',  desc: '100% UNC, free powerful script executor for Windows, Android, iOS, macOS & Linux. Fast, stable, advanced bypass.',            img: 'https://obj.wearedevs.net/images/software/ronix/ronix-020426.webp',                 wadUrl: 'https://wearedevs.net/d/Ronix',          status: 'active',       platforms: ['windows','android','ios','mac'], urls: { windows: 'https://ronix-executor.com/ronix-windows-download/', android: 'https://ronix-executor.com/ronix-android/', ios: 'https://wearedevs.net/d/Ronix', mac: 'https://wearedevs.net/d/Ronix' } },
-            { name: 'Delta',          downloads: '1.6m+',  desc: 'ALL SCRIPTS WORK! Free and easy to use with 1 AD ONLY! Everyone\'s favourite choice on Mobile!',                             img: 'https://wearedevs.net/images/thumbnails/delta-120425.webp',                          wadUrl: 'https://wearedevs.net/d/Delta',          status: 'active',       platforms: ['android','ios'],         urls: { android: 'https://deltaexploits.gg/delta-executor-android', ios: 'https://deltaexploits.gg/delta-executor-ios' } },
-            { name: 'Xeno',           downloads: '443.9k+',desc: 'An original Lua executor that brought back the scene in full bloom.',                                                         img: 'https://wearedevs.net/images/thumbnails/xeno-112025.webp',                           wadUrl: 'https://wearedevs.net/d/Xeno',           status: 'active',       platforms: ['windows'],              urls: { windows: 'https://getxeno.net/' } },
-            { name: 'Fluxus Z',       downloads: '348.9k+',desc: '90% UNC, fast executor, easy to use, 1-step 40-hour key system. Free to use, clean UI.',                                     img: 'https://wearedevs.net/images/thumbnails/fluxus-z-111125.webp',                       wadUrl: 'https://wearedevs.net/d/Fluxus Z',       status: 'active',       platforms: ['windows'],              urls: { windows: 'https://wearedevs.net/d/Fluxus Z' } },
-            { name: 'LX63',           downloads: '110.7k+',desc: 'The only free keyless 100% UNC executor right now. Fast, secure, powerful, less crashes. Can run every script!',             img: 'https://wearedevs.net/images/thumbnails/lx6-080225.webp',                            wadUrl: 'https://wearedevs.net/d/LX63',           status: 'active',       platforms: ['windows'],              urls: { windows: 'https://wearedevs.net/d/LX63' } },
-            { name: 'Valex',          downloads: '124.1k+',desc: 'Undetected external with aimbot, ESP, kill-all, player exploits, and 24/7 anti-cheat protection.',                           img: 'https://wearedevs.net/images/thumbnails/valex.webp',                                 wadUrl: 'https://wearedevs.net/d/Valex',          status: 'active',       platforms: ['windows'],              urls: { windows: 'https://valex.io/' } },
-            { name: 'Pluto',          downloads: '93.9k+', desc: 'Seamless FREE external. Undetected, overpowered features, aimbot and ESP, game explorer.',                                   img: 'https://obj.wearedevs.net/images/software/pluto/pluto.webp',                         wadUrl: 'https://wearedevs.net/d/Pluto',          status: 'active',       platforms: ['windows'],              urls: { windows: 'https://pluto.ad/' } },
-            { name: 'CheatHub',       downloads: '85.7k+', desc: 'ESP, aimbot, and walkspeed changer. Fully external and undetected!',                                                         img: 'https://obj.wearedevs.net/images/software/general/cheathub-012826.webp',             wadUrl: 'https://wearedevs.net/d/CheatHub',       status: 'active',       platforms: ['windows'],              urls: { windows: 'https://wearedevs.net/d/CheatHub' } },
-            { name: 'Multiple Games', downloads: '21.1m+', desc: 'Usually you are limited to one game open at a time — with this you can open as many as you want.',                           img: 'https://wearedevs.net/images/thumbnails/multiple rbx games.webp',                    wadUrl: 'https://wearedevs.net/d/Multiple Games', status: 'active',       platforms: ['windows'],              urls: { windows: 'https://wearedevs.net/d/Multiple Games' } },
-            { name: 'Bunni',          downloads: '144.5k+',desc: 'Undetected from CM bans! Free keyed Lua executor with high UNC and amazing script compatibility.',                            img: 'https://wearedevs.net/images/thumbnails/bunni-080125.webp',                          wadUrl: 'https://wearedevs.net/d/Bunni',          status: 'discontinued', platforms: ['windows'],              urls: {} },
-            { name: 'Drift',          downloads: '395.7k+',desc: 'Undetected external and executor. Always work.',                                                                              img: 'https://wearedevs.net/images/thumbnails/drift.webp',                                 wadUrl: 'https://wearedevs.net/d/Drift',          status: 'pending',      platforms: ['windows'],              urls: { windows: 'https://wearedevs.net/d/Drift' } },
-            { name: 'Hydrogen',       downloads: '15.9k+', desc: 'Achieves a 96% sUNC score, supporting most scripts, and blocks dangerous functions.',                                        img: 'https://wearedevs.net/images/thumbnails/hydrogen.webp',                              wadUrl: 'https://wearedevs.net/d/Hydrogen',       status: 'pending',      platforms: ['android'],              urls: { android: 'https://hydrogenexecutor.com/download/' } },
-            { name: 'Punk X',         downloads: '25.3k+', desc: 'High-performance executor. Undetected, no lag, stable, & optimized for heavy scripts with strong sUNC & UNC support.',      img: 'https://obj.wearedevs.net/images/software/punkx/punkx-012126.webp',                 wadUrl: 'https://wearedevs.net/d/Punk X',         status: 'discontinued', platforms: ['windows'],              urls: {} },
-            { name: 'Nihon',          downloads: '446.6k+',desc: 'Nihon — Discontinued.',                                                                                                      img: 'https://wearedevs.net/images/thumbnails/nihon-102325.webp',                          wadUrl: 'https://wearedevs.net/d/Nihon',          status: 'discontinued', platforms: ['windows'],              urls: {} },
-            { name: 'Krnl',           downloads: '37.4m+', desc: 'UNDETECTED, 100 sUNC, 24-hour keys, getconnections, saveinstance, and gethiddenproperty. Runs any script!',                img: 'https://wearedevs.net/images/thumbnails/krnl.jpeg',                                  wadUrl: 'https://wearedevs.net/d/Krnl',           status: 'discontinued', platforms: ['windows'],              urls: {} },
-        ];
-
-        let execFilter = 'all';
-        let execSearch = '';
-
-        function renderExecutors() {
-            let list = EXECUTORS;
-
-            if (execFilter !== 'all') list = list.filter(e => e.status === execFilter);
-
-            if (execSearch) {
-                const q = execSearch.toLowerCase();
-                list = list.filter(e =>
-                    e.name.toLowerCase().includes(q) ||
-                    e.desc.toLowerCase().includes(q)
-                );
-            }
-
-            if (!list.length) {
-                executorsContainer.innerHTML = `<div class="empty-state"><h3>No executors found</h3><p>Try a different filter or search term</p></div>`;
-                return;
-            }
-
-            executorsContainer.innerHTML = '';
-            list.forEach((ex, i) => {
-                const statusLabel = { active: '✅ Active', discontinued: '🚫 Discontinued', pending: '⚠️ Pending Fixes' }[ex.status];
-                const canDownload = ex.status !== 'discontinued';
-
-                const platformIcons = {
-                    windows: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.548H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg> Windows`,
-                    android: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1367 1.0989L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.1185-9.4396"/></svg> Android`,
-                    ios: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> iOS`,
-                    mac: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> macOS`,
-                };
-
-                const dlButtons = canDownload
-                    ? ex.platforms.map(p => {
-                        const url = ex.urls[p] || ex.wadUrl;
-                        return `<button class="exec-platform-btn exec-platform-${p}" onclick="window.open('${url}','_blank')">${platformIcons[p] || p}</button>`;
-                      }).join('')
-                    : `<span class="exec-download-btn disabled">Unavailable</span>`;
-
-                const card = document.createElement('div');
-                card.className = `exec-card ${ex.status}`;
-                card.style.animationDelay = `${i * 0.04}s`;
-                card.innerHTML = `
-                    <div class="exec-thumb-wrap">
-                        <img class="exec-thumbnail" src="${ex.img}" alt="${ex.name}" onerror="this.closest('.exec-thumb-wrap').remove()">
-                    </div>
-                    <div class="exec-body">
-                        <div class="exec-status-bar">
-                            <span class="exec-status ${ex.status}">${statusLabel}</span>
-                            <span class="exec-downloads">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                ${ex.downloads}
-                            </span>
-                        </div>
-                        <div class="exec-title">${ex.name}</div>
-                        <div class="exec-desc">${ex.desc}</div>
-                        <div class="exec-platform-btns">${dlButtons}</div>
-                    </div>
-                `;
-                executorsContainer.appendChild(card);
-            });
-        }
-
-        execFilterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                execFilterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                execFilter = btn.dataset.filter;
-                renderExecutors();
-            });
-        });
-
-        execSearchInput.addEventListener('input', () => {
-            execSearch = execSearchInput.value.trim();
-            renderExecutors();
-        });
+        // ════════════════════════════════════════════════════════════
     </script>
 </body>
 </html>
