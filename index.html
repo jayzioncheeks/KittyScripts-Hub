@@ -119,17 +119,6 @@
         }
         [data-theme="light"] .navbar { background: rgba(243, 240, 247, 0.97); }
 
-        .nav-brand {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800; font-size: 1.2rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-bright));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-            white-space: nowrap; flex-shrink: 0;
-        }
-        .nav-right { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
-        .social-icons-nav { display: flex; align-items: center; gap: 0.4rem; }
-
         .nav-tabs {
             display: flex; align-items: center; gap: 0.25rem;
             overflow-x: auto; scrollbar-width: none;
@@ -156,10 +145,12 @@
             border-left: none;
         }
 
+        /* ── Social Bar — left-aligned ── */
         .social-bar {
             position: sticky; top: 57px; z-index: 99;
-            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-            padding: 0.4rem 1rem;
+            display: flex; align-items: center; justify-content: flex-start;
+            gap: 0.5rem;
+            padding: 0.4rem 1.5rem;
             background: rgba(18, 10, 31, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-subtle);
@@ -555,7 +546,8 @@
             #scriptsContainer { columns: 2; }
         }
         @media (max-width: 768px) {
-            .navbar { padding: 0.6rem 1rem; gap: 0.4rem; }            .tabs { gap: 0.3rem; }
+            .navbar { padding: 0.6rem 1rem; gap: 0.4rem; }
+            .tabs { gap: 0.3rem; }
             .tab { padding: 0.35rem 0.6rem; font-size: 0.72rem; white-space: nowrap; flex-shrink: 0; }
 
             .discord-icon-btn, .youtube-icon-btn, .tiktok-icon-btn, .keysystem-icon-btn { width: 34px; height: 34px; padding: 0.4rem; }
@@ -576,6 +568,7 @@
             .modal-body { padding: 1.25rem 1.25rem 1.5rem; }
             .modal-title { font-size: 1.35rem; }
             .modal-thumb { height: 160px; }
+            .social-bar { padding: 0.4rem 1rem; }
         }
         /* ── Sort Dropdown ── */
         .sort-wrap { position: relative; }
@@ -794,13 +787,12 @@
         }
 
         .keytut-video-container {
-            position: relative; width: 100%; padding-top: 177.77%; /* 9:16 shorts ratio */
+            position: relative; width: 100%; padding-top: 177.77%;
             border-radius: 16px; overflow: hidden;
             border: 1px solid var(--border-bright);
             box-shadow: 0 16px 48px rgba(0,0,0,0.5);
             max-height: 560px;
         }
-        /* Cap height on larger screens so it doesn't go full-page */
         @media (min-width: 480px) {
             .keytut-video-container {
                 padding-top: 0;
@@ -1013,8 +1005,8 @@
         </svg>
     </button>
 
+    <!-- ── Navbar: brand removed, tabs fill the row ── -->
     <nav class="navbar">
-        <div class="nav-brand">KittyScripts</div>
         <div class="nav-tabs">
             <div class="tab active" data-tab="main">Main</div>
             <div class="tab" data-tab="scripts">Scripts</div>
@@ -1023,6 +1015,8 @@
             <div class="tab" data-tab="obfuscator">🔒 Obfuscator</div>
         </div>
     </nav>
+
+    <!-- ── Social Bar: left-aligned ── -->
     <div class="social-bar">
         <button class="discord-icon-btn" onclick="window.open('https://discord.gg/TdaWNwNAMa','_blank')" aria-label="Discord">
             <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
@@ -1126,7 +1120,6 @@
             </div>
 
             <div class="keytut-layout">
-                <!-- Video -->
                 <div class="keytut-video-wrap">
                     <div class="keytut-video-label">Watch the tutorial</div>
                     <div class="keytut-video-container">
@@ -1141,7 +1134,6 @@
                     <p class="keytut-video-note">Can't watch? Scroll down for written steps ↓</p>
                 </div>
 
-                <!-- Written steps -->
                 <div class="keytut-steps" id="writtenSteps">
                     <div class="keytut-steps-label">Step-by-step written guide</div>
 
@@ -1223,7 +1215,6 @@
                     <h2>Lua Obfuscator</h2>
                     <p class="obf-subtitle">--[[ KittyScripts Obfuscator ]] — loadstring() wrapping</p>
                 </div>
-
             </div>
 
             <div class="obf-editors">
@@ -1259,7 +1250,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -1426,7 +1416,6 @@
                 }
                 showToast('Script copied to clipboard!', 'success');
 
-                // Button feedback
                 const orig = modalCopyBtn.innerHTML;
                 modalCopyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:white;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
                 modalCopyBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
@@ -1443,7 +1432,6 @@
         function openModal(script) {
             currentScript = script;
 
-            // Thumbnail
             const imageUrl = (script.game && script.game.imageUrl) || script.scriptImage || script.image || script.imageUrl;
             if (imageUrl) {
                 modalThumb.src = imageUrl;
@@ -1453,10 +1441,8 @@
                 modalThumb.style.display = 'none';
             }
 
-            // Title
             modalTitle.textContent = script.title || 'Untitled Script';
 
-            // Game
             if (script.game && script.game.name) {
                 modalGameName.textContent = script.game.name;
                 const gameId = script.game.id || script.game.gameId || script.gameId;
@@ -1470,17 +1456,14 @@
                 modalGame.style.display = 'none';
             }
 
-            // Badges
             let badges = '';
             if (script.isUniversal) badges += '<span class="badge universal">Universal</span>';
             if (script.key)         badges += '<span class="badge key-system">Key System</span>';
             if (script.verified)    badges += '<span class="badge verified">Verified</span>';
             modalBadges.innerHTML = badges;
 
-            // Code
             modalCode.textContent = script.script || 'No script content available.';
 
-            // Open
             modalOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
             updateModalFavBtn();
@@ -1538,13 +1521,11 @@
 
                 const imageUrl = (script.game && script.game.imageUrl) || script.scriptImage || script.image || script.imageUrl;
 
-                // Badges
                 let badges = '';
                 if (script.isUniversal) badges += '<span class="badge universal">Universal</span>';
                 if (script.key)         badges += '<span class="badge key-system">Key System</span>';
                 if (script.verified)    badges += '<span class="badge verified">Verified</span>';
 
-                // Snippet (first 3 lines)
                 const snippet = (script.script || 'No content').split('\n').slice(0, 3).join('\n');
 
                 card.innerHTML = `
@@ -1565,7 +1546,6 @@
                     </div>
                 `;
 
-                // Star button — toggle fav without opening modal
                 const starBtn = card.querySelector('.fav-star-btn');
                 starBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -1574,7 +1554,6 @@
                     starBtn.title = isFav(script) ? 'Remove from favorites' : 'Add to favorites';
                 });
 
-                // Click card body (not star) → open modal
                 card.addEventListener('click', () => openModal(script));
                 scriptsContainer.appendChild(card);
             });
@@ -1625,7 +1604,6 @@
             if (currentScript && (currentScript._id === script._id || currentScript.title === script.title)) {
                 updateModalFavBtn();
             }
-            // If viewing favs only, re-apply so removed ones disappear
             if (showFavsOnly) applyFiltersAndSort();
         }
         function updateFavBadge() {
@@ -1657,7 +1635,6 @@
         updateFavBadge();
 
         // ── Tab switching ──
-        // ── Hamburger menu ──
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 const name = tab.dataset.tab;
@@ -1685,8 +1662,6 @@
             const statsEl  = document.getElementById('obfStats');
             let obfLevel   = 2;
 
-
-            // ── Helpers ──
             function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
             function randHex(len) { let s=''; for(let i=0;i<len;i++) s+='0123456789abcdef'[rand(0,15)]; return s; }
             function randIdent() {
@@ -1694,176 +1669,11 @@
                 return prefixes[rand(0,prefixes.length-1)] + randHex(rand(8,14));
             }
 
-            // ── String extractor: pull all string literals out before processing ──
-            // Replaces them with safe placeholders so nothing touches them
-            function extractStrings(src) {
-                const strings = [];
-                // Handle: "...", '...', [[...]], [=[...]=] style
-                let result = '';
-                let i = 0;
-                while (i < src.length) {
-                    // Single-line comment -- skip to end of line
-                    if (src[i] === '-' && src[i+1] === '-') {
-                        let end = src.indexOf('\n', i);
-                        if (end === -1) end = src.length;
-                        result += src.slice(i, end);
-                        i = end;
-                        continue;
-                    }
-                    // Double-quoted string
-                    if (src[i] === '"') {
-                        let j = i + 1;
-                        while (j < src.length && src[j] !== '"') {
-                            if (src[j] === '\\') j++;
-                            j++;
-                        }
-                        const str = src.slice(i+1, j);
-                        const ph = `\x00STR${strings.length}\x00`;
-                        strings.push({ val: str, quote: '"' });
-                        result += ph;
-                        i = j + 1;
-                        continue;
-                    }
-                    // Single-quoted string
-                    if (src[i] === "'") {
-                        let j = i + 1;
-                        while (j < src.length && src[j] !== "'") {
-                            if (src[j] === '\\') j++;
-                            j++;
-                        }
-                        const str = src.slice(i+1, j);
-                        const ph = `\x00STR${strings.length}\x00`;
-                        strings.push({ val: str, quote: "'" });
-                        result += ph;
-                        i = j + 1;
-                        continue;
-                    }
-                    // Multiline string [[ ... ]] — keep as-is, don't encode
-                    if (src[i] === '[' && src[i+1] === '[') {
-                        let end = src.indexOf(']]', i+2);
-                        if (end === -1) end = src.length - 2;
-                        const str = src.slice(i, end+2);
-                        const ph = `\x00RAW${strings.length}\x00`;
-                        strings.push({ val: str, raw: true });
-                        result += ph;
-                        i = end + 2;
-                        continue;
-                    }
-                    result += src[i];
-                    i++;
-                }
-                return { src: result, strings };
-            }
-
-            // Restore strings back, optionally encoding them
-            function restoreStrings(src, strings, encode, level) {
-                return src.replace(/\x00(STR|RAW)(\d+)\x00/g, (_, type, idx) => {
-                    const s = strings[parseInt(idx)];
-                    if (type === 'RAW' || s.raw) return s.val; // multiline: always restore raw
-                    if (!encode || s.val.length === 0) return s.quote + s.val + s.quote;
-                    // Skip encoding URLs and Enum paths — they break at runtime
-                    if (s.val.startsWith('http') || s.val.includes('Enum.') || s.val.includes('rbxasset')) {
-                        return s.quote + s.val + s.quote;
-                    }
-                    // Low level: skip long strings
-                    if (level === 1 && s.val.length > 30) return s.quote + s.val + s.quote;
-                    return encodeString(s.val);
-                });
-            }
-
-            // XOR-encode a string into a Lua expression
-            function encodeString(s) {
-                if (!s.length) return '""';
-                const key = rand(1, 90);
-                const bytes = [];
-                for (let i = 0; i < s.length; i++) bytes.push(s.charCodeAt(i) ^ key);
-                const k = randIdent(), t = randIdent(), ii = randIdent(), v = randIdent();
-                return `(function(${k},...) local ${t}={} for ${ii},${v} in ipairs({...}) do ${t}[${ii}]=string.char(bit32.bxor(${v},${k})) end return table.concat(${t}) end)(${key},${bytes.join(',')})`;
-            }
-
-            // Junk lines safe to inject at statement level
-            function junkLine() {
-                const id1 = randIdent(), id2 = randIdent();
-                const j = [
-                    () => `local ${id1} = ${rand(1,9999)} * ${rand(1,99)}`,
-                    () => `local ${id1} = math.floor(${rand(100,9999)} / ${rand(1,50)})`,
-                    () => `if false then local ${id1} = ${rand(0,9)} end`,
-                    () => `do local ${id1} = tostring(${rand(0,999)}) end`,
-                    () => `pcall(function() local ${id1} = ${rand(0,99)} end)`,
-                    () => `local ${id1} = type(${rand(0,1) ? 'nil' : 'true'})`,
-                    () => `do end`,
-                    () => `local ${id1}, ${id2} = ${rand(0,9)}, ${rand(0,9)}`,
-                ];
-                return j[rand(0, j.length-1)]();
-            }
-
-            // ── Variable renaming — only rename variables declared with `local` ──
-            function renameLocals(src) {
-                const keywords = new Set([
-                    'and','break','do','else','elseif','end','false','for','function',
-                    'goto','if','in','local','nil','not','or','repeat','return',
-                    'then','true','until','while',
-                    // Roblox globals — never rename these
-                    'game','workspace','script','LocalPlayer','Players','RunService',
-                    'UserInputService','TweenService','ReplicatedStorage','ServerStorage',
-                    'Lighting','SoundService','StarterGui','StarterPlayer','Teams',
-                    'Humanoid','Character','Instance','Vector3','CFrame','Color3',
-                    'UDim','UDim2','Enum','math','table','string','pairs','ipairs',
-                    'pcall','xpcall','error','warn','print','type','tostring','tonumber',
-                    'select','unpack','next','rawget','rawset','setmetatable','getmetatable',
-                    'require','loadstring','load','wait','task','tick','time','os',
-                    'coroutine','io','debug','bit32','utf8','_G','_ENV',
-                ]);
-
-                const varMap = {};
-                // Only match `local NAME` or `local NAME,` or `for NAME` patterns
-                const pattern = /\blocal\s+([a-zA-Z_][a-zA-Z0-9_]*)(?:\s*[,=\n])/g;
-                let m;
-                while ((m = pattern.exec(src)) !== null) {
-                    const name = m[1];
-                    if (!keywords.has(name) && !varMap[name] && !name.startsWith('\x00')) {
-                        varMap[name] = randIdent();
-                    }
-                }
-                // Apply replacements as whole-word only
-                for (const [orig, repl] of Object.entries(varMap)) {
-                    src = src.replace(new RegExp(`\\b${orig}\\b`, 'g'), repl);
-                }
-                return src;
-            }
-
-            // Inject junk between lines, skipping function-body-opening lines
-            function injectJunk(src, level) {
-                const lines = src.split('\n');
-                const result = [];
-                const freq = level === 1 ? 6 : level === 2 ? 3 : 1;
-                let cd = rand(1, freq);
-                for (let i = 0; i < lines.length; i++) {
-                    result.push(lines[i]);
-                    const trimmed = lines[i].trim();
-                    // Don't inject after lines that open a block or are continuations
-                    const skip = /^(function|if|else|elseif|for|while|repeat|do|then)\b|[\(\,\{]$/.test(trimmed) || trimmed === '';
-                    if (!skip) {
-                        cd--;
-                        if (cd <= 0) {
-                            const count = level === 3 ? rand(2,3) : 1;
-                            for (let j = 0; j < count; j++) result.push(junkLine());
-                            cd = rand(1, freq);
-                        }
-                    }
-                }
-                return result.join('\n');
-            }
-
-            // Encode entire script as decimal escape sequences — works in all Lua/Luau versions
-            // This is the same technique WeAreDevs uses
-            // Wrap with a ROT-N cipher — output stays small but source is unreadable
             function wrapLoad(src, level) {
                 let current = src;
                 const enc = new TextEncoder();
                 for (let i = 0; i < level; i++) {
                     const shift = rand(40, 90);
-                    // Encode as UTF-8 bytes so multi-byte characters (╔ ║ etc.) survive intact
                     const utf8 = enc.encode(current);
                     const bytes = Array.from(utf8).map(b => (b + shift) % 256);
                     const fv = randIdent();
@@ -1872,7 +1682,6 @@
                     const iv = randIdent();
                     const vv = randIdent();
                     const sv = randIdent();
-                    // Chunk into rows of 100 numbers to avoid long-line issues
                     const rows = [];
                     for (let j = 0; j < bytes.length; j += 100) {
                         rows.push(bytes.slice(j, j + 100).join(','));
@@ -1890,14 +1699,10 @@
                 return current;
             }
 
-            // ── Main pipeline ──
             function obfuscate(src, level) {
-                // Low = 1 layer, Medium = 2 layers, Max = 3 layers
-                // All levels just use loadstring wrapping — it's the safest and works every time
                 return wrapLoad(src, level);
             }
 
-            // ── UI ──
             runBtn.addEventListener('click', () => {
                 const src = input.value.trim();
                 if (!src) { showToast('Paste a script first!', 'error'); return; }
@@ -1924,7 +1729,6 @@
             selectBtn.addEventListener('click', () => {
                 output.focus();
                 output.setSelectionRange(0, output.value.length);
-                // iOS fallback
                 if (window.getSelection) {
                     const sel = window.getSelection();
                     sel.removeAllRanges();
@@ -1947,7 +1751,6 @@
 
             copyBtn.addEventListener('click', () => {
                 const text = output.value;
-                // Try modern clipboard API first, fall back to execCommand for large scripts
                 const doFallback = () => {
                     const ta = document.createElement('textarea');
                     ta.value = text;
@@ -1988,13 +1791,10 @@
         refreshBtn.addEventListener('click', fetchScripts);
 
         // ── Executors ──
-        const execSearchInput   = document.getElementById('execSearchInput');
+        const execSearchInput    = document.getElementById('execSearchInput');
         const executorsContainer = document.getElementById('executorsContainer');
-        const execFilterBtns    = document.querySelectorAll('.exec-filter-btn');
+        const execFilterBtns     = document.querySelectorAll('.exec-filter-btn');
 
-        // Data sourced from WeAreDevs — fetch on tab open so it's always current
-        // WeAreDevs doesn't expose a public API, so we hardcode from the live page
-        // and mark the data so users know it reflects the current listing.
         const EXECUTORS = [
             { name: 'JJSploit',       downloads: '66.7m+', desc: 'Undetected Lua executor with click teleport, ESP, speed, fly, infinite jump, aimbot, and more. A powerful all-in-one package.', img: 'https://wearedevs.net/images/thumbnails/JJSploit.webp',                                 wadUrl: 'https://wearedevs.net/d/JJSploit',       status: 'active',       platforms: ['windows','android'], urls: { windows: 'https://wearedevs.net/d/JJSploit', android: 'https://wearedevs.net/d/JJSploit-Android' } },
             { name: 'Solara',         downloads: '11.3m+', desc: 'Free and keyless executor — the first & best external executor after Hyperion.',                                                img: 'https://obj.wearedevs.net/images/software/solara/solara-011026.webp',                wadUrl: 'https://wearedevs.net/d/Solara',         status: 'active',       platforms: ['windows'],              urls: { windows: 'https://getsolara.dev/download/' } },
