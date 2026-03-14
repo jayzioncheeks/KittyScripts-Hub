@@ -140,7 +140,6 @@
         .tab.active {
             color: var(--accent-bright);
             background: rgba(124,58,237,0.15);
-            border-left: none;
         }
 
         .social-bar {
@@ -176,6 +175,7 @@
             position: relative; z-index: 1;
         }
 
+        /* ── Main Tab ── */
         #mainTab {
             text-align: center; padding: 6rem 2rem;
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -213,6 +213,7 @@
         .tagline span:nth-child(4) { animation-delay: 0.5s; color: var(--accent-bright); }
         .tagline span:nth-child(5) { animation-delay: 0.6s; }
 
+        /* ── Scripts Tab ── */
         #scriptsTab { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .script-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -331,6 +332,7 @@
         }
         .view-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px var(--accent-glow); }
 
+        /* ── Modal ── */
         .modal-overlay {
             position: fixed; inset: 0;
             background: rgba(5, 2, 10, 0.82);
@@ -441,15 +443,6 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; overflow: hidden;
         }
-        .btn-copy-modal::before {
-            content: '';
-            position: absolute; top: 50%; left: 50%;
-            width: 0; height: 0; border-radius: 50%;
-            background: rgba(255,255,255,0.12);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        .btn-copy-modal:active::before { width: 400px; height: 400px; }
         .btn-copy-modal:hover { transform: translateY(-2px); box-shadow: 0 10px 28px var(--accent-glow); }
         .btn-copy-modal svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; }
         .btn-close-modal {
@@ -462,6 +455,7 @@
         }
         .btn-close-modal:hover { border-color: var(--accent-primary); color: var(--text-primary); }
 
+        /* ── Toast ── */
         .toast {
             position: fixed; bottom: 2rem; left: 2rem;
             background: var(--bg-card); border: 1px solid var(--border-bright);
@@ -477,6 +471,7 @@
         .toast.success { border-color: var(--success); }
         .toast.error { border-color: var(--danger); }
 
+        /* ── Loaders / Empty ── */
         .loading-spinner { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
         .spinner {
             width: 50px; height: 50px; margin: 0 auto 1rem;
@@ -492,73 +487,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 1100px) { #scriptsContainer { columns: 2; } }
-        @media (max-width: 768px) {
-            .navbar { padding: 0.6rem 1rem; gap: 0.4rem; }
-            .tabs { gap: 0.3rem; }
-            .tab { padding: 0.35rem 0.6rem; font-size: 0.72rem; white-space: nowrap; flex-shrink: 0; }
-            .discord-icon-btn, .youtube-icon-btn, .tiktok-icon-btn, .keysystem-icon-btn { width: 34px; height: 34px; padding: 0.4rem; }
-            .discord-icon, .youtube-icon, .tiktok-icon, .keysystem-icon { width: 16px; height: 16px; }
-            #mainTab { padding: 3rem 1rem; }
-            #mainTab h1 { font-size: 2.5rem; }
-            #scriptsContainer { columns: 1; }
-            .content { padding: 2rem 1rem; }
-            .theme-toggle { bottom: 1rem; right: 1rem; width: 48px; height: 48px; }
-            .theme-toggle svg { width: 20px; height: 20px; }
-            .header-left { flex-direction: column; gap: 1rem; align-items: flex-start; width: 100%; }
-            .search-input { width: 100%; }
-            .search-input:focus { width: 100%; }
-            .script-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .script-header h2 { font-size: 2rem; }
-            .refresh-btn { width: 100%; justify-content: center; }
-            .toast { right: 1rem; left: 1rem; bottom: 6rem; }
-            .modal-body { padding: 1.25rem 1.25rem 1.5rem; }
-            .modal-title { font-size: 1.35rem; }
-            .modal-thumb { height: 160px; }
-            .social-bar { padding: 0.4rem 1rem; }
-        }
-
-        .sort-wrap { position: relative; }
-        .sort-btn {
-            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
-            border-radius: 10px; padding: 0.75rem 1rem;
-            color: var(--text-primary); cursor: pointer;
-            display: flex; align-items: center; gap: 0.5rem;
-            font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem;
-            transition: all 0.2s ease; white-space: nowrap;
-            user-select: none;
-        }
-        .sort-btn:hover { border-color: var(--accent-primary); box-shadow: 0 4px 12px var(--accent-glow); }
-        .sort-btn.open { border-color: var(--accent-primary); box-shadow: 0 4px 12px var(--accent-glow); }
-        .sort-chevron { transition: transform 0.25s ease; flex-shrink: 0; }
-        .sort-btn.open .sort-chevron { transform: rotate(180deg); }
-        .sort-menu {
-            position: absolute; top: calc(100% + 0.5rem); left: 0;
-            min-width: 180px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-bright);
-            border-radius: 12px;
-            box-shadow: 0 12px 36px rgba(0,0,0,0.5);
-            overflow: hidden;
-            z-index: 500;
-            opacity: 0; pointer-events: none;
-            transform: translateY(-8px) scale(0.97);
-            transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-        .sort-menu.open { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
-        .sort-option {
-            padding: 0.7rem 1.1rem;
-            font-size: 0.9rem; font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
-        }
-        .sort-option:hover { background: var(--bg-elevated); color: var(--text-primary); }
-        .sort-option.active { color: var(--accent-bright); background: rgba(124,58,237,0.08); }
-        .sort-option.active::after { content: '✓'; font-size: 0.8rem; color: var(--accent-bright); }
-        @media (max-width: 768px) { .sort-menu { right: 0; left: auto; } }
-
+        /* ── Executors ── */
         .exec-filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
         .exec-filter-btn {
             padding: 0.5rem 1.1rem; border-radius: 20px;
@@ -609,14 +538,13 @@
         .exec-platform-windows:hover { background: #106ebe; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,120,212,0.45); }
         .exec-platform-android { background: #3ddc84; color: #1a1a1a; box-shadow: 0 4px 12px rgba(61,220,132,0.3); }
         .exec-platform-android:hover { background: #2fc870; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(61,220,132,0.45); }
-        .exec-platform-ios { background: #555; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .exec-platform-ios { background: #555; color: white; }
         .exec-platform-ios:hover { background: #444; transform: translateY(-2px); }
-        .exec-platform-mac { background: #555; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .exec-platform-mac { background: #555; color: white; }
         .exec-platform-mac:hover { background: #444; transform: translateY(-2px); }
         .exec-download-btn.disabled { display: flex; align-items: center; justify-content: center; padding: 0.65rem 1rem; border-radius: 10px; background: var(--bg-elevated); color: var(--text-dim); border: 1px solid var(--border-subtle); font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; }
-        @media (max-width: 1100px) { #executorsContainer { columns: 2; } }
-        @media (max-width: 768px)  { #executorsContainer { columns: 1; } }
 
+        /* ── Key Tutorial ── */
         .keytut-layout { display: flex; flex-direction: column; gap: 3rem; max-width: 720px; margin: 0 auto; }
         .keytut-video-wrap { display: flex; flex-direction: column; gap: 0.75rem; }
         .keytut-video-label, .keytut-steps-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.25rem; }
@@ -638,6 +566,41 @@
         .keytut-tip { display: flex; gap: 0.75rem; align-items: flex-start; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.25); border-radius: 12px; padding: 1rem 1.25rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem; }
         .keytut-tip span:first-child { font-size: 1.1rem; flex-shrink: 0; }
 
+        /* ── Sort Dropdown ── */
+        .sort-wrap { position: relative; }
+        .sort-btn {
+            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
+            border-radius: 10px; padding: 0.75rem 1rem;
+            color: var(--text-primary); cursor: pointer;
+            display: flex; align-items: center; gap: 0.5rem;
+            font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem;
+            transition: all 0.2s ease; white-space: nowrap; user-select: none;
+        }
+        .sort-btn:hover { border-color: var(--accent-primary); box-shadow: 0 4px 12px var(--accent-glow); }
+        .sort-btn.open { border-color: var(--accent-primary); box-shadow: 0 4px 12px var(--accent-glow); }
+        .sort-chevron { transition: transform 0.25s ease; flex-shrink: 0; }
+        .sort-btn.open .sort-chevron { transform: rotate(180deg); }
+        .sort-menu {
+            position: absolute; top: calc(100% + 0.5rem); left: 0;
+            min-width: 180px; background: var(--bg-card);
+            border: 1px solid var(--border-bright); border-radius: 12px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.5); overflow: hidden;
+            z-index: 500; opacity: 0; pointer-events: none;
+            transform: translateY(-8px) scale(0.97);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .sort-menu.open { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+        .sort-option {
+            padding: 0.7rem 1.1rem; font-size: 0.9rem; font-weight: 600;
+            color: var(--text-muted); cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+        }
+        .sort-option:hover { background: var(--bg-elevated); color: var(--text-primary); }
+        .sort-option.active { color: var(--accent-bright); background: rgba(124,58,237,0.08); }
+        .sort-option.active::after { content: '✓'; font-size: 0.8rem; color: var(--accent-bright); }
+
+        /* ── Favorites ── */
         .fav-count-badge { display: inline-flex; align-items: center; justify-content: center; background: #f59e0b; color: white; font-size: 0.65rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; margin-left: 0.2rem; }
         .fav-filter-btn { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.75rem 1rem; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; transition: all 0.2s ease; white-space: nowrap; }
         .fav-filter-btn svg { width: 16px; height: 16px; stroke: var(--text-muted); fill: none; transition: all 0.2s ease; }
@@ -655,40 +618,170 @@
         .btn-fav-modal.active { border-color: #f59e0b; background: rgba(245,158,11,0.1); }
         .btn-fav-modal.active svg { stroke: #f59e0b; fill: #f59e0b; }
 
-        /* ── Obfuscator ── */
-        #obfuscatorTab { display:none; }
-        .obf-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; padding: 3rem 2rem; }
-        .obf-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-        .obf-header h2 { margin: 0 0 0.25rem; font-size: 1.6rem; }
-        .obf-subtitle { color: var(--text-dim); font-size: 0.9rem; margin: 0; }
-        .obf-level-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; }
-        .obf-level-label { font-size: 0.75rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
-        .obf-level-btns { display: flex; gap: 0.4rem; }
-        .obf-level-btn { background: var(--bg-elevated); border: 1px solid var(--border-subtle); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.8rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
-        .obf-level-btn:hover { border-color: var(--accent-primary); color: var(--accent-bright); }
-        .obf-level-btn.active { background: var(--accent-primary); border-color: var(--accent-primary); color: white; }
-        .obf-editors { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
-        @media (max-width: 768px) { .obf-editors { grid-template-columns: 1fr; } .obf-arrow { transform: rotate(90deg); margin: 0 auto; } }
-        .obf-panel { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: var(--bg-elevated); }
-        .obf-panel-header { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-subtle); }
-        .obf-panel-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); }
-        .obf-panel-btn { background: none; border: 1px solid var(--border-subtle); color: var(--text-muted); border-radius: 6px; padding: 0.25rem 0.65rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Syne', sans-serif; }
-        .obf-panel-btn:hover:not(:disabled) { border-color: var(--accent-bright); color: var(--accent-bright); }
-        .obf-panel-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-        .obf-textarea { flex: 1; min-height: 320px; resize: vertical; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; line-height: 1.6; padding: 1rem; tab-size: 4; }
-        .obf-textarea::placeholder { color: var(--text-dim); }
-        .obf-textarea[readonly] { color: var(--accent-bright); }
-        .obf-arrow { display: flex; align-items: center; justify-content: center; width: 40px; flex-shrink: 0; }
-        .obf-arrow svg { width: 28px; height: 28px; stroke: var(--accent-primary); }
-        .obf-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-        .obf-stats { font-size: 0.85rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; }
-        .obf-stats span { color: var(--accent-bright); font-weight: 700; }
-        .obf-run-btn { background: linear-gradient(135deg, var(--accent-primary), #6d28d9); border: none; color: white; border-radius: 12px; padding: 0.85rem 2rem; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s; box-shadow: 0 4px 20px rgba(124,58,237,0.4); }
-        .obf-run-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.5); }
-        .obf-run-btn:active { transform: translateY(0); }
-        .obf-run-btn.running { opacity: 0.7; cursor: not-allowed; }
-        .obf-clear-btn { background: var(--bg-elevated); border: 1px solid var(--border-subtle); color: var(--text-muted); border-radius: 12px; padding: 0.85rem 1.25rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
-        .obf-clear-btn:hover { border-color: var(--danger); color: var(--danger); }
+        /* ══════════════════════════════════════════════
+           ── OBFUSCATOR TAB (iframe embed) ──────────────
+           ══════════════════════════════════════════════ */
+        #obfuscatorTab { display: none; position: relative; z-index: 1; }
+
+        .obf-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        /* KittyScripts branded header bar */
+        .obf-brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .obf-brand-left { display: flex; flex-direction: column; gap: 0.3rem; }
+        .obf-brand-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            background: linear-gradient(135deg, var(--accent-bright), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .obf-brand-sub {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+        .obf-brand-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(124,58,237,0.1);
+            border: 1px solid rgba(167,139,250,0.25);
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--accent-bright);
+        }
+        .obf-brand-badge svg { width: 14px; height: 14px; }
+
+        /* iframe container */
+        .obf-iframe-wrap {
+            position: relative;
+            border: 1px solid var(--border-bright);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        /* Purple accent line across the top of the iframe */
+        .obf-iframe-wrap::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-bright), var(--accent-primary));
+            background-size: 200% 100%;
+            animation: gradientFlow 4s linear infinite;
+        }
+
+        /* The iframe itself — full height so nothing gets cut */
+        .obf-iframe {
+            display: block;
+            width: 100%;
+            height: 820px;
+            border: none;
+            background: #fff;
+        }
+
+        /* Overlay strip that covers ONLY the WeAreDevs header text inside the iframe
+           Note: because of same-origin policy we can't reach inside the iframe DOM,
+           but we can overlay a branded element on top of the top portion. */
+        .obf-header-overlay {
+            position: absolute;
+            top: 3px; /* below accent line */
+            left: 0; right: 0;
+            height: 68px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            pointer-events: none; /* let clicks pass through to buttons below */
+            z-index: 10;
+            gap: 0.75rem;
+        }
+
+        [data-theme="dark"] .obf-header-overlay {
+            background: #1a1a2e;
+            border-bottom-color: #2d2d4e;
+        }
+
+        .obf-overlay-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-bright));
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .obf-overlay-icon img { width: 22px; height: 22px; object-fit: contain; border-radius: 4px; }
+
+        .obf-overlay-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, var(--accent-bright), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .obf-overlay-sub {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .obf-iframe { height: 600px; }
+            .obf-header-overlay { height: 56px; }
+            .obf-brand-title { font-size: 1.4rem; }
+            .obf-brand-badge { display: none; }
+        }
+
+        /* ── Responsive general ── */
+        @media (max-width: 1100px) { #scriptsContainer { columns: 2; } #executorsContainer { columns: 2; } }
+        @media (max-width: 768px) {
+            .navbar { padding: 0.6rem 1rem; gap: 0.4rem; }
+            .tabs { gap: 0.3rem; }
+            .tab { padding: 0.35rem 0.6rem; font-size: 0.72rem; white-space: nowrap; flex-shrink: 0; }
+            .discord-icon-btn, .youtube-icon-btn, .tiktok-icon-btn, .keysystem-icon-btn { width: 34px; height: 34px; padding: 0.4rem; }
+            .discord-icon, .youtube-icon, .tiktok-icon, .keysystem-icon { width: 16px; height: 16px; }
+            #mainTab { padding: 3rem 1rem; }
+            #mainTab h1 { font-size: 2.5rem; }
+            #scriptsContainer { columns: 1; }
+            #executorsContainer { columns: 1; }
+            .content { padding: 2rem 1rem; }
+            .theme-toggle { bottom: 1rem; right: 1rem; width: 48px; height: 48px; }
+            .theme-toggle svg { width: 20px; height: 20px; }
+            .header-left { flex-direction: column; gap: 1rem; align-items: flex-start; width: 100%; }
+            .search-input { width: 100%; }
+            .search-input:focus { width: 100%; }
+            .script-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .script-header h2 { font-size: 2rem; }
+            .refresh-btn { width: 100%; justify-content: center; }
+            .toast { right: 1rem; left: 1rem; bottom: 6rem; }
+            .modal-body { padding: 1.25rem 1.25rem 1.5rem; }
+            .modal-title { font-size: 1.35rem; }
+            .modal-thumb { height: 160px; }
+            .social-bar { padding: 0.4rem 1rem; }
+            .sort-menu { right: 0; left: auto; }
+            .obf-wrapper { padding: 1.5rem 1rem; }
+        }
     </style>
 </head>
 
@@ -731,6 +824,7 @@
     </div>
 
     <main class="content">
+        <!-- ── Main Tab ── -->
         <section id="mainTab">
             <h1>KittyScripts</h1>
             <div class="logo-container">
@@ -741,6 +835,7 @@
             </p>
         </section>
 
+        <!-- ── Scripts Tab ── -->
         <section id="scriptsTab" style="display:none;">
             <div class="script-header">
                 <div class="header-left">
@@ -779,6 +874,7 @@
             </div>
         </section>
 
+        <!-- ── Executors Tab ── -->
         <section id="executorsTab" style="display:none;">
             <div class="script-header">
                 <div class="header-left">
@@ -801,6 +897,7 @@
             </div>
         </section>
 
+        <!-- ── Key Guide Tab ── -->
         <section id="keytutTab" style="display:none;">
             <div class="script-header"><div class="header-left"><h2>Key Guide</h2></div></div>
             <div class="keytut-layout">
@@ -827,59 +924,51 @@
         </section>
     </main>
 
-    <!-- ── Obfuscator Tab (outside .content so it's full-width) ── -->
+    <!-- ══════════════════════════════════════════════════════════
+         ── OBFUSCATOR TAB — WeAreDevs Iframe with KS branding ──
+         ══════════════════════════════════════════════════════════ -->
     <section id="obfuscatorTab">
-        <div class="obf-container">
-            <div class="obf-header">
-                <div>
-                    <h2>Lua Obfuscator</h2>
-                    <p class="obf-subtitle">--[[ KittyScripts Obfuscator ]] — XOR + shift encoding, split tables, junk injection</p>
+        <div class="obf-wrapper">
+
+            <!-- KittyScripts branded header ABOVE the iframe -->
+            <div class="obf-brand-header">
+                <div class="obf-brand-left">
+                    <div class="obf-brand-title">KittyScripts Obfuscator</div>
+                    <div class="obf-brand-sub">Powered by Prometheus LuaU Obfuscator — protect your scripts</div>
                 </div>
-                <div class="obf-level-wrap">
-                    <span class="obf-level-label">Layers</span>
-                    <div class="obf-level-btns">
-                        <button class="obf-level-btn" data-level="1">1</button>
-                        <button class="obf-level-btn active" data-level="2">2</button>
-                        <button class="obf-level-btn" data-level="3">3</button>
-                    </div>
+                <div class="obf-brand-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    Real Prometheus Engine
                 </div>
             </div>
 
-            <div class="obf-editors">
-                <div class="obf-panel">
-                    <div class="obf-panel-header">
-                        <span class="obf-panel-label">Input Script</span>
-                        <button class="obf-panel-btn" id="obfPasteBtn">Paste</button>
-                    </div>
-                    <textarea class="obf-textarea" id="obfInput" placeholder="-- Paste your Lua script here...&#10;&#10;local player = game.Players.LocalPlayer&#10;print(&quot;Hello, &quot; .. player.Name)"></textarea>
-                </div>
-                <div class="obf-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </div>
-                <div class="obf-panel">
-                    <div class="obf-panel-header">
-                        <span class="obf-panel-label">Obfuscated Output</span>
-                        <div style="display:flex;gap:0.5rem;">
-                            <button class="obf-panel-btn" id="obfSelectBtn" disabled>Select All</button>
-                            <button class="obf-panel-btn" id="obfCopyBtn" disabled>Copy</button>
-                        </div>
-                    </div>
-                    <textarea class="obf-textarea" id="obfOutput" placeholder="-- Obfuscated script will appear here..." readonly></textarea>
-                </div>
-            </div>
+            <!-- iframe container with overlay on the "LuaU Obfuscator" header text -->
+            <div class="obf-iframe-wrap">
 
-            <div class="obf-actions">
-                <div class="obf-stats" id="obfStats"></div>
-                <div style="display:flex;gap:0.75rem;">
-                    <button class="obf-clear-btn" id="obfClearBtn">Clear</button>
-                    <button class="obf-run-btn" id="obfRunBtn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                        Obfuscate
-                    </button>
+                <!-- Overlay covering WeAreDevs header text, replacing with KittyScripts branding -->
+                <div class="obf-header-overlay">
+                    <div class="obf-overlay-icon">
+                        <img src="https://raw.githubusercontent.com/jayzioncheeks/KittyScripts-Hub/refs/heads/main/Untitled30_20260227180647.png" alt="KS">
+                    </div>
+                    <div>
+                        <div class="obf-overlay-text">KittyScripts Obfuscator</div>
+                        <div class="obf-overlay-sub">Built to protect Roblox Lua scripts</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Feature info cards removed -->
+                <!-- Actual WeAreDevs obfuscator, scrolled down to hide their nav -->
+                <iframe
+                    class="obf-iframe"
+                    id="obfFrame"
+                    src="https://wearedevs.net/obfuscator"
+                    title="KittyScripts Obfuscator"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    loading="lazy"
+                ></iframe>
+            </div>
 
         </div>
     </section>
@@ -1048,7 +1137,7 @@
         modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        // ── Fetch ──
+        // ── Fetch Scripts ──
         async function fetchScripts() {
             refreshBtn.classList.add('loading');
             scriptsContainer.innerHTML = `<div class="loading-spinner"><div class="spinner"></div><p>Loading scripts from ScriptBlox…</p></div>`;
@@ -1067,7 +1156,7 @@
             } finally { refreshBtn.classList.remove('loading'); }
         }
 
-        // ── Render ──
+        // ── Render Scripts ──
         function renderScripts(scripts) {
             scriptsContainer.innerHTML = '';
             if (!scripts.length) { scriptsContainer.innerHTML = `<div class="empty-state"><h3>No scripts match your search</h3><p>Try a different search term</p></div>`; return; }
@@ -1136,17 +1225,17 @@
         modalFavBtn.addEventListener('click', () => { if (currentScript) toggleFav(currentScript); });
         updateFavBadge();
 
-        // ── Tab switching ──
+        // ── Tab Switching ──
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 const name = tab.dataset.tab;
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-                mainTab.style.display       = name === 'main'       ? 'block' : 'none';
-                scriptsTab.style.display    = name === 'scripts'    ? 'block' : 'none';
-                document.getElementById('executorsTab').style.display  = name === 'executors'  ? 'block' : 'none';
-                document.getElementById('keytutTab').style.display     = name === 'keytut'     ? 'block' : 'none';
-                document.getElementById('obfuscatorTab').style.display = name === 'obfuscator' ? 'block' : 'none';
+                mainTab.style.display                                             = name === 'main'       ? 'block' : 'none';
+                scriptsTab.style.display                                          = name === 'scripts'    ? 'block' : 'none';
+                document.getElementById('executorsTab').style.display             = name === 'executors'  ? 'block' : 'none';
+                document.getElementById('keytutTab').style.display                = name === 'keytut'     ? 'block' : 'none';
+                document.getElementById('obfuscatorTab').style.display            = name === 'obfuscator' ? 'block' : 'none';
                 if (name === 'scripts'   && !allScripts.length) fetchScripts();
                 if (name === 'executors') renderExecutors();
             });
@@ -1217,212 +1306,15 @@
         searchInput.addEventListener('input', applyFiltersAndSort);
         refreshBtn.addEventListener('click', fetchScripts);
 
-        // ════════════════════════════════════════════════════════════
-        // ── IMPROVED OBFUSCATOR ENGINE ──────────────────────────────
-        // ════════════════════════════════════════════════════════════
-        (function () {
-            const input     = document.getElementById('obfInput');
-            const output    = document.getElementById('obfOutput');
-            const runBtn    = document.getElementById('obfRunBtn');
-            const clearBtn  = document.getElementById('obfClearBtn');
-            const copyBtn   = document.getElementById('obfCopyBtn');
-            const selectBtn = document.getElementById('obfSelectBtn');
-            const pasteBtn  = document.getElementById('obfPasteBtn');
-            const statsEl   = document.getElementById('obfStats');
-            let obfLevel    = 2;
-
-            document.querySelectorAll('.obf-level-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.obf-level-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    obfLevel = parseInt(btn.dataset.level) || 2;
-                });
-            });
-
-            function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-            function randHex(len)   { let s=''; for (let i=0;i<len;i++) s+='0123456789abcdef'[rand(0,15)]; return s; }
-
-            const PREFIXES = ['_0x','_L','_R','__','_x','lI','Il','l1'];
-            const CONFUSE   = 'lI1lIl1IlI1lI1Il'.split('');
-            function randIdent() {
-                const p = PREFIXES[rand(0, PREFIXES.length - 1)];
-                const useHex = rand(0, 1);
-                const body = useHex
-                    ? randHex(rand(6, 12))
-                    : [...CONFUSE].sort(() => Math.random() - 0.5).join('').slice(0, rand(8, 14));
-                return p + body;
+        // ── Obfuscator: scroll iframe on load to hide WeAreDevs navbar ──
+        document.getElementById('obfFrame').addEventListener('load', function() {
+            try {
+                // Scroll the iframe content down past the WeAreDevs navbar (~60px)
+                this.contentWindow.scrollTo(0, 60);
+            } catch(e) {
+                // Cross-origin — can't scroll, overlay handles the visual branding
             }
-
-            function junkLine() {
-                const flavors = [
-                    () => `local ${randIdent()} = ${rand(0,9999)} * ${rand(1,99)} + ${rand(0,99)}`,
-                    () => `local ${randIdent()} = math.floor(${rand(1,999)} + ${rand(0,99)})`,
-                    () => `local ${randIdent()} = string.len("${randHex(rand(3,8))}")`,
-                    () => `local ${randIdent()} = type(${rand(0,1) ? '"'+randHex(4)+'"' : rand(0,255)})`,
-                    () => `-- ${randHex(rand(6,14))}`,
-                    () => `local ${randIdent()} = tostring(${rand(100,9999)})`,
-                    () => `local ${randIdent()} = (${rand(1,50)} > ${rand(1,50)}) and ${rand(0,9)} or ${rand(0,9)}`,
-                ];
-                return flavors[rand(0, flavors.length - 1)]();
-            }
-            function addJunk(n) { return Array.from({ length: n }, junkLine); }
-
-            function emitXorHelper(fnName) {
-                const a=randIdent(), b=randIdent(), r=randIdent(), i=randIdent(), ba=randIdent(), bb=randIdent();
-                return [
-                    `local function ${fnName}(${a},${b})`,
-                    `  local ${r}=0`,
-                    `  for ${i}=0,7 do`,
-                    `    local ${ba}=math.floor(${a}/(2^${i}))%2`,
-                    `    local ${bb}=math.floor(${b}/(2^${i}))%2`,
-                    `    if ${ba}~=${bb} then ${r}=${r}+(2^${i}) end`,
-                    `  end`,
-                    `  return ${r}`,
-                `end`,
-                ];
-            }
-
-            function encodeBytes(utf8Bytes, shift, xorKey) {
-                return utf8Bytes.map(b => ((b ^ xorKey) + shift) % 256);
-            }
-
-            function emitSplitTables(encoded) {
-                const numParts = rand(3, 6);
-                const partSize = Math.ceil(encoded.length / numParts);
-                const names    = Array.from({ length: numParts }, randIdent);
-                const lines    = [];
-
-                for (let i = 0; i < numParts; i++) {
-                    const chunk = encoded.slice(i * partSize, (i + 1) * partSize);
-                    const rows  = [];
-                    for (let j = 0; j < chunk.length; j += 80) {
-                        rows.push(chunk.slice(j, j + 80).join(','));
-                    }
-                    lines.push(`local ${names[i]}={${rows.join(',')}}`);
-                }
-
-                const merged = randIdent();
-                lines.push(`local ${merged}={}`);
-                names.forEach(name => {
-                    const idx = randIdent(), val = randIdent();
-                    lines.push(`for ${idx},${val} in ipairs(${name}) do ${merged}[#${merged}+1]=${val} end`);
-                });
-
-                return { lines, merged };
-            }
-
-            function buildLayer(src, junkDensity) {
-                const enc    = new TextEncoder();
-                const utf8   = Array.from(enc.encode(src));
-                const shift  = rand(30, 110);
-                const xorKey = rand(1, 127);
-                const encoded = encodeBytes(utf8, shift, xorKey);
-
-                const xorFn   = randIdent();
-                const outVar  = randIdent();
-                const idxVar  = randIdent();
-                const valVar  = randIdent();
-                const byteVar = randIdent();
-                const catVar  = randIdent();
-                const loadVar = randIdent();
-
-                const { lines: tableLines, merged } = emitSplitTables(encoded);
-                const xorLines = emitXorHelper(xorFn);
-
-                const decodeLines = [
-                    `local ${outVar}={}`,
-                    `for ${idxVar},${valVar} in ipairs(${merged}) do`,
-                    `  local ${byteVar}=(${valVar}-${shift}+256)%256`,
-                    `  ${outVar}[${idxVar}]=string.char(${xorFn}(${byteVar},${xorKey}))`,
-                    `end`,
-                ];
-
-                const allLines = [
-                    `--[[ KittyScripts Obfuscator ]]`,
-                    ...addJunk(junkDensity),
-                    ...xorLines,
-                    ...addJunk(junkDensity),
-                    ...tableLines,
-                    ...addJunk(junkDensity),
-                    ...decodeLines,
-                    ...addJunk(Math.ceil(junkDensity / 2)),
-                    `local ${catVar}=table.concat(${outVar})`,
-                    ...addJunk(Math.ceil(junkDensity / 2)),
-                    `local ${loadVar}=loadstring(${catVar})`,
-                    `if ${loadVar} then ${loadVar}() end`,
-                ];
-
-                return allLines.join('\n');
-            }
-
-            function obfuscate(src, levels) {
-                let current = src;
-                for (let i = 0; i < levels; i++) {
-                    const junk = i === 0 ? rand(2, 5) : rand(1, 3);
-                    current = buildLayer(current, junk);
-                }
-                return current;
-            }
-
-            runBtn.addEventListener('click', () => {
-                const src = input.value.trim();
-                if (!src) { showToast('Paste a script first!', 'error'); return; }
-                runBtn.classList.add('running');
-                runBtn.textContent = 'Obfuscating…';
-                setTimeout(() => {
-                    try {
-                        const result = obfuscate(src, obfLevel);
-                        output.value       = result;
-                        copyBtn.disabled   = false;
-                        selectBtn.disabled = false;
-                        const ratio = ((result.length / src.length) * 100).toFixed(0);
-                        statsEl.innerHTML  = `Input: <span>${src.length.toLocaleString()}</span> chars → Output: <span>${result.length.toLocaleString()}</span> chars (<span>${ratio}%</span> size)`;
-                        showToast('🔒 Script obfuscated!', 'success');
-                    } catch (e) {
-                        showToast('Error: ' + e.message, 'error');
-                    }
-                    runBtn.classList.remove('running');
-                    runBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Obfuscate';
-                }, 80);
-            });
-
-            selectBtn.addEventListener('click', () => {
-                output.focus();
-                output.setSelectionRange(0, output.value.length);
-                selectBtn.textContent = 'Selected! ✓';
-                selectBtn.style.color = 'var(--accent-bright)';
-                setTimeout(() => { selectBtn.textContent = 'Select All'; selectBtn.style.color = ''; }, 2000);
-            });
-
-            clearBtn.addEventListener('click', () => {
-                input.value = ''; output.value = '';
-                copyBtn.disabled = true; selectBtn.disabled = true;
-                statsEl.innerHTML = '';
-            });
-
-            copyBtn.addEventListener('click', () => {
-                const text = output.value;
-                const fallback = () => {
-                    const ta = document.createElement('textarea');
-                    ta.value = text; ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
-                    document.body.appendChild(ta); ta.focus(); ta.select();
-                    try { document.execCommand('copy'); copyBtn.textContent = 'Copied!'; } catch { copyBtn.textContent = 'Failed'; }
-                    document.body.removeChild(ta);
-                    setTimeout(() => copyBtn.textContent = 'Copy', 2000);
-                };
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(text)
-                        .then(() => { copyBtn.textContent = 'Copied!'; setTimeout(() => copyBtn.textContent = 'Copy', 2000); })
-                        .catch(fallback);
-                } else { fallback(); }
-            });
-
-            pasteBtn.addEventListener('click', async () => {
-                try { input.value = await navigator.clipboard.readText(); }
-                catch { showToast('Clipboard access denied — paste manually', 'error'); }
-            });
-        })();
-        // ════════════════════════════════════════════════════════════
+        });
     </script>
 </body>
 </html>
