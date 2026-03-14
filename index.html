@@ -1397,7 +1397,10 @@
                 const realNames = Array.from({ length: numParts }, () => randIdent());
                 const lines     = [];
 
-                for (let i = 0; i < numParts; i++) {
+                // Emit chunk declarations in a shuffled visual order
+                // (just cosmetic — the merge order below must stay sequential)
+                const declOrder = shuffle([...Array(numParts).keys()]);
+                for (const i of declOrder) {
                     const chunk = encoded.slice(i * partSize, (i + 1) * partSize);
                     const rows  = [];
                     for (let j = 0; j < chunk.length; j += 80) {
@@ -1417,14 +1420,15 @@
                     lines.push(`local ${v}=#${decoyName}`);
                 }
 
-                // Merge real parts in shuffled order
-                const merged     = randIdent();
-                const mergeOrder = shuffle([...Array(numParts).keys()]);
+                // IMPORTANT: merge in sequential order (0,1,2,...) so byte positions
+                // match what was encoded. The key schedule is position-dependent,
+                // so order must be preserved exactly.
+                const merged = randIdent();
                 lines.push(`local ${merged}={}`);
-                mergeOrder.forEach(idx => {
+                for (let idx = 0; idx < numParts; idx++) {
                     const iVar = randIdent(), vVar = randIdent();
                     lines.push(`for ${iVar},${vVar} in ipairs(${realNames[idx]}) do ${merged}[#${merged}+1]=${vVar} end`);
-                });
+                }
 
                 return { lines, merged };
             }
