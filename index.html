@@ -1298,15 +1298,9 @@
         refreshBtn.addEventListener('click', fetchScripts);
 
         // ══════════════════════════════════════════════════════════════════
-        // KittyScripts Obfuscator — clean, verified encode/decode pipeline
-        //
-        // Strategy (simple & bulletproof):
-        //   1. Convert source to UTF-8 bytes
-        //   2. XOR every byte with a random key (0-127)  → always reversible
-        //   3. Store as a flat Lua number-array literal   → no string escaping issues
-        //   4. Emit Lua that rebuilds chars via XOR and calls loadstring
-        //   5. Wrap in junk locals + obfuscated var names (WRD aesthetic)
-        //   6. Multi-pass wraps the whole thing again
+        // KittyScripts Obfuscator — fixed engine
+        // XOR encode → Lua number-array → bit32.bxor decode → loadstring
+        // Bugs fixed: valid Lua identifiers, obfNum is subtraction only
         // ══════════════════════════════════════════════════════════════════
         (function() {
             const obfInput         = document.getElementById('obfInput');
@@ -1328,117 +1322,92 @@
                 });
             });
 
-            // ── Helpers ──
             function rng(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-            function randHex(len)  { let s=''; for(let i=0;i<len;i++) s+='0123456789abcdef'[rng(0,15)]; return s; }
+            function randHex(len) { let s=''; for(let i=0;i<len;i++) s+='0123456789abcdef'[rng(0,15)]; return s; }
 
-            // WRD-style confusing identifiers: mix of l, I, 1 + optional _0x prefix
+            // VALID Lua identifiers only: must start with letter or underscore, never a digit
             function randId() {
-                const pool = ['l','I','1'];
-                const len  = rng(8, 14);
-                const body = Array.from({length: len}, () => pool[rng(0, 2)]).join('');
-                return rng(0,1) ? body : '_0x' + randHex(rng(5,10));
+                if (rng(0,1)) return '_0x' + randHex(rng(6, 10));
+                const starters = ['l','I','O','o','_l','_I','_O'];
+                const pool     = ['l','I','1','O','o','0'];
+                const start    = starters[rng(0, starters.length-1)];
+                const body     = Array.from({length: rng(7,13)}, () => pool[rng(0, pool.length-1)]).join('');
+                return start + body;
             }
 
-            // Obfuscated number literal  e.g. 42  →  (600123-600081)
+            // Obfuscate number as simple subtraction: (base+n)-base === n
+            // Never use multiplication here — it would give the wrong value
             function obfNum(n) {
-                const base = rng(100000, 900000);
-                return n >= 0 ? `(${base+n}-${base})` : `(-${Math.abs(n)+base}+${base})`;
+                const base = rng(200000, 800000);
+                return '(' + (base + n) + '-' + base + ')';
             }
 
-            // Junk Lua lines (valid syntax, does nothing useful)
             function junkLine() {
                 const v = randId();
-                const choices = [
-                    `local ${v}=${obfNum(rng(0,9999))}*${obfNum(rng(1,99))}+${obfNum(rng(0,99))}`,
-                    `local ${v}=math.floor(${obfNum(rng(1,9999))})`,
-                    `local ${v}=math.max(${obfNum(rng(0,100))},${obfNum(rng(0,100))})`,
-                    `local ${v}=tostring(${obfNum(rng(100,9999))})`,
-                    `local ${v}=(${obfNum(rng(1,50))}>0 and ${obfNum(rng(0,9))} or ${obfNum(rng(0,9))})`,
-                    `local ${v}=${obfNum(rng(1,255))}%${obfNum(rng(2,15))}`,
-                    `--${randHex(rng(10,20))}`,
-                ];
-                return choices[rng(0, choices.length-1)];
+                const pick = rng(0, 4);
+                if (pick === 0) return 'local ' + v + '=' + obfNum(rng(0, 9999));
+                if (pick === 1) return 'local ' + v + '=math.floor(' + obfNum(rng(1, 9999)) + ')';
+                if (pick === 2) return 'local ' + v + '=math.max(' + obfNum(rng(0,100)) + ',' + obfNum(rng(0,100)) + ')';
+                if (pick === 3) return '--' + randHex(rng(12, 24));
+                return 'local ' + v + '=' + obfNum(rng(1, 255)) + '%' + obfNum(rng(2, 15));
             }
-            function junkBlock(n) {
-                return Array.from({length: n}, junkLine).join('\n');
-            }
+            function junkBlock(n) { return Array.from({length: n}, junkLine).join('\n'); }
 
-            // ── Encode source → XOR byte array ──
-            // XOR with key is self-inverse: decode(encode(b, k), k) === b  always
             function encodeBytes(src, key) {
                 const out = [];
                 for (let i = 0; i < src.length; i++) out.push(src.charCodeAt(i) ^ key);
                 return out;
             }
 
-            // ── Emit a single obfuscation pass ──
             function obfPass(src, junkN) {
-                const key   = rng(1, 127);          // XOR key (never 0 so every byte changes)
-                const bytes = encodeBytes(src, key); // encoded byte array
-
-                // Chunk the byte array into rows of ~60 values for readability
-                const COLS = 60;
-                const rows = [];
-                for (let i = 0; i < bytes.length; i += COLS) {
+                const key   = rng(1, 127);
+                const bytes = encodeBytes(src, key);
+                const COLS  = 60;
+                const rows  = [];
+                for (let i = 0; i < bytes.length; i += COLS)
                     rows.push(bytes.slice(i, i + COLS).join(','));
-                }
-                const byteTableLit = rows.join(',');
 
-                // Variable names
-                const vTbl  = randId();  // encoded byte table
-                const vKey  = randId();  // XOR key variable
-                const vOut  = randId();  // output char table
-                const vI    = randId();  // loop index
-                const vB    = randId();  // current byte
-                const vCat  = randId();  // concatenated string
-                const vLoad = randId();  // loadstring result
-                const vFn   = randId();  // loaded function
+                const vTbl  = randId();
+                const vKey  = randId();
+                const vOut  = randId();
+                const vI    = randId();
+                const vB    = randId();
+                const vCat  = randId();
+                const vLoad = randId();
+                const vFn   = randId();
 
-                // Obfuscate the key as arithmetic so it's not a plain literal
-                const keyExpr = obfNum(key);
-
-                // Build Lua source
-                const parts = [];
-                parts.push(`--[[ KittyScripts Obfuscator ]]`);
-                parts.push(`local ${vTbl}={${byteTableLit}}`);
-                parts.push(junkBlock(junkN));
-                parts.push(`local ${vKey}=${keyExpr}`);
-                parts.push(junkBlock(Math.ceil(junkN / 2)));
-                parts.push(`local ${vOut}={}`);
-                parts.push(`for ${vI}=1,#${vTbl} do`);
-                // XOR decode: use bit32 if available (Lua 5.2 / early Luau), else manual
-                // Roblox Luau has bit32 library reliably
-                parts.push(`  local ${vB}=${vTbl}[${vI}]`);
-                parts.push(`  ${vOut}[${vI}]=string.char(bit32.bxor(${vB},${vKey}))`);
-                parts.push(`end`);
-                parts.push(junkBlock(Math.ceil(junkN / 2)));
-                parts.push(`local ${vCat}=table.concat(${vOut})`);
-                parts.push(junkBlock(rng(1, 3)));
-                parts.push(`local ${vLoad}=loadstring(${vCat})`);
-                parts.push(`local ${vFn}=${vLoad}`);
-                parts.push(`if ${vFn} then ${vFn}() end`);
-
-                return parts.join('\n');
+                return [
+                    '--[[ KittyScripts Obfuscator ]]',
+                    'local ' + vTbl + '={\n' + rows.join(',\n') + '\n}',
+                    junkBlock(junkN),
+                    'local ' + vKey + '=' + obfNum(key),
+                    junkBlock(Math.ceil(junkN / 2)),
+                    'local ' + vOut + '={}',
+                    'for ' + vI + '=1,#' + vTbl + ' do',
+                    '  local ' + vB + '=' + vTbl + '[' + vI + ']',
+                    '  ' + vOut + '[' + vI + ']=string.char(bit32.bxor(' + vB + ',' + vKey + '))',
+                    'end',
+                    junkBlock(Math.ceil(junkN / 2)),
+                    'local ' + vCat + '=table.concat(' + vOut + ')',
+                    junkBlock(rng(1, 2)),
+                    'local ' + vLoad + '=loadstring(' + vCat + ')',
+                    'local ' + vFn + '=' + vLoad,
+                    'if ' + vFn + ' then ' + vFn + '() end',
+                ].join('\n');
             }
 
             function obfuscate(src, passes) {
-                // Validate: make sure source has no null bytes that would corrupt encoding
                 let cur = src.replace(/\0/g, '');
-                for (let i = 0; i < passes; i++) {
-                    const density = i === 0 ? rng(4, 7) : rng(2, 4);
-                    cur = obfPass(cur, density);
-                }
+                for (let i = 0; i < passes; i++)
+                    cur = obfPass(cur, i === 0 ? rng(4, 6) : rng(2, 3));
                 return cur;
             }
 
-            // ── Button wiring ──
             obfRunBtn.addEventListener('click', () => {
                 const src = obfInput.value.trim();
                 if (!src) { showToast('Paste a script first!', 'error'); return; }
                 obfRunBtn.classList.add('running');
-                obfRunBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Obfuscating…`;
-
+                obfRunBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Obfuscating\u2026';
                 setTimeout(() => {
                     try {
                         const result = obfuscate(src, obfLevel);
@@ -1446,14 +1415,14 @@
                         obfCopyOutBtn.disabled = false;
                         obfSelectBtn.disabled  = false;
                         const ratio = ((result.length / src.length) * 100).toFixed(0);
-                        obfStatsEl.innerHTML = `Input: <span>${src.length.toLocaleString()}</span> chars → Output: <span>${result.length.toLocaleString()}</span> chars (<span>${ratio}%</span> size · <span>${obfLevel}</span> pass${obfLevel>1?'es':''})`;
-                        showToast('🔒 Obfuscated!', 'success');
+                        obfStatsEl.innerHTML = 'Input: <span>' + src.length.toLocaleString() + '</span> chars \u2192 Output: <span>' + result.length.toLocaleString() + '</span> chars (<span>' + ratio + '%</span> size \xb7 <span>' + obfLevel + '</span> pass' + (obfLevel>1?'es':'') + ')';
+                        showToast('\uD83D\uDD12 Obfuscated!', 'success');
                     } catch(e) {
                         showToast('Error: ' + e.message, 'error');
                         console.error(e);
                     }
                     obfRunBtn.classList.remove('running');
-                    obfRunBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Obfuscate`;
+                    obfRunBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Obfuscate';
                 }, 60);
             });
 
@@ -1463,32 +1432,28 @@
                 obfStatsEl.innerHTML = '';
             });
             obfClearInputBtn.addEventListener('click', () => { obfInput.value = ''; });
-
             obfSelectBtn.addEventListener('click', () => {
                 obfOutput.focus(); obfOutput.setSelectionRange(0, obfOutput.value.length);
                 const orig = obfSelectBtn.textContent;
-                obfSelectBtn.textContent = 'Selected ✓';
+                obfSelectBtn.textContent = 'Selected \u2713';
                 setTimeout(() => { obfSelectBtn.textContent = orig; }, 1800);
             });
-
             function copyText(text) {
-                const fallback = () => {
+                const fb = () => {
                     const ta = document.createElement('textarea');
                     ta.value = text; ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
                     document.body.appendChild(ta); ta.focus(); ta.select();
-                    try { document.execCommand('copy'); showToast('Copied!', 'success'); }
-                    catch { showToast('Copy failed', 'error'); }
+                    try { document.execCommand('copy'); showToast('Copied!', 'success'); } catch { showToast('Copy failed','error'); }
                     document.body.removeChild(ta);
                 };
                 if (navigator.clipboard && navigator.clipboard.writeText)
-                    navigator.clipboard.writeText(text).then(() => showToast('Copied!', 'success')).catch(fallback);
-                else fallback();
+                    navigator.clipboard.writeText(text).then(() => showToast('Copied!','success')).catch(fb);
+                else fb();
             }
-
             obfCopyOutBtn.addEventListener('click', () => copyText(obfOutput.value));
             obfPasteBtn.addEventListener('click', async () => {
                 try { obfInput.value = await navigator.clipboard.readText(); }
-                catch { showToast('Clipboard denied — paste manually (Ctrl+V)', 'error'); }
+                catch { showToast('Clipboard denied \u2014 paste manually (Ctrl+V)', 'error'); }
             });
         })();
     </script>
