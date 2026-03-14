@@ -1268,13 +1268,27 @@
 
             // ── Opaque predicate expressions ───────────────────────
             function opaqueInt(n) {
+                // Always safe: plain literal fallback
+                if (typeof n !== 'number' || !isFinite(n) || n < 0) return `(${n|0})`;
                 const strategies = [
+                    // a*b - c  (always exact integers)
                     () => { const a=rand(2,12),b=rand(2,12); const c=a*b-n; return `(${a}*${b}-${c})`; },
-                    () => { const step=rand(1,6); const reps=Math.floor(n/step); const rem=n-(step*reps); return `(function() local _r=${rem};for _i=1,${reps} do _r=_r+${step} end;return _r end)()`; },
-                    () => { const pad=rand(0,8); const s=randHex(n+pad); return `(string.len("${s}")-${pad})`; },
+                    // loop accumulator — only use when reps >= 1 so the loop is valid
+                    () => {
+                        if (n === 0) return `(0)`;
+                        const step=rand(1,6); const reps=Math.floor(n/step); const rem=n-(step*reps);
+                        if (reps < 1) return `(${n})`;
+                        return `(function() local _r=${rem};for _i=1,${reps} do _r=_r+${step} end;return _r end)()`;
+                    },
+                    // string.len — pad must be >= 1 so length > 0, and total must be > 0
+                    () => {
+                        const pad=rand(1,8); const total=n+pad;
+                        if (total < 1) return `(${n})`;
+                        const s=randHex(total); return `(string.len("${s}")-${pad})`;
+                    },
+                    // math.floor of float
                     () => { const frac=(rand(1,99)/100); return `math.floor(${(n+frac).toFixed(4)})`; },
                 ];
-                // guard: for very small n some strategies may produce bad output, fallback to safe one
                 try { return pick(strategies)(); } catch(e) { return `(${n})`; }
             }
 
@@ -1343,7 +1357,9 @@
                 const oShift = opaqueInt(shift);
                 const oBase  = opaqueInt(baseKey);
                 const oMult  = opaqueInt(mult);
-                const oDivG  = opaqueInt(divG);
+                // divG is used as a divisor — must be a plain integer to avoid float division issues
+                // Wrap in math.floor() to be safe regardless of which opaque strategy was chosen
+                const oDivG  = `math.floor(${opaqueInt(divG)})`;
                 return [
                     `local ${outVar}={}`,
                     `for ${idxVar},${valVar} in ipairs(${merged}) do`,
@@ -1356,17 +1372,20 @@
             }
 
             // ── Dynamic loadstring reconstruction ─────────────────
-            // Never writes "loadstring" as a literal string
+            // Never writes "loadstring" as a literal string.
+            // Uses getfenv(0) fallback so it works in both Lua 5.1 (Roblox) and 5.2+
             function emitDynamicLoadstring(loadVar, execVar) {
-                const lsBytes = [108,111,97,100,115,116,114,105,110,103];
+                const lsBytes = [108,111,97,100,115,116,114,105,110,103]; // "loadstring"
                 const lsKey = rand(1, 63);
                 const encoded = lsBytes.map(b => b ^ lsKey);
                 const tblVar = randIdent(), iVar = randIdent(), vVar = randIdent(), strVar = randIdent();
+                const envVar = randIdent();
                 return [
                     `local ${tblVar}={${encoded.join(',')}}`,
                     `local ${strVar}=""`,
                     `for ${iVar},${vVar} in ipairs(${tblVar}) do ${strVar}=${strVar}..string.char(${vVar}^${lsKey}) end`,
-                    `local ${loadVar}=_ENV[${strVar}]`,
+                    `local ${envVar}=(type(_ENV)=="table" and _ENV) or (getfenv and getfenv(0)) or {}`,
+                    `local ${loadVar}=${envVar}[${strVar}]`,
                     `local ${execVar}=${loadVar}`,
                 ];
             }
