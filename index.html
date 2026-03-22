@@ -1646,7 +1646,7 @@
                 let title = 'YouTube Video';
                 let thumb = videoId ? 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' : null;
 
-                // oEmbed gives us title + thumbnail with zero auth and open CORS
+                // oEmbed: free, open CORS, gives us the real title + thumbnail
                 try {
                     const oembed = await fetch('https://www.youtube.com/oembed?url=' + encodeURIComponent(url) + '&format=json');
                     if (oembed.ok) {
@@ -1654,34 +1654,24 @@
                         title = meta.title || title;
                         if (meta.thumbnail_url) thumb = meta.thumbnail_url;
                     }
-                } catch { /* use fallback title/thumb */ }
+                } catch { /* fallback to id-based thumb */ }
 
-                const enc = encodeURIComponent(url);
+                // SSYouTube trick: just prepend "ss" to youtube.com → opens savefrom.net
+                // with the video already loaded and all format options ready to click
+                const ssUrl = url
+                    .replace(/https?:\/\/(www\.)?youtube\.com/, 'https://ssyoutube.com')
+                    .replace(/https?:\/\/youtu\.be/, 'https://ssyoutu.be');
 
                 renderCard({
                     title,
                     thumb,
-                    info: '\u25B6\uFE0F YouTube \u00b7 click a format to download',
+                    info: '\u25B6\uFE0F YouTube \u00b7 choose a format below',
                     buttons: [
                         {
-                            url: 'https://yt1s.ltd/en/youtube-to-mp4?q=' + enc,
-                            label: 'Download MP4',
+                            url: ssUrl,
+                            label: 'Download Video / MP3',
                             icon: DL_ICON,
                             primary: true,
-                            download: false,
-                        },
-                        {
-                            url: 'https://yt1s.ltd/en/youtube-to-mp3?q=' + enc,
-                            label: 'Download MP3',
-                            icon: MUS_ICON,
-                            primary: false,
-                            download: false,
-                        },
-                        {
-                            url: 'https://cobalt.tools/?u=' + enc,
-                            label: 'Try Cobalt',
-                            icon: EXT_ICON,
-                            primary: false,
                             download: false,
                         },
                     ],
