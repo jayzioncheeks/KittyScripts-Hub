@@ -1545,10 +1545,11 @@
 
         // ══════════════════════════════════════════════════════════════
         // ══════════════════════════════════════════════════════════════
-        // Downloader — fully inline, no new tab needed
-        //   TikTok  → tikwm.com (open CORS, no auth, no watermark)
-        //   YouTube → p.savenow.to REST API via allorigins.win CORS proxy
-        //             Polls /ajax/progress until download URL is ready
+        // ══════════════════════════════════════════════════════════════
+        // Downloader
+        //   TikTok  → tikwm.com (open CORS, free, no watermark) — fully inline
+        //   YouTube → YouTube has blocked all free download APIs in 2025.
+        //             We show the video info + links to the best free services.
         // ══════════════════════════════════════════════════════════════
         (function() {
             const urlInput  = document.getElementById('dlUrlInput');
@@ -1558,7 +1559,6 @@
             const statusMsg = document.getElementById('dlStatusMsg');
             const cardWrap  = document.getElementById('dlCardWrap');
 
-            // ── Paste ──
             pasteBtn.addEventListener('click', async () => {
                 try {
                     const text = await navigator.clipboard.readText();
@@ -1581,33 +1581,33 @@
                 statusEl.className = 'dl-status visible ' + (type || 'loading');
             }
 
-            // ── Render a result card inline ──
-            function showResult({ title, thumb, info, buttons }) {
+            const DL_ICON  = `<svg style="width:15px;height:15px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+            const MUS_ICON = `<svg style="width:15px;height:15px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`;
+            const EXT_ICON = `<svg style="width:14px;height:14px;flex-shrink:0;opacity:0.7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+            function renderCard({ title, thumb, info, buttons }) {
                 statusEl.className = 'dl-status';
                 cardWrap.className = 'dl-card-wrap visible';
-
                 const thumbHtml = thumb
                     ? `<img src="${thumb}" style="width:110px;height:70px;object-fit:cover;border-radius:8px;flex-shrink:0;border:1px solid var(--border-subtle);" onerror="this.style.display='none'">`
                     : `<div style="width:110px;height:70px;border-radius:8px;background:var(--bg-elevated);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:2rem;">🎬</div>`;
-
                 const btnHtml = buttons.map(b => `
-                    <a href="${b.url}" target="_blank" rel="noopener noreferrer" download
+                    <a href="${b.url}" ${b.download ? 'download' : ''} target="_blank" rel="noopener noreferrer"
                        style="flex:1;min-width:140px;display:flex;align-items:center;justify-content:center;gap:0.5rem;
-                              padding:0.8rem 1.25rem;border-radius:10px;text-decoration:none;font-family:'Syne',sans-serif;
-                              font-weight:700;font-size:0.88rem;transition:all 0.2s;
-                              ${b.primary
-                                ? 'background:linear-gradient(135deg,var(--accent-primary),var(--accent-bright));color:white;box-shadow:0 4px 14px var(--accent-glow);'
-                                : 'background:var(--bg-elevated);border:1px solid var(--border-bright);color:var(--text-primary);'}"
+                              padding:0.8rem 1.1rem;border-radius:10px;text-decoration:none;font-family:'Syne',sans-serif;
+                              font-weight:700;font-size:0.85rem;transition:all 0.2s;cursor:pointer;
+                              ${b.primary ? 'background:linear-gradient(135deg,var(--accent-primary),var(--accent-bright));color:white;box-shadow:0 4px 14px var(--accent-glow);'
+                                          : 'background:var(--bg-elevated);border:1px solid var(--border-bright);color:var(--text-primary);'}"
                        onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
                         ${b.icon}${b.label}
                     </a>`).join('');
-
                 cardWrap.innerHTML = `
                     <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem;">
                         <div style="display:flex;gap:1rem;align-items:flex-start;">
                             ${thumbHtml}
                             <div style="flex:1;min-width:0;">
-                                <div style="font-weight:800;font-size:1rem;color:var(--text-primary);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:0.3rem;">${title}</div>
+                                <div style="font-weight:800;font-size:1rem;color:var(--text-primary);line-height:1.35;
+                                            display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:0.35rem;">${title}</div>
                                 <div style="font-size:0.78rem;color:var(--text-dim);font-weight:600;">${info}</div>
                             </div>
                         </div>
@@ -1615,10 +1615,7 @@
                     </div>`;
             }
 
-            const DL_ICON = `<svg style="width:15px;height:15px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
-            const MUS_ICON = `<svg style="width:15px;height:15px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`;
-
-            // ── TikTok via tikwm.com ──
+            // ── TikTok: fully inline via tikwm.com (open CORS) ──────────────────
             async function fetchTikTok(url) {
                 setStatus('Fetching TikTok video\u2026', 'loading');
                 const res  = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url) + '&hd=1');
@@ -1626,96 +1623,78 @@
                 if (json.code !== 0 || !json.data) throw new Error(json.msg || 'Could not fetch this TikTok. Make sure the video is public.');
                 const d = json.data;
                 const buttons = [];
-                if (d.hdplay || d.play) buttons.push({ url: d.hdplay || d.play, label: 'Download Video (No Watermark)', icon: DL_ICON, primary: true });
-                if (d.music)           buttons.push({ url: d.music,             label: 'Audio Only (MP3)',               icon: MUS_ICON, primary: false });
-                showResult({
-                    title: d.title || 'TikTok Video',
-                    thumb: d.cover || d.origin_cover || null,
-                    info:  d.author?.unique_id ? '\u{1F4F1} @' + d.author.unique_id : 'TikTok',
+                if (d.hdplay || d.play) buttons.push({ url: d.hdplay || d.play, label: 'Download Video (No Watermark)', icon: DL_ICON, primary: true, download: true });
+                if (d.music)            buttons.push({ url: d.music,             label: 'Audio Only (MP3)',               icon: MUS_ICON, primary: false, download: true });
+                renderCard({
+                    title:   d.title || 'TikTok Video',
+                    thumb:   d.cover || d.origin_cover || null,
+                    info:    d.author?.unique_id ? '\uD83D\uDCF1 @' + d.author.unique_id : 'TikTok',
                     buttons,
                 });
             }
 
-            // ── YouTube via p.savenow.to REST API (proxied through allorigins to bypass CORS) ──
-            // allorigins.win fetches the URL server-side and returns JSON with CORS headers
-            async function proxyGet(url) {
-                const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-                const res = await fetch(proxyUrl);
-                if (!res.ok) throw new Error('Proxy request failed (' + res.status + ')');
-                return res.json();
-            }
-
+            // ── YouTube: show video info + reliable download site links ──────────
+            // YouTube has fully blocked all free clientside download APIs in 2025.
+            // We fetch the video title/thumb from YouTube's oEmbed endpoint (no auth needed)
+            // and show direct links to the best working free download sites.
             async function fetchYouTube(url) {
-                setStatus('Starting YouTube download\u2026', 'loading');
+                setStatus('Looking up video info\u2026', 'loading');
 
-                // Step 1: initiate — savenow.to returns {success, id, info:{image,title}}
                 const idMatch = url.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/);
                 const videoId = idMatch ? idMatch[1] : null;
-                const thumb   = videoId ? 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' : null;
 
-                const initUrl = 'https://p.savenow.to/ajax/download.php?' + new URLSearchParams({
-                    format: '1080',
-                    url: url,
-                    add_info: '1',
-                    audio_quality: '128',
-                });
+                let title = 'YouTube Video';
+                let thumb = videoId ? 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' : null;
 
-                const init = await proxyGet(initUrl);
-                if (!init.success) throw new Error('Could not start download. The video may be unavailable or age-restricted.');
-
-                const jobId = init.id;
-                const title = init.info?.title || 'YouTube Video';
-                const imgUrl = init.info?.image || thumb;
-
-                setStatus('Processing video\u2026 (this may take 10-30 seconds)', 'loading');
-
-                // Step 2: poll /ajax/progress until done (progress 1000 = 100%)
-                const progressUrl = base => 'https://p.savenow.to/ajax/progress?id=' + jobId;
-                let dlUrl = null;
-                let attempts = 0;
-                const maxAttempts = 40; // 40 × 2.5s = 100s max wait
-
-                while (attempts < maxAttempts) {
-                    await new Promise(r => setTimeout(r, 2500));
-                    attempts++;
-
-                    let prog;
-                    try {
-                        prog = await proxyGet('https://p.savenow.to/ajax/progress?id=' + jobId);
-                    } catch { continue; }
-
-                    if (prog.success === 0) throw new Error('Download failed on server side. Try a shorter video.');
-
-                    const pct = Math.round((prog.progress || 0) / 10);
-                    setStatus('Processing\u2026 ' + pct + '%', 'loading');
-
-                    if (prog.download_url) {
-                        dlUrl = prog.download_url;
-                        break;
+                // oEmbed gives us title + thumbnail with zero auth and open CORS
+                try {
+                    const oembed = await fetch('https://www.youtube.com/oembed?url=' + encodeURIComponent(url) + '&format=json');
+                    if (oembed.ok) {
+                        const meta = await oembed.json();
+                        title = meta.title || title;
+                        if (meta.thumbnail_url) thumb = meta.thumbnail_url;
                     }
-                }
+                } catch { /* use fallback title/thumb */ }
 
-                if (!dlUrl) throw new Error('Download timed out. The video may be too long or the server is busy.');
+                const enc = encodeURIComponent(url);
 
-                showResult({
+                renderCard({
                     title,
-                    thumb: imgUrl,
-                    info: '\u25B6\uFE0F YouTube \u00b7 1080p MP4',
+                    thumb,
+                    info: '\u25B6\uFE0F YouTube \u00b7 click a format to download',
                     buttons: [
-                        { url: dlUrl, label: 'Download MP4 (1080p)', icon: DL_ICON, primary: true },
+                        {
+                            url: 'https://yt1s.ltd/en/youtube-to-mp4?q=' + enc,
+                            label: 'Download MP4',
+                            icon: DL_ICON,
+                            primary: true,
+                            download: false,
+                        },
+                        {
+                            url: 'https://yt1s.ltd/en/youtube-to-mp3?q=' + enc,
+                            label: 'Download MP3',
+                            icon: MUS_ICON,
+                            primary: false,
+                            download: false,
+                        },
+                        {
+                            url: 'https://cobalt.tools/?u=' + enc,
+                            label: 'Try Cobalt',
+                            icon: EXT_ICON,
+                            primary: false,
+                            download: false,
+                        },
                     ],
                 });
             }
 
-            // ── Main handler ──
+            // ── Main ────────────────────────────────────────────────────────────
             fetchBtn.addEventListener('click', async () => {
                 const raw = urlInput.value.trim();
                 if (!raw) { showToast('Paste a URL first!', 'error'); return; }
-
                 const isYT = /youtube\.com|youtu\.be/i.test(raw);
                 const isTT = /tiktok\.com|vm\.tiktok/i.test(raw);
                 if (!isYT && !isTT) { showToast('Only YouTube and TikTok URLs are supported', 'error'); return; }
-
                 fetchBtn.disabled = true;
                 try {
                     if (isTT) await fetchTikTok(raw);
