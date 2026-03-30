@@ -1,97 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XENO — Documentation</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0a0a0f;
-      --surface: #111118;
-      --surface2: #18181f;
-      --border: #2a2a38;
-      --accent: #7c5cfc;
-      --accent2: #a78bfa;
-      --accent-glow: rgba(124,92,252,0.18);
-      --text: #e8e8f0;
-      --muted: #8888a0;
-      --code-bg: #13131c;
-      --sidebar-w: 260px;
-      --header-h: 58px;
-      --green: #4ade80;
-      --yellow: #facc15;
-      --red: #f87171;
-      --blue: #60a5fa;
+<html lang="en">    
+<head>    
+  <meta charset="UTF-8" />    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+  <title>XENO — Documentation</title>    
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />    
+  <style>    
+    :root {    
+      --bg: #0a0a0f;    
+      --surface: #111118;    
+      --surface2: #18181f;    
+      --border: #2a2a38;    
+      --accent: #7c5cfc;    
+      --accent2: #a78bfa;    
+      --accent-glow: rgba(124,92,252,0.18);    
+      --text: #e8e8f0;    
+      --muted: #8888a0;    
+      --code-bg: #13131c;    
+      --sidebar-w: 260px;    
+      --header-h: 58px;    
+      --green: #4ade80;    
+      --yellow: #facc15;    
+      --red: #f87171;    
+      --blue: #60a5fa;    
+    }    
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }    
+    html { scroll-behavior: smooth; }    
+    body {    
+      background: var(--bg);    
+      color: var(--text);    
+      font-family: 'Syne', sans-serif;    
+      min-height: 100vh;    
+      display: flex;    
+      flex-direction: column;    
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Syne', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* HEADER */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: var(--header-h);
-      background: rgba(10,10,15,0.92);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(14px);
-      display: flex; align-items: center; gap: 16px;
-      padding: 0 20px;
-    }
-    .logo {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px;
-      color: var(--text); text-decoration: none; flex-shrink: 0;
-    }
-    .logo-icon {
-      width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), #c084fc);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; font-weight: 800; color: #fff;
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
-    .header-divider { width: 1px; height: 20px; background: var(--border); }
-    .header-badge {
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
-      color: var(--accent2); background: rgba(124,92,252,0.12);
-      border: 1px solid rgba(124,92,252,0.25); border-radius: 999px;
-      padding: 2px 10px; text-transform: uppercase;
-    }
-    .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-    .header-link {
-      color: var(--muted); text-decoration: none; font-size: 0.82rem;
-      font-weight: 600; padding: 6px 12px; border-radius: 6px;
-      transition: color 0.2s, background 0.2s;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .header-link:hover { color: var(--text); background: var(--surface2); }
-    .hamburger {
-      display: none; background: none; border: none; cursor: pointer;
-      color: var(--text); padding: 6px; border-radius: 6px;
-    }
-    .hamburger:hover { background: var(--surface2); }
-
-    /* LAYOUT */
+    header {    
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;    
+      height: var(--header-h);    
+      background: rgba(10,10,15,0.92);    
+      border-bottom: 1px solid var(--border);    
+      backdrop-filter: blur(14px);    
+      display: flex; align-items: center; gap: 16px;    
+      padding: 0 20px;    
+    }    
+    .logo {    
+      display: flex; align-items: center; gap: 10px;    
+      font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px;    
+      color: var(--text); text-decoration: none; flex-shrink: 0;    
+    }    
+    .logo-icon {    
+      width: 32px; height: 32px; border-radius: 8px;    
+      background: linear-gradient(135deg, var(--accent), #c084fc);    
+      display: flex; align-items: center; justify-content: center;    
+      font-size: 0.85rem; font-weight: 800; color: #fff;    
+      box-shadow: 0 0 16px var(--accent-glow);    
+    }    
+    .header-divider { width: 1px; height: 20px; background: var(--border); }    
+    .header-badge {    
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;    
+      color: var(--accent2); background: rgba(124,92,252,0.12);    
+      border: 1px solid rgba(124,92,252,0.25); border-radius: 999px;    
+      padding: 2px 10px; text-transform: uppercase;    
+    }    
+    .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }    
+    .header-link {    
+      color: var(--muted); text-decoration: none; font-size: 0.82rem;    
+      font-weight: 600; padding: 6px 12px; border-radius: 6px;    
+      transition: color 0.2s, background 0.2s;    
+      display: flex; align-items: center; gap: 6px;    
+    }    
+    .header-link:hover { color: var(--text); background: var(--surface2); }    
+    .hamburger {    
+      display: none; background: none; border: none; cursor: pointer;    
+      color: var(--text); padding: 6px; border-radius: 6px;    
+    }    
     .layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
-
-    /* SIDEBAR */
     .sidebar {
       width: var(--sidebar-w); flex-shrink: 0;
       position: fixed; top: var(--header-h); left: 0; bottom: 0;
       overflow-y: auto; padding: 24px 12px 40px;
       border-right: 1px solid var(--border); background: var(--bg);
-      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
-      transition: transform 0.25s ease; z-index: 90;
+      z-index: 90;
     }
-    .sidebar::-webkit-scrollbar { width: 4px; }
-    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
     .sidebar-group { margin-bottom: 28px; }
     .sidebar-group-title {
       font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
@@ -103,863 +93,152 @@
       text-decoration: none; color: var(--muted);
       font-size: 0.85rem; font-weight: 600;
       padding: 7px 8px; border-radius: 7px;
-      transition: color 0.15s, background 0.15s; position: relative;
+      transition: color 0.15s, background 0.15s;
     }
     .sidebar-link:hover { color: var(--text); background: var(--surface2); }
     .sidebar-link.active { color: var(--accent2); background: rgba(124,92,252,0.1); }
-    .sidebar-link.active::before {
-      content: ''; position: absolute; left: -12px; top: 4px; bottom: 4px;
-      width: 3px; background: var(--accent); border-radius: 0 3px 3px 0;
-    }
-    .sidebar-icon { font-size: 0.95rem; opacity: 0.7; }
-    .sidebar-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.6); z-index: 80;
-    }
-
-    /* MAIN */
     main { margin-left: var(--sidebar-w); flex: 1; max-width: 860px; padding: 48px 48px 80px; }
-
-    /* SECTIONS */
     .doc-section { margin-bottom: 72px; }
-    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-    .section-pill {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent);
-      border: 1px solid rgba(124,92,252,0.3); border-radius: 999px;
-      padding: 2px 10px; background: rgba(124,92,252,0.08);
+    h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; }
+    h2 { font-size: 1.6rem; font-weight: 700; margin-top: 40px; margin-bottom: 16px; color: var(--accent2); }
+    .step-number { 
+        background: var(--accent); color: white; padding: 2px 10px; 
+        border-radius: 6px; font-size: 0.8rem; margin-right: 8px; vertical-align: middle;
     }
-    h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; line-height: 1.15; }
-    h2 { font-size: 1.45rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.3px; margin-top: 48px; }
-    h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
-    .lead { font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; max-width: 620px; }
     p { font-size: 0.92rem; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
-    strong { color: var(--text); font-weight: 700; }
-    a { color: var(--accent2); }
-    hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-
-    /* API CARD */
     .api-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; overflow: hidden; margin-bottom: 24px;
-      transition: border-color 0.2s;
     }
-    .api-card:hover { border-color: rgba(124,92,252,0.35); }
-    .api-card-header {
-      padding: 14px 20px; background: var(--surface2);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    }
+    .api-card-header { padding: 14px 20px; background: var(--surface2); border-bottom: 1px solid var(--border); }
     .api-name { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--accent2); }
-    .api-badge {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
-      padding: 2px 8px; border-radius: 999px; text-transform: uppercase;
-    }
-    .badge-fn { background: rgba(96,165,250,0.15); color: var(--blue); border: 1px solid rgba(96,165,250,0.25); }
-    .badge-bool { background: rgba(74,222,128,0.12); color: var(--green); border: 1px solid rgba(74,222,128,0.22); }
-    .badge-notify { background: rgba(250,204,21,0.12); color: var(--yellow); border: 1px solid rgba(250,204,21,0.22); }
     .api-card-body { padding: 20px; }
-    .api-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
-
-    /* PARAMS TABLE */
-    .param-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
-    .param-table th {
-      text-align: left; color: var(--muted); font-weight: 600;
-      font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 6px 10px; border-bottom: 1px solid var(--border);
-    }
-    .param-table td { padding: 8px 10px; border-bottom: 1px solid rgba(42,42,56,0.5); vertical-align: top; }
-    .param-table tr:last-child td { border-bottom: none; }
-    .param-name { font-family: 'JetBrains Mono', monospace; color: var(--accent2); font-size: 0.82rem; }
-    .param-type { font-family: 'JetBrains Mono', monospace; color: var(--blue); font-size: 0.78rem; }
-    .param-desc { color: var(--muted); }
-
-    /* CODE BLOCK */
-    .code-wrap {
-      position: relative; margin-top: 14px;
-      background: var(--code-bg); border: 1px solid var(--border);
-      border-radius: 10px; overflow: hidden;
-    }
-    .code-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 14px; background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid var(--border);
-    }
-    .code-lang { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-    .copy-btn {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
-      color: var(--muted); background: none; border: none; cursor: pointer;
-      padding: 3px 8px; border-radius: 5px; transition: color 0.2s, background 0.2s;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .copy-btn:hover { color: var(--text); background: var(--surface2); }
-    pre {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem; line-height: 1.7;
-      padding: 18px; overflow-x: auto; color: var(--text); tab-size: 4;
-    }
-    .kw { color: #c084fc; }
-    .fn-color { color: #60a5fa; }
-    .str { color: #4ade80; }
-    .num { color: #fb923c; }
-    .cmt { color: #4b5563; font-style: italic; }
-    .prop { color: #a78bfa; }
-
-    /* CALLOUTS */
-    .callout {
-      display: flex; gap: 12px; align-items: flex-start;
-      padding: 14px 16px; border-radius: 10px; margin: 20px 0;
-      font-size: 0.86rem; line-height: 1.65;
-    }
-    .callout-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .code-wrap { position: relative; margin-top: 14px; background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border); }
+    pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; padding: 18px; color: var(--text); overflow-x: auto; }
+    .kw { color: #c084fc; } .fn-color { color: #60a5fa; } .str { color: #4ade80; } .cmt { color: #4b5563; }
+    .callout { display: flex; gap: 12px; padding: 14px 16px; border-radius: 10px; margin: 20px 0; font-size: 0.86rem; }
     .callout-info { background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.22); color: #93c5fd; }
-    .callout-warn { background: rgba(250,204,21,0.07); border: 1px solid rgba(250,204,21,0.2); color: #fde68a; }
-    .callout-tip { background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.2); color: #86efac; }
-
-    /* HERO */
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(124,92,252,0.12) 0%, rgba(192,132,252,0.06) 100%);
-      border: 1px solid rgba(124,92,252,0.2);
-      border-radius: 16px; padding: 36px 32px; margin-bottom: 40px;
-      position: relative; overflow: hidden;
-    }
-    .hero-banner::before {
-      content: 'XENO'; position: absolute; right: -10px; top: -20px;
-      font-size: 9rem; font-weight: 800; color: rgba(124,92,252,0.06);
-      font-family: 'Syne', sans-serif; letter-spacing: -8px; pointer-events: none;
-    }
-    .hero-banner h1 { font-size: 2.6rem; }
-    .hero-banner .lead { margin-bottom: 24px; }
-    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.88rem;
-      background: var(--accent); color: #fff; text-decoration: none;
-      border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 0 24px rgba(124,92,252,0.3);
-    }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.88rem;
-      background: transparent; color: var(--text); text-decoration: none;
-      border: 1px solid var(--border); cursor: pointer; transition: background 0.2s, transform 0.15s;
-    }
-    .btn-secondary:hover { background: var(--surface2); transform: translateY(-1px); }
-
-    /* FEATURE GRID */
-    .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
-    .feature-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 20px;
-      transition: border-color 0.2s, transform 0.15s;
-    }
-    .feature-card:hover { border-color: rgba(124,92,252,0.35); transform: translateY(-2px); }
-    .feature-icon { font-size: 1.4rem; margin-bottom: 10px; }
-    .feature-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
-    .feature-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
-
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82em; background: rgba(124,92,252,0.12);
-      color: var(--accent2); padding: 1px 6px; border-radius: 4px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) { main { padding: 32px 28px 60px; } }
-    @media (max-width: 768px) {
-      .sidebar { transform: translateX(-100%); }
-      .sidebar.open { transform: translateX(0); box-shadow: 8px 0 32px rgba(0,0,0,0.5); }
-      .sidebar-overlay.open { display: block; }
-      main { margin-left: 0; padding: 28px 20px 60px; }
-      .hamburger { display: flex; }
-      h1 { font-size: 1.8rem; }
-      .hero-banner { padding: 24px 20px; }
-      .hero-banner h1 { font-size: 2rem; }
-      .hero-banner::before { font-size: 6rem; }
-    }
-    @media (max-width: 480px) {
-      main { padding: 20px 16px 60px; }
-      h1 { font-size: 1.6rem; }
-      h2 { font-size: 1.2rem; }
-      .feature-grid { grid-template-columns: 1fr; }
-      .hero-btns { flex-direction: column; }
-      .btn-primary, .btn-secondary { justify-content: center; }
-      pre { font-size: 0.74rem; padding: 14px; }
-      .api-name { font-size: 0.78rem; word-break: break-all; }
-    }
   </style>
-</head>
-<body>
+</head>    
+<body>  
+<header>    
+  <a href="#" class="logo"><div class="logo-icon">X</div> XENO</a>    
+  <div class="header-divider"></div>    
+  <span class="header-badge">Step-by-Step Guide</span>    
+</header>  
 
-<header>
-  <a href="#introduction" class="logo">
-    <div class="logo-icon">X</div>
-    XENO
-  </a>
-  <div class="header-divider"></div>
-  <span class="header-badge">Docs</span>
-  <div class="header-right">
-    <a href="https://discord.gg/TdaWNwNAMa" target="_blank" class="header-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.015.04.036.05a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-      Discord
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-  </div>
-</header>
+<div class="layout">    
+  <nav class="sidebar">    
+    <div class="sidebar-group">    
+      <span class="sidebar-group-title">The Process</span>    
+      <a href="#step1" class="sidebar-link"><span class="step-number">1</span> Initialization</a>    
+      <a href="#step2" class="sidebar-link"><span class="step-number">2</span> Configuration</a>    
+      <a href="#step3" class="sidebar-link"><span class="step-number">3</span> Theming</a>    
+      <a href="#step4" class="sidebar-link"><span class="step-number">4</span> Build UI</a>    
+    </div>    
+  </nav>
 
-<div class="sidebar-overlay" id="overlay"></div>
-
-<nav class="sidebar" id="sidebar">
-  <div class="sidebar-group">
-    <span class="sidebar-group-title">Overview</span>
-    <a href="#introduction" class="sidebar-link active"><span class="sidebar-icon">🏠</span> Introduction</a>
-    <a href="#getting-started" class="sidebar-link"><span class="sidebar-icon">⚡</span> Getting Started</a>
-  </div>
-  <div class="sidebar-group">
-    <span class="sidebar-group-title">Elements</span>
-    <a href="#searchbar" class="sidebar-link"><span class="sidebar-icon">🔍</span> Search Bar</a>
-    <a href="#header-el" class="sidebar-link"><span class="sidebar-icon">🏷️</span> Header</a>
-    <a href="#label" class="sidebar-link"><span class="sidebar-icon">📝</span> Label</a>
-    <a href="#button" class="sidebar-link"><span class="sidebar-icon">🔘</span> Button</a>
-    <a href="#switch" class="sidebar-link"><span class="sidebar-icon">🔀</span> Switch</a>
-    <a href="#slider" class="sidebar-link"><span class="sidebar-icon">🎚️</span> Slider</a>
-    <a href="#dropdown" class="sidebar-link"><span class="sidebar-icon">📋</span> Dropdown</a>
-    <a href="#multiselect" class="sidebar-link"><span class="sidebar-icon">☑️</span> Multi-Select</a>
-    <a href="#textbox" class="sidebar-link"><span class="sidebar-icon">✏️</span> Text Box</a>
-    <a href="#keybind" class="sidebar-link"><span class="sidebar-icon">⌨️</span> Keybind</a>
-  </div>
-  <div class="sidebar-group">
-    <span class="sidebar-group-title">Reference</span>
-    <a href="#notifications" class="sidebar-link"><span class="sidebar-icon">🔔</span> Notifications</a>
-    <a href="#full-example" class="sidebar-link"><span class="sidebar-icon">📦</span> Full Example</a>
-  </div>
-</nav>
-
-<div class="layout">
   <main>
+    <section class="doc-section" id="step1">
+      <h2>Step 1: Initialization</h2>
+      <p>The first step is to load the XENO library into your environment using <code>loadstring</code>. This fetches the latest public version of the core engine.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">Luau</span></div>
+        <pre><span class="kw">local</span> XENO = <span class="fn-color">loadstring</span>(game:<span class="fn-color">HttpGet</span>(<span class="str">'https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC'</span>))()</pre>
+      </div>
+    </section>
 
-    <!-- INTRODUCTION -->
-    <section class="doc-section" id="introduction">
-      <div class="hero-banner">
-        <div class="section-header"><span class="section-pill">Overview</span></div>
-        <h1>XENO Library</h1>
-        <p class="lead">A powerful, lightweight UI library for Roblox scripts. Buttons, sliders, dropdowns, keybinds, and smart toast notifications — all in one clean API.</p>
-        <div class="hero-btns">
-          <a href="#getting-started" class="btn-primary">⚡ Get Started</a>
-          <a href="https://discord.gg/TdaWNwNAMa" target="_blank" class="btn-secondary">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.015.04.036.05a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-            Join Discord
-          </a>
+    <section class="doc-section" id="step2">
+      <h2>Step 2: Core Configuration</h2>
+      <p>Before adding any buttons or sliders, define your GUI Identity and allow the game a brief moment to initialize properly.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">Luau</span></div>
+        <pre><span class="kw">local</span> DiscordInvite = <span class="str">"https://discord.gg/yourlink"</span>
+<span class="kw">local</span> XENOGUINAME   = <span class="str">"MyScriptHub"</span>
+
+<span class="fn-color">wait</span>(<span class="num">6</span>) <span class="cmt">-- Essential: Allows Roblox to load objects before UI injection</span>
+
+XENO:<span class="fn-color">AddSearchBar</span>() <span class="cmt">-- Optional: Call this first if you want search functionality</span></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="step3">
+      <h2>Step 3: Custom Theming</h2>
+      <p>XENO allows you to set a primary theme or add theme-switching buttons directly into your panel for user customization.</p>
+      
+      <div class="api-card">
+        <div class="api-card-header"><span class="api-name">XENO:SetTheme(ThemeName)</span></div>
+        <div class="api-card-body">
+            <p>Instantly applies a built-in theme (e.g., "Purple", "Green", "Blue", "Red").</p>
+            <div class="code-wrap"><pre>XENO:<span class="fn-color">SetTheme</span>(<span class="str">"Purple"</span>)</pre></div>
         </div>
       </div>
 
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🎛️</div>
-          <div class="feature-title">Rich Elements</div>
-          <div class="feature-desc">Buttons, sliders, dropdowns, switches, text boxes, keybinds and more.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔔</div>
-          <div class="feature-title">Smart Notifications</div>
-          <div class="feature-desc">Toast alerts with built-in anti-spam tag system per element.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔍</div>
-          <div class="feature-title">Search Bar</div>
-          <div class="feature-desc">Built-in search so users can quickly find any element in the panel.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⌨️</div>
-          <div class="feature-title">Keybinds</div>
-          <div class="feature-desc">Bind any Roblox KeyCode to trigger callbacks instantly.</div>
+      <div class="api-card">
+        <div class="api-card-header"><span class="api-name">XENO:AddThemeBtn(name, accentColor)</span></div>
+        <div class="api-card-body">
+            <p>Adds a button that lets the user change the UI accent color on the fly.</p>
+            <div class="code-wrap">
+                <pre>XENO:<span class="fn-color">AddThemeBtn</span>(<span class="str">"Purple"</span>, Themes.Purple.Accent1)
+XENO:<span class="fn-color">AddThemeBtn</span>(<span class="str">"Green"</span>, Themes.Green.Accent1)
+XENO:<span class="fn-color">AddThemeBtn</span>(<span class="str">"Blue"</span>, Themes.Blue.Accent1)</pre>
+            </div>
         </div>
       </div>
     </section>
 
-    <!-- GETTING STARTED -->
-    <section class="doc-section" id="getting-started">
-      <h2>⚡ Getting Started</h2>
-      <p>Load XENO at the top of your script with a single <code>loadstring</code> call, then set your GUI name and Discord link before adding elements.</p>
+    <section class="doc-section" id="step4">
+      <h2>Step 4: Adding Elements</h2>
+      <p>Now, populate your sections. Use Headers to organize and interactive elements for functionality.</p>
+      
+      <h3>Add Elements with Notifications</h3>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">Luau</span></div>
+        <pre>XENO:<span class="fn-color">AddHeader</span>(<span class="str">"Combat"</span>)
+
+XENO:<span class="fn-color">AddSwitch</span>(<span class="str">"Killaura"</span>, <span class="kw">function</span>(state)
+    <span class="cmt">-- Logic here</span>
+<span class="kw">end</span>, <span class="kw">true</span>) <span class="cmt">-- 'true' enables the toast notification</span>
+
+XENO:<span class="fn-color">AddSlider</span>(<span class="str">"Reach"</span>, <span class="num">3</span>, <span class="num">20</span>, <span class="num">3</span>, <span class="kw">function</span>(v)
+    <span class="cmt">-- Logic here</span>
+<span class="kw">end</span>, <span class="kw">true</span>)</pre>
+      </div>
 
       <div class="callout callout-info">
-        <span class="callout-icon">ℹ️</span>
-        <span>XENO requires <strong>HttpGet</strong> to be enabled in your executor. The library is fetched from GitHub at runtime.</span>
-      </div>
-
-      <div class="code-wrap">
-        <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-        <pre><span class="cmt">-- Load the XENO library</span>
-<span class="kw">local</span> XENO = <span class="fn-color">loadstring</span>(game:<span class="fn-color">HttpGet</span>(<span class="str">'https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC'</span>))()
-
-<span class="cmt">--- Configuration ---</span>
-<span class="kw">local</span> DiscordInvite = <span class="str">"https://discord.gg/TdaWNwNAMa"</span>
-<span class="kw">local</span> XENOGUINAME   = <span class="str">"YourNameHere"</span>
-
-<span class="fn-color">wait</span>(<span class="num">6</span>) <span class="cmt">-- Wait for game to fully load</span>
-
-<span class="cmt">-- Add your elements below...</span></pre>
-      </div>
-
-      <div class="callout callout-warn">
-        <span class="callout-icon">⚠️</span>
-        <span>Always call <code>wait(6)</code> before adding elements. This ensures the Roblox game has fully initialized before your UI renders.</span>
+        <span><strong>Pro Tip:</strong> Use <code>AddLabel</code> to provide instructions to your users between complex inputs.</span>
       </div>
     </section>
 
-    <hr/>
-
-    <!-- SEARCH BAR -->
-    <section class="doc-section" id="searchbar">
-      <h2>🔍 AddSearchBar</h2>
-      <p>Inserts a search input at the top of the XENO panel. Players can type to filter and quickly locate any element by name. <strong>Call this before adding any other elements.</strong></p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddSearchBar()</span>
-          <span class="api-badge badge-fn">Function</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">No parameters required. Call it once, immediately after loading XENO and before any other <code>Add*</code> calls.</p>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre>XENO:<span class="fn-color">AddSearchBar</span>()</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HEADER ELEMENT -->
-    <section class="doc-section" id="header-el">
-      <h2>🏷️ AddHeader</h2>
-      <p>Adds a bold visual section heading inside the panel. Use headers to separate groups of features such as "Combat", "Farm", or "Utility".</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddHeader(title)</span>
-          <span class="api-badge badge-fn">Function</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">Purely decorative. No callback or interactivity — just a styled divider with a title label.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">title</td><td class="param-type">string</td><td class="param-desc">The heading text displayed in the panel</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre>XENO:<span class="fn-color">AddHeader</span>(<span class="str">"NORMAL FEATURES"</span>)
-XENO:<span class="fn-color">AddHeader</span>(<span class="str">"COMBAT"</span>)
-XENO:<span class="fn-color">AddHeader</span>(<span class="str">"UTILITY"</span>)</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LABEL -->
-    <section class="doc-section" id="label">
-      <h2>📝 AddLabel</h2>
-      <p>Renders a small informational text line inside the panel. Great for adding context beneath a header or displaying current status.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddLabel(text)</span>
-          <span class="api-badge badge-fn">Function</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">Displays a muted text string. No interactivity — informational only.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">text</td><td class="param-type">string</td><td class="param-desc">The text content to display</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre>XENO:<span class="fn-color">AddLabel</span>(<span class="str">"Standard interactions without alerts"</span>)
-XENO:<span class="fn-color">AddLabel</span>(<span class="str">"These alert you when used"</span>)</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BUTTON -->
-    <section class="doc-section" id="button">
-      <h2>🔘 AddButton</h2>
-      <p>Creates a clickable button that fires a callback when pressed. The <code>notify</code> flag controls whether a toast notification pops up on click.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddButton(label, callback, notify)</span>
-          <span class="api-badge badge-fn">Function</span>
-          <span class="api-badge badge-notify">Notify Support</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">When clicked, <code>callback</code> is invoked. Set <code>notify</code> to <code>true</code> to show a toast alert confirming the action — useful for actions like teleports, checks, or toggles.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">label</td><td class="param-type">string</td><td class="param-desc">Button text shown in the panel</td></tr>
-              <tr><td class="param-name">callback</td><td class="param-type">function</td><td class="param-desc">Called when the button is clicked</td></tr>
-              <tr><td class="param-name">notify</td><td class="param-type">boolean</td><td class="param-desc"><code>true</code> = toast on click; <code>false</code> = silent</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre><span class="cmt">-- Silent button</span>
-XENO:<span class="fn-color">AddButton</span>(<span class="str">"Print to Console"</span>, <span class="kw">function</span>()
-    <span class="fn-color">print</span>(<span class="str">"This is a standard button"</span>)
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-<span class="cmt">-- Button with notification</span>
-XENO:<span class="fn-color">AddButton</span>(<span class="str">"Secure Check"</span>, <span class="kw">function</span>()
-    <span class="fn-color">wait</span>(<span class="num">0.5</span>)
-    <span class="cmt">-- logic here</span>
-<span class="kw">end</span>, <span class="kw">true</span>)</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SWITCH -->
-    <section class="doc-section" id="switch">
-      <h2>🔀 AddSwitch</h2>
-      <p>A toggle switch for enabling or disabling features. Ideal for auto-farm, aim assist, ESP, or any persistent on/off state.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddSwitch(label, callback, notify)</span>
-          <span class="api-badge badge-fn">Function</span>
-          <span class="api-badge badge-bool">Boolean State</span>
-          <span class="api-badge badge-notify">Notify Support</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">Renders an on/off toggle. The callback receives the new state (<code>true</code> = on, <code>false</code> = off) every time it's flipped.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">label</td><td class="param-type">string</td><td class="param-desc">Switch label shown in the panel</td></tr>
-              <tr><td class="param-name">callback</td><td class="param-type">function(state: boolean)</td><td class="param-desc">Receives <code>true</code> when on, <code>false</code> when off</td></tr>
-              <tr><td class="param-name">notify</td><td class="param-type">boolean</td><td class="param-desc">Whether to show a notification on each toggle</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre><span class="cmt">-- Silent switch</span>
-XENO:<span class="fn-color">AddSwitch</span>(<span class="str">"Standard Switch"</span>, <span class="kw">function</span>(state)
-    <span class="fn-color">print</span>(<span class="str">"Switch is now:"</span>, state)
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-<span class="cmt">-- Auto-Farm with notification</span>
-XENO:<span class="fn-color">AddSwitch</span>(<span class="str">"Auto-Farm"</span>, <span class="kw">function</span>(state)
-    <span class="kw">if</span> state <span class="kw">then</span>
-        <span class="cmt">-- start farming loop</span>
-    <span class="kw">else</span>
-        <span class="cmt">-- stop farming loop</span>
-    <span class="kw">end</span>
-<span class="kw">end</span>, <span class="kw">true</span>)</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDER -->
-    <section class="doc-section" id="slider">
-      <h2>🎚️ AddSlider</h2>
-      <p>A draggable slider for numeric values. Perfect for WalkSpeed, JumpPower, FOV, transparency, or anything on a numeric range.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddSlider(label, min, max, default, callback, notify?)</span>
-          <span class="api-badge badge-fn">Function</span>
-          <span class="api-badge badge-notify">Notify Support</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">Renders a slider between <code>min</code> and <code>max</code>, initialized at <code>default</code>. The callback fires in real-time as the user drags. When <code>notify</code> is on, XENO's tag system batches rapid updates to prevent notification spam.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">label</td><td class="param-type">string</td><td class="param-desc">Name shown above the slider</td></tr>
-              <tr><td class="param-name">min</td><td class="param-type">number</td><td class="param-desc">Minimum value</td></tr>
-              <tr><td class="param-name">max</td><td class="param-type">number</td><td class="param-desc">Maximum value</td></tr>
-              <tr><td class="param-name">default</td><td class="param-type">number</td><td class="param-desc">Starting value (must be within min–max)</td></tr>
-              <tr><td class="param-name">callback</td><td class="param-type">function(val: number)</td><td class="param-desc">Called with current value as slider moves</td></tr>
-              <tr><td class="param-name">notify</td><td class="param-type">boolean?</td><td class="param-desc">Optional. Show notifications on change (anti-spam built in)</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre><span class="cmt">-- WalkSpeed slider (16–100, default 16)</span>
-XENO:<span class="fn-color">AddSlider</span>(<span class="str">"WalkSpeed"</span>, <span class="num">16</span>, <span class="num">100</span>, <span class="num">16</span>, <span class="kw">function</span>(val)
-    <span class="kw">if</span> LocalPlayer.<span class="prop">Character</span> <span class="kw">and</span>
-       LocalPlayer.<span class="prop">Character</span>:<span class="fn-color">FindFirstChild</span>(<span class="str">"Humanoid"</span>) <span class="kw">then</span>
-        LocalPlayer.<span class="prop">Character</span>.<span class="prop">Humanoid</span>.<span class="prop">WalkSpeed</span> = val
-    <span class="kw">end</span>
-<span class="kw">end</span>)
-
-<span class="cmt">-- Slider with notification (tag system prevents spam)</span>
-XENO:<span class="fn-color">AddSlider</span>(<span class="str">"Notify Slider"</span>, <span class="num">0</span>, <span class="num">100</span>, <span class="num">50</span>, <span class="kw">function</span>(val)
-    <span class="cmt">-- realtime logic</span>
-<span class="kw">end</span>, <span class="kw">true</span>)</pre>
-          </div>
-          <div class="callout callout-tip">
-            <span class="callout-icon">💡</span>
-            <span>Sliders with <code>notify = true</code> use a tag system to batch rapid updates — your screen won't be flooded while the user drags.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DROPDOWN -->
-    <section class="doc-section" id="dropdown">
-      <h2>📋 AddDropdown</h2>
-      <p>A single-select dropdown menu. Ideal for mode selection, teleport lists, aim options, or any mutually exclusive choice set.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddDropdown(label, options, default, callback, notify)</span>
-          <span class="api-badge badge-fn">Function</span>
-          <span class="api-badge badge-notify">Notify Support</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">Renders a dropdown with a list of string options. The user picks one; the callback fires with the selected string value.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">label</td><td class="param-type">string</td><td class="param-desc">Dropdown label in the panel</td></tr>
-              <tr><td class="param-name">options</td><td class="param-type">table&lt;string&gt;</td><td class="param-desc">List of selectable string options</td></tr>
-              <tr><td class="param-name">default</td><td class="param-type">string</td><td class="param-desc">Initially selected option (must exist in options)</td></tr>
-              <tr><td class="param-name">callback</td><td class="param-type">function(opt: string)</td><td class="param-desc">Called with the chosen option string</td></tr>
-              <tr><td class="param-name">notify</td><td class="param-type">boolean</td><td class="param-desc">Show notification on selection change</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre><span class="cmt">-- Teleport list (silent)</span>
-XENO:<span class="fn-color">AddDropdown</span>(<span class="str">"Teleport List"</span>, {<span class="str">"Spawn"</span>, <span class="str">"Bank"</span>, <span class="str">"Safe Zone"</span>}, <span class="str">"Spawn"</span>, <span class="kw">function</span>(opt)
-    <span class="fn-color">print</span>(<span class="str">"Teleporting to:"</span>, opt)
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-<span class="cmt">-- Aim mode selector (with notification)</span>
-XENO:<span class="fn-color">AddDropdown</span>(<span class="str">"Aim Mode"</span>, {<span class="str">"Legit"</span>, <span class="str">"Blatant"</span>, <span class="str">"Rage"</span>}, <span class="str">"Legit"</span>, <span class="kw">function</span>(opt)
-    <span class="cmt">-- apply aim mode logic</span>
-<span class="kw">end</span>, <span class="kw">true</span>)</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MULTI SELECT -->
-    <section class="doc-section" id="multiselect">
-      <h2>☑️ AddMultiSelectDropdown</h2>
-      <p>Like a dropdown, but lets the user pick <strong>multiple options simultaneously</strong>. Use this for zones, feature flags, or game modes that aren't mutually exclusive.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddMultiSelectDropdown(label, options, defaults, callback, notify)</span>
-          <span class="api-badge badge-fn">Function</span>
-          <span class="api-badge badge-notify">Notify Support</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">The callback fires with a table of all currently selected strings whenever the selection changes. Defaults pre-selects one or more options on load.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">label</td><td class="param-type">string</td><td class="param-desc">Dropdown label</td></tr>
-              <tr><td class="param-name">options</td><td class="param-type">table&lt;string&gt;</td><td class="param-desc">All available options</td></tr>
-              <tr><td class="param-name">defaults</td><td class="param-type">table&lt;string&gt;</td><td class="param-desc">Options pre-selected when the panel loads</td></tr>
-              <tr><td class="param-name">callback</td><td class="param-type">function(selected: table)</td><td class="param-desc">Called with all selected option strings as a table</td></tr>
-              <tr><td class="param-name">notify</td><td class="param-type">boolean</td><td class="param-desc">Show notification on selection change</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre><span class="cmt">-- Zone selector (silent, default: Spawn)</span>
-XENO:<span class="fn-color">AddMultiSelectDropdown</span>(
-    <span class="str">"Select Zones"</span>,
-    {<span class="str">"Spawn"</span>, <span class="str">"Bank"</span>, <span class="str">"Safe Zone"</span>, <span class="str">"Market"</span>, <span class="str">"Arena"</span>},
-    {<span class="str">"Spawn"</span>},
-    <span class="kw">function</span>(selected)
-        <span class="fn-color">print</span>(<span class="str">"Selected:"</span>, table.<span class="fn-color">concat</span>(selected, <span class="str">", "</span>))
-    <span class="kw">end</span>,
-    <span class="kw">false</span>
-)
-
-<span class="cmt">-- Mode selector (with notification)</span>
-XENO:<span class="fn-color">AddMultiSelectDropdown</span>(
-    <span class="str">"Select Modes"</span>,
-    {<span class="str">"Legit"</span>, <span class="str">"Blatant"</span>, <span class="str">"Rage"</span>, <span class="str">"Silent"</span>},
-    {<span class="str">"Legit"</span>},
-    <span class="kw">function</span>(selected)
-        <span class="fn-color">print</span>(<span class="str">"Modes:"</span>, table.<span class="fn-color">concat</span>(selected, <span class="str">", "</span>))
-    <span class="kw">end</span>,
-    <span class="kw">true</span>
-)</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TEXTBOX -->
-    <section class="doc-section" id="textbox">
-      <h2>✏️ AddTextBox</h2>
-      <p>A freeform text input field. Use it to let players type usernames, custom values, or any string input your script needs.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddTextBox(label, placeholder, default, callback, notify)</span>
-          <span class="api-badge badge-fn">Function</span>
-          <span class="api-badge badge-notify">Notify Support</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">Renders a text input. The callback fires when the user submits the text (on focus lost or pressing Enter). Placeholder text is shown when the field is empty.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">label</td><td class="param-type">string</td><td class="param-desc">Label shown above the input field</td></tr>
-              <tr><td class="param-name">placeholder</td><td class="param-type">string</td><td class="param-desc">Greyed-out hint text when the field is empty</td></tr>
-              <tr><td class="param-name">default</td><td class="param-type">string</td><td class="param-desc">Pre-filled value on load (use <code>""</code> for blank)</td></tr>
-              <tr><td class="param-name">callback</td><td class="param-type">function(text: string)</td><td class="param-desc">Called with the entered text on submit</td></tr>
-              <tr><td class="param-name">notify</td><td class="param-type">boolean</td><td class="param-desc">Show notification when text is submitted</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre><span class="cmt">-- Username input (silent)</span>
-XENO:<span class="fn-color">AddTextBox</span>(
-    <span class="str">"Username"</span>,
-    <span class="str">"Type a username..."</span>,
-    <span class="str">""</span>,
-    <span class="kw">function</span>(text)
-        <span class="fn-color">print</span>(<span class="str">"User typed:"</span>, text)
-    <span class="kw">end</span>,
-    <span class="kw">false</span>
-)
-
-<span class="cmt">-- Username input (with notification)</span>
-XENO:<span class="fn-color">AddTextBox</span>(
-    <span class="str">"Username"</span>,
-    <span class="str">"Type a username..."</span>,
-    <span class="str">""</span>,
-    <span class="kw">function</span>(text)
-        <span class="fn-color">print</span>(<span class="str">"User typed:"</span>, text)
-    <span class="kw">end</span>,
-    <span class="kw">true</span>
-)</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- KEYBIND -->
-    <section class="doc-section" id="keybind">
-      <h2>⌨️ AddKeybind</h2>
-      <p>Binds a keyboard key to a callback function. Use this for toggling the UI, activating abilities, or any action that needs a hotkey.</p>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-name">XENO:AddKeybind(label, keyCode, callback, notify)</span>
-          <span class="api-badge badge-fn">Function</span>
-          <span class="api-badge badge-notify">Notify Support</span>
-        </div>
-        <div class="api-card-body">
-          <p class="api-desc">Registers a hotkey using a Roblox <code>Enum.KeyCode</code>. The callback fires each time the key is pressed. The keybind label and bound key are displayed in the panel.</p>
-          <table class="param-table">
-            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-            <tbody>
-              <tr><td class="param-name">label</td><td class="param-type">string</td><td class="param-desc">Display name for this keybind in the panel</td></tr>
-              <tr><td class="param-name">keyCode</td><td class="param-type">Enum.KeyCode</td><td class="param-desc">The key to listen for (e.g. <code>Enum.KeyCode.RightControl</code>)</td></tr>
-              <tr><td class="param-name">callback</td><td class="param-type">function</td><td class="param-desc">Fired each time the key is pressed</td></tr>
-              <tr><td class="param-name">notify</td><td class="param-type">boolean</td><td class="param-desc">Show a notification when the keybind fires</td></tr>
-            </tbody>
-          </table>
-          <div class="code-wrap">
-            <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre><span class="cmt">-- Toggle UI with Right Control (with notification)</span>
-XENO:<span class="fn-color">AddKeybind</span>(
-    <span class="str">"Toggle Interface"</span>,
-    Enum.<span class="prop">KeyCode</span>.<span class="prop">RightControl</span>,
-    <span class="kw">function</span>()
-        <span class="fn-color">ToggleUI</span>()
-    <span class="kw">end</span>,
-    <span class="kw">true</span>
-)</pre>
-          </div>
-          <div class="callout callout-info">
-            <span class="callout-icon">ℹ️</span>
-            <span>Any valid <a href="https://create.roblox.com/docs/reference/engine/enums/KeyCode" target="_blank">Enum.KeyCode</a> works. Popular choices: <code>RightControl</code>, <code>F6</code>, <code>Insert</code>, <code>Home</code>, <code>End</code>.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NOTIFICATIONS -->
-    <section class="doc-section" id="notifications">
-      <h2>🔔 Notification System</h2>
-      <p>Every interactive element in XENO supports an optional <code>notify</code> parameter. When <code>true</code>, a toast notification appears whenever that element is interacted with.</p>
-
-      <div class="callout callout-tip">
-        <span class="callout-icon">✨</span>
-        <span>XENO uses a <strong>tag system</strong> to prevent spam. Elements that fire rapidly (like sliders) batch their notifications so your screen stays clean.</span>
-      </div>
-
-      <div class="api-card" style="margin-top: 20px;">
-        <div class="api-card-header">
-          <span class="api-name">notify: boolean</span>
-          <span class="api-badge badge-bool">Last Parameter</span>
-        </div>
-        <div class="api-card-body">
-          <table class="param-table">
-            <thead><tr><th>Value</th><th>Behavior</th><th>Use When</th></tr></thead>
-            <tbody>
-              <tr>
-                <td class="param-name">false</td>
-                <td class="param-desc">Silent — no notification shown</td>
-                <td class="param-desc">Internal updates, print-only debug, high-frequency callbacks</td>
-              </tr>
-              <tr>
-                <td class="param-name">true</td>
-                <td class="param-desc">Toast notification appears on use</td>
-                <td class="param-desc">Mode changes, toggles, keybinds, user-submitted inputs</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- FULL EXAMPLE -->
-    <section class="doc-section" id="full-example">
-      <h2>📦 Full Example Script</h2>
-      <p>A complete working script showing every XENO element, organized into two sections — one without notifications and one with.</p>
-
-      <div class="code-wrap">
-        <div class="code-header"><span class="code-lang">Luau</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-        <pre><span class="kw">local</span> XENO = <span class="fn-color">loadstring</span>(game:<span class="fn-color">HttpGet</span>(<span class="str">'https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC'</span>))()
-
-<span class="cmt">--- Configuration ---</span>
-<span class="kw">local</span> DiscordInvite = <span class="str">"https://discord.gg/TdaWNwNAMa"</span>
-<span class="kw">local</span> XENOGUINAME   = <span class="str">"YourNameHere"</span>
-
+    <section class="doc-section">
+        <h2>Full Implementation</h2>
+        <div class="code-wrap">
+            <pre><span class="cmt">-- Step 1 & 2</span>
+<span class="kw">local</span> XENO = <span class="fn-color">loadstring</span>(game:<span class="fn-color">HttpGet</span>(<span class="str">'...'</span>))()
 <span class="fn-color">wait</span>(<span class="num">6</span>)
 
-XENO:<span class="fn-color">AddSearchBar</span>()
+<span class="cmt">-- Step 3</span>
+XENO:<span class="fn-color">SetTheme</span>(<span class="str">"Blue"</span>)
 
-<span class="cmt">-- 1. NORMAL FEATURES SECTION</span>
-XENO:<span class="fn-color">AddHeader</span>(<span class="str">"NORMAL FEATURES"</span>)
-XENO:<span class="fn-color">AddLabel</span>(<span class="str">"Standard interactions without alerts"</span>)
-
-XENO:<span class="fn-color">AddButton</span>(<span class="str">"Print to Console"</span>, <span class="kw">function</span>()
-    <span class="fn-color">print</span>(<span class="str">"This is a standard button"</span>)
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-XENO:<span class="fn-color">AddSwitch</span>(<span class="str">"Standard Switch"</span>, <span class="kw">function</span>(state)
-    <span class="fn-color">print</span>(<span class="str">"Switch is now:"</span>, state)
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-XENO:<span class="fn-color">AddSlider</span>(<span class="str">"WalkSpeed"</span>, <span class="num">16</span>, <span class="num">100</span>, <span class="num">16</span>, <span class="kw">function</span>(val)
-    <span class="kw">if</span> LocalPlayer.<span class="prop">Character</span> <span class="kw">and</span> LocalPlayer.<span class="prop">Character</span>:<span class="fn-color">FindFirstChild</span>(<span class="str">"Humanoid"</span>) <span class="kw">then</span>
-        LocalPlayer.<span class="prop">Character</span>.<span class="prop">Humanoid</span>.<span class="prop">WalkSpeed</span> = val
-    <span class="kw">end</span>
-<span class="kw">end</span>)
-
-XENO:<span class="fn-color">AddDropdown</span>(<span class="str">"Teleport List"</span>, {<span class="str">"Spawn"</span>, <span class="str">"Bank"</span>, <span class="str">"Safe Zone"</span>}, <span class="str">"Spawn"</span>, <span class="kw">function</span>(opt)
-    <span class="fn-color">print</span>(<span class="str">"Teleporting to:"</span>, opt)
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-XENO:<span class="fn-color">AddMultiSelectDropdown</span>(<span class="str">"Select Zones"</span>, {<span class="str">"Spawn"</span>, <span class="str">"Bank"</span>, <span class="str">"Safe Zone"</span>, <span class="str">"Market"</span>, <span class="str">"Arena"</span>}, {<span class="str">"Spawn"</span>}, <span class="kw">function</span>(selected)
-    <span class="fn-color">print</span>(<span class="str">"Selected:"</span>, table.<span class="fn-color">concat</span>(selected, <span class="str">", "</span>))
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-XENO:<span class="fn-color">AddTextBox</span>(<span class="str">"Username"</span>, <span class="str">"Type a username..."</span>, <span class="str">""</span>, <span class="kw">function</span>(text)
-    <span class="fn-color">print</span>(<span class="str">"User typed:"</span>, text)
-<span class="kw">end</span>, <span class="kw">false</span>)
-
-
-<span class="cmt">-- 2. NOTIFICATION FEATURES SECTION</span>
-XENO:<span class="fn-color">AddHeader</span>(<span class="str">"NOTIFICATION FEATURES"</span>)
-XENO:<span class="fn-color">AddLabel</span>(<span class="str">"These alert you when used"</span>)
-
-XENO:<span class="fn-color">AddButton</span>(<span class="str">"Secure Check"</span>, <span class="kw">function</span>()
-    <span class="fn-color">wait</span>(<span class="num">0.5</span>)
-<span class="kw">end</span>, <span class="kw">true</span>)
-
-XENO:<span class="fn-color">AddSwitch</span>(<span class="str">"Auto-Farm"</span>, <span class="kw">function</span>(state)
-    <span class="cmt">-- Logic here</span>
-<span class="kw">end</span>, <span class="kw">true</span>)
-
-XENO:<span class="fn-color">AddSlider</span>(<span class="str">"Notify Slider"</span>, <span class="num">0</span>, <span class="num">100</span>, <span class="num">50</span>, <span class="kw">function</span>(val)
-    <span class="cmt">-- Realtime notification updates (tag system handles spam)</span>
-<span class="kw">end</span>, <span class="kw">true</span>)
-
-XENO:<span class="fn-color">AddDropdown</span>(<span class="str">"Aim Mode"</span>, {<span class="str">"Legit"</span>, <span class="str">"Blatant"</span>, <span class="str">"Rage"</span>}, <span class="str">"Legit"</span>, <span class="kw">function</span>(opt)
-    <span class="cmt">-- Logic here</span>
-<span class="kw">end</span>, <span class="kw">true</span>)
-
-XENO:<span class="fn-color">AddMultiSelectDropdown</span>(<span class="str">"Select Modes"</span>, {<span class="str">"Legit"</span>, <span class="str">"Blatant"</span>, <span class="str">"Rage"</span>, <span class="str">"Silent"</span>}, {<span class="str">"Legit"</span>}, <span class="kw">function</span>(selected)
-    <span class="fn-color">print</span>(<span class="str">"Modes selected:"</span>, table.<span class="fn-color">concat</span>(selected, <span class="str">", "</span>))
-<span class="kw">end</span>, <span class="kw">true</span>)
-
-XENO:<span class="fn-color">AddTextBox</span>(<span class="str">"Username"</span>, <span class="str">"Type a username..."</span>, <span class="str">""</span>, <span class="kw">function</span>(text)
-    <span class="fn-color">print</span>(<span class="str">"User typed:"</span>, text)
-<span class="kw">end</span>, <span class="kw">true</span>)
-
-XENO:<span class="fn-color">AddKeybind</span>(<span class="str">"Toggle Interface"</span>, Enum.<span class="prop">KeyCode</span>.<span class="prop">RightControl</span>, <span class="kw">function</span>()
-    <span class="fn-color">ToggleUI</span>()
-<span class="kw">end</span>, <span class="kw">true</span>)</pre>
-      </div>
+<span class="cmt">-- Step 4</span>
+XENO:<span class="fn-color">AddHeader</span>(<span class="str">"Settings"</span>)
+XENO:<span class="fn-color">AddThemeBtn</span>(<span class="str">"Red Theme"</span>, Themes.Red.Accent1)
+XENO:<span class="fn-color">AddButton</span>(<span class="str">"Self Destruct"</span>, <span class="kw">function</span>() <span class="fn-color">print</span>(<span class="str">"Bye!"</span>) <span class="kw">end</span>, <span class="kw">true</span>)</pre>
+        </div>
     </section>
-
   </main>
 </div>
 
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-
-  hamburger.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('open');
-  });
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('open');
-  });
-  document.querySelectorAll('.sidebar-link').forEach(link => {
+  // Simple active state for sidebar
+  const links = document.querySelectorAll('.sidebar-link');
+  links.forEach(link => {
     link.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('open');
+      links.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
     });
   });
-
-  // Active link on scroll
-  const sections = document.querySelectorAll('.doc-section');
-  const sidebarLinks = document.querySelectorAll('.sidebar-link');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        sidebarLinks.forEach(l => l.classList.remove('active'));
-        const id = entry.target.id;
-        const active = document.querySelector(`.sidebar-link[href="#${id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  sections.forEach(s => observer.observe(s));
-
-  // Copy buttons
-  function copyCode(btn) {
-    const pre = btn.closest('.code-wrap').querySelector('pre');
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'Copied!';
-      setTimeout(() => btn.textContent = 'Copy', 2000);
-    });
-  }
 </script>
 </body>
 </html>
