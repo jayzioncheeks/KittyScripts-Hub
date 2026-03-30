@@ -44,13 +44,11 @@
       background: var(--bg); z-index: 999; overflow-y: auto;
       transition: transform 0.3s ease;
     }
-
     .nav-section-label {
       font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
       color: #4a4a5a; text-transform: uppercase; margin: 20px 0 8px;
     }
     .nav-section-label:first-child { margin-top: 0; }
-
     .nav-item { margin-bottom: 2px; }
     .nav-link {
       display: block; padding: 9px 10px; color: var(--text-muted);
@@ -59,53 +57,32 @@
     }
     .nav-link:hover { color: var(--text); background: #13131a; }
     .nav-link.active { color: var(--accent); font-weight: 600; background: #1a1428; }
-
-    .sub-nav { display: none; margin-left: 10px; border-left: 1px solid var(--border); padding-left: 12px; }
+    .sub-nav { display: none; margin-left: 10px; margin-bottom: 4px; border-left: 1px solid var(--border); padding-left: 12px; }
     .sub-nav.open { display: block; }
     .sub-link { display: block; padding: 5px 0; color: #64748b; font-size: 0.83rem; cursor: pointer; transition: color 0.2s; }
     .sub-link:hover { color: var(--text); }
 
     main { margin-left: var(--sidebar-w); padding: 100px 40px 60px; max-width: 900px; min-height: 100vh; }
-
     .page { display: none; }
     .page.active { display: block; }
 
     .breadcrumbs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 30px; }
     .breadcrumbs .cur { color: var(--accent); font-weight: 500; }
-
     h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
     p { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
     code { background: #1a1a1f; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
 
-    .hero-image-container {
-      margin: 28px 0 36px; border-radius: 14px; overflow: hidden;
-      border: 1px solid var(--border); box-shadow: 0 8px 48px rgba(0,0,0,0.6);
-    }
+    .hero-image-container { margin: 28px 0 36px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 8px 48px rgba(0,0,0,0.6); }
     .hero-image-container img { width: 100%; display: block; }
-
     .section-label { font-size: 1.5rem; font-weight: 700; margin: 48px 0 20px; scroll-margin-top: 80px; }
 
     .code-container { position: relative; margin: 20px 0; }
-    .code-container pre {
-      background: #000; padding: 45px 20px 20px; border-radius: 12px;
-      border: 1px solid var(--border); color: #d4d4d4;
-      font-size: 0.85rem; overflow-x: auto; line-height: 1.5; white-space: pre;
-    }
-    .code-copy {
-      position: absolute; top: 10px; right: 10px;
-      background: #1e1e24; border: 1px solid #33333c; color: var(--text-muted);
-      padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600;
-      cursor: pointer; transition: 0.2s;
-    }
+    .code-container pre { background: #000; padding: 45px 20px 20px; border-radius: 12px; border: 1px solid var(--border); color: #d4d4d4; font-size: 0.85rem; overflow-x: auto; line-height: 1.5; white-space: pre; }
+    .code-copy { position: absolute; top: 10px; right: 10px; background: #1e1e24; border: 1px solid #33333c; color: var(--text-muted); padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
     .code-copy:hover, .code-copy.copied { background: var(--surface); border-color: var(--accent); color: white; }
 
     .footer-nav { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; gap: 20px; }
-    .nav-btn {
-      flex: 1; background: var(--surface); border: 1px solid var(--border);
-      color: var(--text); padding: 16px; border-radius: 10px;
-      cursor: pointer; transition: 0.2s; display: flex; flex-direction: column;
-      text-align: left; font-family: inherit;
-    }
+    .nav-btn { flex: 1; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 16px; border-radius: 10px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; text-align: left; font-family: inherit; }
     .nav-btn.right { text-align: right; }
     .nav-btn:hover { border-color: var(--accent); background: #1c1c22; }
     .nav-btn span { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; display: block; }
@@ -115,73 +92,59 @@
     /* ── OBFUSCATOR ── */
     .obf-box { background: #000; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 20px 0; }
     .obf-box-header { padding: 10px 16px; background: #111116; border-bottom: 1px solid var(--border); font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
-    .obf-textarea {
-      width: 100%; background: transparent; border: none; outline: none;
-      color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-      line-height: 1.6; padding: 16px; resize: vertical; min-height: 200px;
-    }
+    .obf-textarea { width: 100%; background: transparent; border: none; outline: none; color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; padding: 16px; resize: vertical; min-height: 200px; }
     .obf-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 16px 0; }
-    .tool-btn {
-      background: var(--accent); color: #0b0b0e; border: none;
-      padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.9rem;
-      cursor: pointer; transition: opacity 0.2s; font-family: inherit;
-    }
+    .tool-btn { background: var(--accent); color: #0b0b0e; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: opacity 0.2s; font-family: inherit; }
     .tool-btn:hover { opacity: 0.85; }
     .tool-btn.secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
     .tool-btn.secondary:hover { border-color: var(--accent); opacity: 1; }
     .obf-strength { display: flex; gap: 8px; align-items: center; margin-left: auto; }
     .obf-strength label { font-size: 0.8rem; color: var(--text-muted); }
-    .obf-strength select {
-      background: var(--surface); border: 1px solid var(--border); color: var(--text);
-      padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-family: inherit; cursor: pointer;
-    }
+    .obf-strength select { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-family: inherit; cursor: pointer; }
     .obf-status { font-size: 0.8rem; color: var(--accent); margin-top: 4px; min-height: 20px; }
 
     /* ── SHARE FORM ── */
-    .share-textarea {
-      width: 100%; background: #000; border: 1px solid var(--border); border-radius: 12px;
-      color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-      line-height: 1.6; padding: 16px; resize: vertical; min-height: 220px;
-      outline: none; transition: border-color 0.2s;
-    }
+    .share-textarea { width: 100%; background: #000; border: 1px solid var(--border); border-radius: 12px; color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; padding: 16px; resize: vertical; min-height: 220px; outline: none; transition: border-color 0.2s; }
     .share-textarea:focus { border-color: var(--accent); }
-    .share-submit {
-      margin-top: 12px; background: var(--accent); color: #0b0b0e; border: none;
-      padding: 11px 28px; border-radius: 8px; font-weight: 700; font-size: 0.95rem;
-      cursor: pointer; font-family: inherit; transition: opacity 0.2s;
-    }
-    .share-submit:hover { opacity: 0.85; }
 
-    /* ── PASTE VIEW ── */
-    .paste-topbar {
+    /* ── PASTE VIEW PAGE ── */
+    .paste-header-bar {
       display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px; gap: 12px; flex-wrap: wrap;
+      background: #111116; border: 1px solid var(--border); border-radius: 12px 12px 0 0;
+      padding: 12px 16px; margin-top: 20px;
     }
-    .paste-meta { font-size: 0.8rem; color: var(--text-muted); }
-    .paste-meta span { color: var(--accent); font-weight: 600; }
-    .paste-actions { display: flex; gap: 10px; }
-    .paste-code-box {
-      background: #000; border: 1px solid var(--border); border-radius: 12px;
-      padding: 20px; color: #d4d4d4; font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap;
-      word-break: break-all; min-height: 300px;
+    .paste-id-label { font-size: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .paste-actions { display: flex; gap: 8px; }
+    .paste-code-block {
+      background: #000; border: 1px solid var(--border); border-top: none;
+      border-radius: 0 0 12px 12px; padding: 20px;
+      color: #d4d4d4; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem; line-height: 1.7; white-space: pre-wrap;
+      word-break: break-all; min-height: 300px; max-height: 70vh; overflow-y: auto;
     }
 
-    /* ── RAW VIEW ── */
-    .raw-topbar { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
-    .raw-badge {
-      background: var(--accent); color: #0b0b0e; padding: 3px 10px;
-      border-radius: 5px; font-size: 0.75rem; font-weight: 700;
+    /* ── RAW VIEW — full page takeover ── */
+    #raw-view {
+      display: none;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #0a0a0a; z-index: 9999;
+      overflow: auto;
     }
-    .raw-content {
-      background: #000; border: 1px solid var(--border); border-radius: 12px;
-      padding: 20px; color: #d4d4d4; font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap;
-      word-break: break-all; min-height: 300px;
+    #raw-view.active { display: block; }
+    .raw-topbar {
+      position: sticky; top: 0;
+      background: #111116; border-bottom: 1px solid var(--border);
+      padding: 10px 20px; display: flex; align-items: center; gap: 12px;
+    }
+    .raw-topbar span { font-size: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; flex: 1; }
+    #raw-code {
+      margin: 0; padding: 24px;
+      color: #d4d4d4; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem; line-height: 1.7; white-space: pre-wrap;
+      word-break: break-all;
     }
 
     .menu-toggle { display: none; background: none; border: none; color: white; cursor: pointer; }
-
     @media (max-width: 900px) {
       .sidebar { transform: translateX(-100%); width: 100%; }
       .sidebar.open { transform: translateX(0); }
@@ -192,13 +155,21 @@
 </head>
 <body>
 
+<!-- RAW VIEW — full screen overlay, shown via hash routing -->
+<div id="raw-view">
+  <div class="raw-topbar">
+    <span id="raw-label">raw</span>
+    <button class="tool-btn secondary" id="rawCopyBtn">Copy</button>
+    <button class="tool-btn secondary" id="rawBackBtn">← Back</button>
+  </div>
+  <pre id="raw-code"></pre>
+</div>
+
 <header>
   <div class="header-left">
     <button class="menu-toggle" id="menuBtn">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
     <img class="logo-img" src="https://raw.githubusercontent.com/jayzioncheeks/XENO-Docs/refs/heads/main/X%20logo.png" alt="XENO" />
@@ -232,7 +203,6 @@
     </div>
   </div>
   <div class="nav-item"><div class="nav-link" data-page="example">Full Code Script</div></div>
-
   <div class="nav-section-label" style="margin-top:28px;">Tools</div>
   <div class="nav-item"><div class="nav-link" data-page="obfuscator">Obfuscator</div></div>
   <div class="nav-item"><div class="nav-link" data-page="share">Share Script</div></div>
@@ -282,6 +252,7 @@ _G.XENOGUINAME = "name"</pre>
     <div class="code-container">
       <button class="code-copy">Copy</button>
       <pre>SetTheme("Purple")
+
 AddThemeBtn("Purple", Themes.Purple.Accent1)
 AddThemeBtn("Green", Themes.Green.Accent1)
 AddThemeBtn("Blue", Themes.Blue.Accent1)
@@ -423,36 +394,28 @@ end, true)</pre>
   <section id="share" class="page">
     <div class="breadcrumbs">Tools › <span class="cur">Share Script</span></div>
     <h1>Share Script</h1>
-    <p>Paste your script and press <strong>Submit</strong>. You'll be taken straight to your paste where you can also grab the raw link.</p>
+    <p>Paste your script and press <strong>Submit</strong>. You'll be taken to the paste page with both a normal link and a raw link.</p>
     <textarea class="share-textarea" id="shareInput" placeholder="-- Paste your script here..."></textarea>
-    <br/>
-    <button class="share-submit" id="shareSubmitBtn">Submit</button>
+    <div style="margin-top:12px;">
+      <button class="tool-btn" id="shareSubmitBtn">Submit</button>
+    </div>
   </section>
 
   <!-- PASTE VIEW (normal link destination) -->
   <section id="paste-view" class="page">
-    <div class="breadcrumbs">Tools › Share › <span class="cur">Paste</span></div>
-    <div class="paste-topbar">
-      <div class="paste-meta">Paste ID: <span id="pasteIdDisplay"></span></div>
+    <div class="breadcrumbs">Tools › Share › <span class="cur" id="paste-view-id"></span></div>
+    <h1>Script</h1>
+
+    <div class="paste-header-bar">
+      <span class="paste-id-label" id="paste-view-label"></span>
       <div class="paste-actions">
-        <button class="tool-btn secondary" id="pasteCopyBtn">Copy Script</button>
-        <button class="tool-btn secondary" id="pasteRawBtn">View Raw</button>
-        <button class="tool-btn secondary" id="pasteNewBtn">New Paste</button>
+        <button class="tool-btn secondary" id="pasteNormalCopyBtn">Copy Link</button>
+        <button class="tool-btn secondary" id="pasteRawLinkBtn">Raw →</button>
+        <button class="tool-btn secondary" id="pasteCopyCodeBtn">Copy Code</button>
+        <button class="tool-btn secondary" id="pasteNewBtn">+ New</button>
       </div>
     </div>
-    <div class="paste-code-box" id="pasteCodeBox"></div>
-  </section>
-
-  <!-- RAW VIEW -->
-  <section id="raw-view" class="page">
-    <div class="breadcrumbs">Tools › Share › <span class="cur">Raw</span></div>
-    <div class="raw-topbar">
-      <span class="raw-badge">RAW</span>
-      <span style="font-size:0.8rem;color:var(--text-muted);">Plain text — copy and use with loadstring()</span>
-      <button class="tool-btn secondary" id="rawCopyBtn" style="margin-left:auto;">Copy</button>
-      <button class="tool-btn secondary" id="rawBackBtn">← Normal View</button>
-    </div>
-    <div class="raw-content" id="rawContent"></div>
+    <div class="paste-code-block" id="paste-code-block"></div>
   </section>
 
 </main>
@@ -460,33 +423,131 @@ end, true)</pre>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
+  // ── In-memory paste store ────────────────────────────────────
   var pastes = {};
   var currentPasteId = null;
 
   function genId() {
-    return Math.random().toString(36).slice(2, 8).toUpperCase();
+    var chars = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+    var id = '';
+    for (var i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
+    return id;
   }
+
+  function getBaseUrl() {
+    return window.location.href.split('#')[0];
+  }
+
+  // ── Hash router ──────────────────────────────────────────────
+  function handleHash() {
+    var hash = window.location.hash; // e.g. #paste-ABCD1234 or #raw-ABCD1234
+    if (!hash) return;
+
+    var pasteMatch = hash.match(/^#paste-([A-Za-z0-9]+)$/);
+    var rawMatch   = hash.match(/^#raw-([A-Za-z0-9]+)$/);
+
+    if (pasteMatch) {
+      var id = pasteMatch[1];
+      if (pastes[id]) openPasteView(id);
+    } else if (rawMatch) {
+      var id = rawMatch[1];
+      if (pastes[id]) openRawView(id);
+    }
+  }
+
+  window.addEventListener('hashchange', handleHash);
+
+  // ── Show/hide raw overlay ────────────────────────────────────
+  function openRawView(id) {
+    var code = pastes[id] || '';
+    document.getElementById('raw-code').textContent = code;
+    document.getElementById('raw-label').textContent = getBaseUrl() + '#raw-' + id;
+    document.getElementById('raw-view').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    currentPasteId = id;
+  }
+
+  function closeRawView() {
+    document.getElementById('raw-view').classList.remove('active');
+    document.body.style.overflow = '';
+    // Go back to the normal paste view
+    if (currentPasteId) {
+      window.location.hash = 'paste-' + currentPasteId;
+    }
+  }
+
+  document.getElementById('rawBackBtn').addEventListener('click', closeRawView);
+
+  document.getElementById('rawCopyBtn').addEventListener('click', function () {
+    var code = document.getElementById('raw-code').textContent;
+    navigator.clipboard.writeText(code).then(function () {
+      var btn = document.getElementById('rawCopyBtn');
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+    });
+  });
+
+  // ── Paste view page ──────────────────────────────────────────
+  function openPasteView(id) {
+    currentPasteId = id;
+    var code = pastes[id] || '';
+    var base = getBaseUrl();
+    var normalUrl = base + '#paste-' + id;
+    var rawUrl    = base + '#raw-' + id;
+
+    document.getElementById('paste-view-id').textContent = id;
+    document.getElementById('paste-view-label').textContent = normalUrl;
+    document.getElementById('paste-code-block').textContent = code;
+
+    document.getElementById('pasteNormalCopyBtn').onclick = function () {
+      navigator.clipboard.writeText(normalUrl).then(function () {
+        var btn = document.getElementById('pasteNormalCopyBtn');
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = 'Copy Link'; }, 2000);
+      });
+    };
+
+    document.getElementById('pasteRawLinkBtn').onclick = function () {
+      window.location.hash = 'raw-' + id;
+    };
+
+    document.getElementById('pasteCopyCodeBtn').onclick = function () {
+      navigator.clipboard.writeText(code).then(function () {
+        var btn = document.getElementById('pasteCopyCodeBtn');
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = 'Copy Code'; }, 2000);
+      });
+    };
+
+    document.getElementById('pasteNewBtn').onclick = function () {
+      document.getElementById('shareInput').value = '';
+      showPage('share');
+      window.location.hash = '';
+    };
+
+    showPage('paste-view');
+  }
+
+  // ── Submit new paste ─────────────────────────────────────────
+  document.getElementById('shareSubmitBtn').addEventListener('click', function () {
+    var code = document.getElementById('shareInput').value.trim();
+    if (!code) return;
+    var id = genId();
+    pastes[id] = code;
+    // Navigate to the paste view via hash — this triggers hashchange → openPasteView
+    window.location.hash = 'paste-' + id;
+  });
 
   // ── Page navigation ──────────────────────────────────────────
   function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
     var target = document.getElementById(pageId);
     if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
 
-    // Only highlight sidebar links for real nav pages
-    var sidebarPages = ['intro','setup','elements','example','obfuscator','share'];
-    document.querySelectorAll('.nav-link[data-page]').forEach(function(link) {
-      var lp = link.dataset.page;
-      if (sidebarPages.indexOf(pageId) !== -1) {
-        link.classList.toggle('active', lp === pageId);
-      } else if (pageId === 'paste-view' || pageId === 'raw-view') {
-        link.classList.toggle('active', lp === 'share');
-      } else {
-        link.classList.remove('active');
-      }
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+      link.classList.toggle('active', link.dataset.page === pageId);
     });
-
-    document.querySelectorAll('.sub-nav').forEach(function(sub) { sub.classList.remove('open'); });
+    document.querySelectorAll('.sub-nav').forEach(function (sub) { sub.classList.remove('open'); });
     var subNav = document.getElementById('sub-' + pageId);
     if (subNav) subNav.classList.add('open');
 
@@ -494,51 +555,44 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function scrollToSection(pageId, sectionId) {
-    var page = document.getElementById(pageId);
-    if (!page.classList.contains('active')) showPage(pageId);
-    setTimeout(function() {
+    if (!document.getElementById(pageId).classList.contains('active')) showPage(pageId);
+    setTimeout(function () {
       var el = document.getElementById(sectionId);
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
     }, 60);
   }
 
-  // Sidebar links
-  document.querySelectorAll('.nav-link[data-page]').forEach(function(link) {
-    link.addEventListener('click', function() { showPage(link.dataset.page); });
+  document.querySelectorAll('.nav-link[data-page]').forEach(function (link) {
+    link.addEventListener('click', function () { showPage(link.dataset.page); });
   });
-  document.querySelectorAll('.sub-link[data-section]').forEach(function(link) {
-    link.addEventListener('click', function() { scrollToSection(link.dataset.page, link.dataset.section); });
+  document.querySelectorAll('.sub-link[data-section]').forEach(function (link) {
+    link.addEventListener('click', function () { scrollToSection(link.dataset.page, link.dataset.section); });
   });
-  document.querySelectorAll('.nav-btn[data-page]').forEach(function(btn) {
-    btn.addEventListener('click', function() { showPage(btn.dataset.page); });
+  document.querySelectorAll('.nav-btn[data-page]').forEach(function (btn) {
+    btn.addEventListener('click', function () { showPage(btn.dataset.page); });
   });
-
-  // Copy buttons on code blocks
-  document.querySelectorAll('.code-copy').forEach(function(btn) {
-    btn.addEventListener('click', function() {
+  document.querySelectorAll('.code-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
       var pre = btn.nextElementSibling;
       if (!pre) return;
-      navigator.clipboard.writeText(pre.innerText).then(function() {
-        var orig = btn.textContent; btn.textContent = 'Copied!'; btn.classList.add('copied');
-        setTimeout(function() { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      navigator.clipboard.writeText(pre.innerText).then(function () {
+        var orig = btn.textContent;
+        btn.textContent = 'Copied!'; btn.classList.add('copied');
+        setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
       });
     });
   });
-
-  // Mobile menu
-  document.getElementById('menuBtn').addEventListener('click', function() {
+  document.getElementById('menuBtn').addEventListener('click', function () {
     document.getElementById('sidebar').classList.toggle('open');
   });
 
   // ── OBFUSCATOR ───────────────────────────────────────────────
   function obfuscateLua(code, level) {
-    var varMap = {};
-    var varCounter = 0;
+    var varMap = {}, varCounter = 0;
     function makeVarName() {
       var chars = ['l','I','ll','lI','Il','II','lll','lIl','IlI','III'];
       varCounter++;
-      var name = '_';
-      var n = varCounter;
+      var name = '_', n = varCounter;
       while (n > 0) { name += chars[(n-1) % chars.length]; n = Math.floor((n-1)/chars.length); }
       return name;
     }
@@ -551,7 +605,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     code = code.replace(/"([^"\\]*(\\.[^"\\]*)*)"|'([^'\\]*(\\.[^'\\]*)*)'/g, function(match) {
       var inner = match.slice(1,-1), encoded = '';
-      for (var i=0;i<inner.length;i++) encoded += '\\' + inner.charCodeAt(i);
+      for (var i = 0; i < inner.length; i++) encoded += '\\' + inner.charCodeAt(i);
       return '"' + encoded + '"';
     });
     code = code.replace(/--[^\n]*/g,'').replace(/--\[\[[\s\S]*?\]\]/g,'');
@@ -559,26 +613,28 @@ document.addEventListener('DOMContentLoaded', function () {
     if (level === 'light') return code;
     var b64 = btoa(unescape(encodeURIComponent(code)));
     var chunks = [];
-    for (var i=0;i<b64.length;i+=76) chunks.push('"'+b64.slice(i,i+76)+'"');
+    for (var i = 0; i < b64.length; i += 76) chunks.push('"' + b64.slice(i,i+76) + '"');
     var medium = [
       'local function _D(s) local b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" s=s:gsub("[^"..b.."=]","") local r,p,v="",0,0 for i=1,#s do local c=b:find(s:sub(i,i))-1 if c then v,p=v*64+c,p+6 if p>=8 then p=p-8 r=r..string.char(math.floor(v/2^p)%256) end end end return r end',
-      'loadstring(_D('+chunks.join('..')+'))()'
+      'loadstring(_D(' + chunks.join('..') + '))()'
     ].join('\n');
     if (level === 'medium') return medium;
     var b64_2 = btoa(unescape(encodeURIComponent(medium)));
     var chunks2 = [];
-    for (var j=0;j<b64_2.length;j+=60) chunks2.push('"'+b64_2.slice(j,j+60)+'"');
+    for (var j = 0; j < b64_2.length; j += 60) chunks2.push('"' + b64_2.slice(j,j+60) + '"');
     var noise = [];
-    for (var k=0;k<6;k++) noise.push('local _n'+k+'='+Math.floor(Math.random()*99999));
-    return noise.join(' ')+'\nlocal function _D(s) local b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" s=s:gsub("[^"..b.."=]","") local r,p,v="",0,0 for i=1,#s do local c=b:find(s:sub(i,i))-1 if c then v,p=v*64+c,p+6 if p>=8 then p=p-8 r=r..string.char(math.floor(v/2^p)%256) end end end return r end\nloadstring(_D('+chunks2.join('..')+'))()';
+    for (var k = 0; k < 6; k++) noise.push('local _n'+k+'='+Math.floor(Math.random()*99999));
+    return noise.join(' ')+'\n'+
+      'local function _D(s) local b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" s=s:gsub("[^"..b.."=]","") local r,p,v="",0,0 for i=1,#s do local c=b:find(s:sub(i,i))-1 if c then v,p=v*64+c,p+6 if p>=8 then p=p-8 r=r..string.char(math.floor(v/2^p)%256) end end end return r end\n'+
+      'loadstring(_D('+chunks2.join('..')+'))()';
   }
 
-  document.getElementById('obfBtn').addEventListener('click', function() {
+  document.getElementById('obfBtn').addEventListener('click', function () {
     var input = document.getElementById('obfInput').value.trim();
     var status = document.getElementById('obfStatus');
     if (!input) { status.textContent = '⚠ Please paste a script first.'; return; }
     status.textContent = '⚙ Obfuscating...';
-    setTimeout(function() {
+    setTimeout(function () {
       try {
         var result = obfuscateLua(input, document.getElementById('obfLevel').value);
         document.getElementById('obfOutput').value = result;
@@ -589,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 80);
   });
 
-  document.getElementById('obfClearBtn').addEventListener('click', function() {
+  document.getElementById('obfClearBtn').addEventListener('click', function () {
     document.getElementById('obfInput').value = '';
     document.getElementById('obfOutput').value = '';
     document.getElementById('obfOutputBox').style.display = 'none';
@@ -597,76 +653,22 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('obfStatus').textContent = '';
   });
 
-  document.getElementById('obfCopyBtn').addEventListener('click', function() {
-    navigator.clipboard.writeText(document.getElementById('obfOutput').value).then(function() {
+  document.getElementById('obfCopyBtn').addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('obfOutput').value).then(function () {
       var btn = document.getElementById('obfCopyBtn');
       btn.textContent = 'Copied!';
-      setTimeout(function() { btn.textContent = 'Copy Output'; }, 2000);
+      setTimeout(function () { btn.textContent = 'Copy Output'; }, 2000);
     });
   });
 
-  document.getElementById('obfSendShareBtn').addEventListener('click', function() {
+  document.getElementById('obfSendShareBtn').addEventListener('click', function () {
     document.getElementById('shareInput').value = document.getElementById('obfOutput').value;
     showPage('share');
   });
 
-  // ── SHARE / PASTE ────────────────────────────────────────────
-
-  function openPasteView(id) {
-    currentPasteId = id;
-    document.getElementById('pasteIdDisplay').textContent = id;
-    document.getElementById('pasteCodeBox').textContent = pastes[id];
-    showPage('paste-view');
-  }
-
-  function openRawView(id) {
-    document.getElementById('rawContent').textContent = pastes[id];
-    showPage('raw-view');
-  }
-
-  // Submit → go straight to paste view
-  document.getElementById('shareSubmitBtn').addEventListener('click', function() {
-    var code = document.getElementById('shareInput').value.trim();
-    if (!code) return;
-    var id = genId();
-    pastes[id] = code;
-    openPasteView(id);
-  });
-
-  // Paste view buttons
-  document.getElementById('pasteCopyBtn').addEventListener('click', function() {
-    if (!currentPasteId) return;
-    navigator.clipboard.writeText(pastes[currentPasteId]).then(function() {
-      var btn = document.getElementById('pasteCopyBtn');
-      btn.textContent = 'Copied!';
-      setTimeout(function() { btn.textContent = 'Copy Script'; }, 2000);
-    });
-  });
-
-  document.getElementById('pasteRawBtn').addEventListener('click', function() {
-    if (currentPasteId) openRawView(currentPasteId);
-  });
-
-  document.getElementById('pasteNewBtn').addEventListener('click', function() {
-    document.getElementById('shareInput').value = '';
-    showPage('share');
-  });
-
-  // Raw view buttons
-  document.getElementById('rawCopyBtn').addEventListener('click', function() {
-    navigator.clipboard.writeText(document.getElementById('rawContent').textContent).then(function() {
-      var btn = document.getElementById('rawCopyBtn');
-      btn.textContent = 'Copied!';
-      setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
-    });
-  });
-
-  document.getElementById('rawBackBtn').addEventListener('click', function() {
-    if (currentPasteId) openPasteView(currentPasteId);
-  });
-
-  // Init
+  // ── Init ─────────────────────────────────────────────────────
   showPage('intro');
+  handleHash();
 });
 </script>
 </body>
