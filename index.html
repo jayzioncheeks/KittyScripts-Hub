@@ -103,103 +103,123 @@
     .obf-strength select { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-family: inherit; cursor: pointer; }
     .obf-status { font-size: 0.8rem; color: var(--accent); margin-top: 4px; min-height: 20px; }
 
-    /* ── SHARE FORM ── */
-    .share-textarea { width: 100%; background: #000; border: 1px solid var(--border); border-radius: 12px; color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; padding: 16px; resize: vertical; min-height: 220px; outline: none; transition: border-color 0.2s; }
-    .share-textarea:focus { border-color: var(--accent); }
-
-    /* ── PASTE VIEW — full screen takeover like Pastefy ── */
-    #paste-fullscreen {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: var(--bg);
-      z-index: 9000;
-      flex-direction: column;
+    /* ── EXECUTORS ── */
+    #executors { max-width: 860px; }
+    .exec-wad-credit {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: var(--text-muted);
+      background: #111116; border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 8px; margin-bottom: 28px;
     }
-    #paste-fullscreen.active { display: flex; }
+    .exec-wad-credit a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .exec-wad-credit a:hover { text-decoration: underline; }
 
-    .paste-topbar {
-      position: sticky; top: 0;
-      background: #0f0f13;
-      border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
-      display: flex; align-items: center; gap: 10px;
-      flex-shrink: 0; flex-wrap: wrap;
+    .exec-filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
     }
-    .paste-topbar-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
-    .paste-topbar-logo img { width: 20px; height: 20px; object-fit: contain; }
-    .paste-topbar-divider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
-    .paste-topbar-id { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .paste-topbar-actions { display: flex; gap: 6px; flex-wrap: wrap; width: 100%; }
-    .paste-topbar-actions .tool-btn { font-size: 0.78rem; padding: 7px 12px; flex: 1; text-align: center; }
-
-    .paste-fullscreen-code {
-      flex: 1;
-      overflow: auto;
-      padding: 20px 16px;
+    .exec-filter-btn {
+      padding: 7px 16px; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-muted); font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s ease;
     }
-    .paste-fullscreen-code pre {
-      color: #d4d4d4;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.9rem;
-      line-height: 1.75;
-      white-space: pre-wrap;
-      word-break: break-all;
+    .exec-filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .exec-filter-btn.active {
+      background: #1a1428; border-color: var(--accent); color: var(--accent);
     }
 
-    .paste-loadstring-bar {
-      background: #0a0a0d;
-      border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
-      display: flex; align-items: center; gap: 10px;
-      flex-shrink: 0; flex-wrap: wrap;
+    .exec-search-wrap { margin-bottom: 24px; }
+    .exec-search-input {
+      width: 100%; background: #111116; border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 16px; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none;
+      transition: border-color 0.2s;
     }
-    .paste-loadstring-bar code {
-      flex: 1; min-width: 0; background: transparent; color: var(--accent);
-      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      padding: 0;
-    }
-    .paste-loadstring-label {
-      font-size: 0.7rem; font-weight: 700; color: #4a4a5a;
-      text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
+    .exec-search-input:focus { border-color: var(--accent); }
+    .exec-search-input::placeholder { color: #4a4a5a; }
+
+    .exec-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
     }
 
-    /* ── RAW VIEW — pure text, full screen ── */
-    #raw-fullscreen {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #0a0a0a;
-      z-index: 9999;
-      flex-direction: column;
+    .exec-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      transition: all 0.25s ease; position: relative;
     }
-    #raw-fullscreen.active { display: flex; }
+    .exec-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .exec-card:hover { border-color: #3d2554; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+    .exec-card:hover::before { opacity: 1; }
+    .exec-card.discontinued { opacity: 0.55; }
+    .exec-card.discontinued:hover { transform: none; }
+    .exec-card.pending { opacity: 0.8; }
 
-    .raw-topbar {
-      position: sticky; top: 0;
-      background: #111116;
-      border-bottom: 1px solid var(--border);
-      padding: 10px 20px;
-      display: flex; align-items: center; gap: 12px;
-      flex-shrink: 0;
+    .exec-thumb-wrap {
+      width: 100%; padding: 20px 20px 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: #0d0d10;
     }
-    .raw-topbar-id { font-size: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; flex: 1; }
+    .exec-thumbnail {
+      max-width: 100%; height: auto; max-height: 90px;
+      object-fit: contain; display: block; border-radius: 6px;
+    }
 
-    .raw-fullscreen-content {
-      flex: 1;
-      overflow: auto;
-      padding: 24px;
+    .exec-body { padding: 14px 16px 16px; }
+
+    .exec-status-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 8px;
     }
-    #raw-code {
-      margin: 0;
-      color: #d4d4d4;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      word-break: break-all;
+    .exec-status {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 5px;
     }
+    .exec-status.active   { background: rgba(16,185,129,0.12); color: #10b981; }
+    .exec-status.discontinued { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .exec-status.pending  { background: rgba(245,158,11,0.12); color: #f59e0b; }
+
+    .exec-downloads {
+      font-size: 0.72rem; color: var(--text-muted); font-weight: 600;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .exec-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+    .exec-desc {
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.55;
+      margin-bottom: 14px;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    .exec-platform-btns { display: flex; flex-direction: column; gap: 6px; }
+    .exec-platform-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 12px; border-radius: 8px; border: none;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700;
+      text-decoration: none; cursor: pointer; transition: all 0.2s ease;
+    }
+    .exec-platform-windows { background: #0078d4; color: white; }
+    .exec-platform-windows:hover { background: #106ebe; transform: translateY(-1px); }
+    .exec-platform-android { background: #3ddc84; color: #111; }
+    .exec-platform-android:hover { background: #2fc870; transform: translateY(-1px); }
+    .exec-platform-ios { background: #555; color: white; }
+    .exec-platform-ios:hover { background: #444; transform: translateY(-1px); }
+    .exec-platform-mac { background: #444; color: white; }
+    .exec-platform-mac:hover { background: #333; transform: translateY(-1px); }
+    .exec-unavailable {
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px; border-radius: 8px; background: #111116;
+      border: 1px solid var(--border); color: #4a4a5a;
+      font-size: 0.82rem; font-weight: 600;
+    }
+
+    .exec-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .exec-empty h3 { font-size: 1.4rem; margin-bottom: 8px; }
 
     .menu-toggle { display: none; background: none; border: none; color: white; cursor: pointer; }
     @media (max-width: 900px) {
@@ -208,48 +228,12 @@
       main { margin-left: 0; padding: 90px 20px 60px; }
       .menu-toggle { display: block; }
     }
+    @media (max-width: 600px) {
+      .exec-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-
-<!-- ── PASTE FULLSCREEN (like pastefy.app/ID) ── -->
-<div id="paste-fullscreen">
-  <div class="paste-topbar">
-    <div class="paste-topbar-logo">
-      <img src="https://raw.githubusercontent.com/jayzioncheeks/XENO-Docs/refs/heads/main/X%20logo.png" alt="XENO" />
-      XENO
-    </div>
-    <div class="paste-topbar-divider"></div>
-    <div class="paste-topbar-id" id="paste-topbar-id"></div>
-    <div class="paste-topbar-actions">
-      <button class="tool-btn secondary" id="pasteCopyLinkBtn">Copy Link</button>
-      <button class="tool-btn secondary" id="pasteRawBtn">Raw</button>
-      <button class="tool-btn secondary" id="pasteCopyCodeBtn">Copy Code</button>
-      <button class="tool-btn secondary" id="pasteNewBtn">+ New</button>
-      <button class="tool-btn secondary" id="pasteCloseBtn">← Docs</button>
-    </div>
-  </div>
-  <div class="paste-loadstring-bar">
-    <span class="paste-loadstring-label">Loadstring</span>
-    <code id="paste-loadstring-text"></code>
-    <button class="tool-btn secondary" id="pasteCopyLoadstringBtn" style="font-size:0.78rem;padding:6px 14px;">Copy</button>
-  </div>
-  <div class="paste-fullscreen-code">
-    <pre id="paste-code-content"></pre>
-  </div>
-</div>
-
-<!-- ── RAW FULLSCREEN (like pastefy.app/ID/raw) ── -->
-<div id="raw-fullscreen">
-  <div class="raw-topbar">
-    <span class="raw-topbar-id" id="raw-topbar-id"></span>
-    <button class="tool-btn secondary" id="rawCopyBtn">Copy</button>
-    <button class="tool-btn secondary" id="rawBackBtn">← Back</button>
-  </div>
-  <div class="raw-fullscreen-content">
-    <pre id="raw-code"></pre>
-  </div>
-</div>
 
 <header>
   <div class="header-left">
@@ -291,7 +275,7 @@
   <div class="nav-item"><div class="nav-link" data-page="example">Full Code Script</div></div>
   <div class="nav-section-label" style="margin-top:28px;">Tools</div>
   <div class="nav-item"><div class="nav-link" data-page="obfuscator">Obfuscator</div></div>
-  <div class="nav-item"><div class="nav-link" data-page="share">Share Script</div></div>
+  <div class="nav-item"><div class="nav-link" data-page="executors">Executors</div></div>
 </aside>
 
 <main>
@@ -472,189 +456,38 @@ end, true)</pre>
     </div>
     <div class="obf-controls" id="obfOutputControls" style="display:none;">
       <button class="tool-btn secondary" id="obfCopyBtn">Copy Output</button>
-      <button class="tool-btn secondary" id="obfSendShareBtn">Send to Share →</button>
     </div>
   </section>
 
-  <!-- SHARE FORM -->
-  <section id="share" class="page">
-    <div class="breadcrumbs">Tools › <span class="cur">Share Script</span></div>
-    <h1>Share Script</h1>
-    <p>Paste your script and press <strong>Submit</strong>. You'll get a shareable link — anyone with it can view the code or open the raw version, just like Pastefy.</p>
-    <textarea class="share-textarea" id="shareInput" placeholder="-- Paste your script here..."></textarea>
-    <div style="margin-top:12px;">
-      <button class="tool-btn" id="shareSubmitBtn">Submit</button>
+  <!-- EXECUTORS -->
+  <section id="executors" class="page">
+    <div class="breadcrumbs">Tools › <span class="cur">Executors</span></div>
+    <h1>Executors</h1>
+    <p>Recommended executors for running XENO scripts. Download links go directly to the official source.</p>
+
+    <div class="exec-wad-credit">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Data sourced from <a href="https://wearedevs.net/exploits" target="_blank" rel="noopener">WeAreDevs ↗</a>
     </div>
+
+    <div class="exec-search-wrap">
+      <input type="search" class="exec-search-input" id="execSearch" placeholder="Search executors…" />
+    </div>
+
+    <div class="exec-filter-bar">
+      <button class="exec-filter-btn active" data-filter="all">All</button>
+      <button class="exec-filter-btn" data-filter="active">✅ Active</button>
+      <button class="exec-filter-btn" data-filter="pending">⚠️ Pending Fixes</button>
+      <button class="exec-filter-btn" data-filter="discontinued">🚫 Discontinued</button>
+    </div>
+
+    <div class="exec-grid" id="execGrid"></div>
   </section>
 
 </main>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-
-  // ── localStorage-backed paste store ─────────────────────────
-  var STORE_KEY = 'xeno_pastes';
-  var currentPasteId = null;
-
-  function loadPastes() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) { return {}; }
-  }
-  function savePaste(id, code) {
-    var pastes = loadPastes();
-    pastes[id] = code;
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(pastes)); } catch(e) {}
-  }
-  function getPaste(id) {
-    return loadPastes()[id] || null;
-  }
-
-  function genId() {
-    var chars = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
-    var id = '';
-    for (var i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
-    return id;
-  }
-
-  function getBaseUrl() {
-    return window.location.href.split('#')[0];
-  }
-
-  // ── Hash router ──────────────────────────────────────────────
-  // Routes:
-  //   #paste-XXXXXXXX  → paste fullscreen view  (like pastefy.app/ID)
-  //   #paste-XXXXXXXX/raw → raw fullscreen view (like pastefy.app/ID/raw)
-
-  function handleHash() {
-    var hash = window.location.hash;
-    if (!hash) {
-      closePasteView();
-      closeRawView();
-      return;
-    }
-
-    var rawMatch   = hash.match(/^#paste-([A-Za-z0-9]+)\/raw$/);
-    var pasteMatch = hash.match(/^#paste-([A-Za-z0-9]+)$/);
-
-    if (rawMatch) {
-      var id = rawMatch[1];
-      closePasteView();
-      if (getPaste(id)) openRawView(id);
-    } else if (pasteMatch) {
-      var id = pasteMatch[1];
-      closeRawView();
-      if (getPaste(id)) openPasteView(id);
-    }
-  }
-
-  window.addEventListener('hashchange', handleHash);
-
-  // ── PASTE FULLSCREEN ─────────────────────────────────────────
-  function openPasteView(id) {
-    currentPasteId = id;
-    var code = getPaste(id) || '';
-    var normalUrl = getBaseUrl() + '#paste-' + id;
-    var rawUrl = getBaseUrl() + '#paste-' + id + '/raw';
-    var loadstring = 'loadstring(game:HttpGet("' + rawUrl + '"))()';
-
-    document.getElementById('paste-topbar-id').textContent = normalUrl;
-    document.getElementById('paste-code-content').textContent = code;
-    document.getElementById('paste-loadstring-text').textContent = loadstring;
-    document.getElementById('paste-fullscreen').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closePasteView() {
-    document.getElementById('paste-fullscreen').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('pasteCopyLoadstringBtn').addEventListener('click', function () {
-    var ls = document.getElementById('paste-loadstring-text').textContent;
-    navigator.clipboard.writeText(ls).then(function () {
-      var btn = document.getElementById('pasteCopyLoadstringBtn');
-      btn.textContent = 'Copied!';
-      setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
-    });
-  });
-
-  document.getElementById('pasteRawBtn').addEventListener('click', function () {
-    if (currentPasteId) {
-      window.location.hash = 'paste-' + currentPasteId + '/raw';
-    }
-  });
-
-  document.getElementById('pasteCopyLinkBtn').addEventListener('click', function () {
-    if (!currentPasteId) return;
-    var url = getBaseUrl() + '#paste-' + currentPasteId;
-    navigator.clipboard.writeText(url).then(function () {
-      var btn = document.getElementById('pasteCopyLinkBtn');
-      btn.textContent = 'Copied!';
-      setTimeout(function () { btn.textContent = 'Copy Link'; }, 2000);
-    });
-  });
-
-  document.getElementById('pasteCopyCodeBtn').addEventListener('click', function () {
-    var code = document.getElementById('paste-code-content').textContent;
-    navigator.clipboard.writeText(code).then(function () {
-      var btn = document.getElementById('pasteCopyCodeBtn');
-      btn.textContent = 'Copied!';
-      setTimeout(function () { btn.textContent = 'Copy Code'; }, 2000);
-    });
-  });
-
-  document.getElementById('pasteNewBtn').addEventListener('click', function () {
-    document.getElementById('shareInput').value = '';
-    closePasteView();
-    window.location.hash = '';
-    showPage('share');
-  });
-
-  document.getElementById('pasteCloseBtn').addEventListener('click', function () {
-    closePasteView();
-    window.location.hash = '';
-    showPage('share');
-  });
-
-  // ── RAW FULLSCREEN ───────────────────────────────────────────
-  function openRawView(id) {
-    var code = getPaste(id) || '';
-    var rawUrl = getBaseUrl() + '#paste-' + id + '/raw';
-    document.getElementById('raw-code').textContent = code;
-    document.getElementById('raw-topbar-id').textContent = rawUrl;
-    document.getElementById('raw-fullscreen').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    currentPasteId = id;
-  }
-
-  function closeRawView() {
-    document.getElementById('raw-fullscreen').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('rawBackBtn').addEventListener('click', function () {
-    closeRawView();
-    if (currentPasteId) {
-      window.location.hash = 'paste-' + currentPasteId;
-    }
-  });
-
-  document.getElementById('rawCopyBtn').addEventListener('click', function () {
-    var code = document.getElementById('raw-code').textContent;
-    navigator.clipboard.writeText(code).then(function () {
-      var btn = document.getElementById('rawCopyBtn');
-      btn.textContent = 'Copied!';
-      setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
-    });
-  });
-
-  // ── Submit new paste ─────────────────────────────────────────
-  document.getElementById('shareSubmitBtn').addEventListener('click', function () {
-    var code = document.getElementById('shareInput').value.trim();
-    if (!code) return;
-    var id = genId();
-    savePaste(id, code);
-    window.location.hash = 'paste-' + id;
-  });
 
   // ── Page navigation ──────────────────────────────────────────
   function showPage(pageId) {
@@ -779,14 +612,202 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  document.getElementById('obfSendShareBtn').addEventListener('click', function () {
-    document.getElementById('shareInput').value = document.getElementById('obfOutput').value;
-    showPage('share');
+  // ── EXECUTORS ────────────────────────────────────────────────
+  var EXECUTORS = [
+    {
+      name: 'JJSploit', downloads: '66.7m+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/JJSploit.webp',
+      desc: 'Undetected Lua executor with click teleport, ESP, speed, fly, infinite jump, aimbot, and more.',
+      platforms: ['windows','android'],
+      urls: { windows: 'https://wearedevs.net/d/JJSploit', android: 'https://wearedevs.net/d/JJSploit-Android' }
+    },
+    {
+      name: 'Solara', downloads: '11.3m+', status: 'active',
+      img: 'https://obj.wearedevs.net/images/software/solara/solara-011026.webp',
+      desc: 'Free and keyless executor — the first & best external executor after Hyperion.',
+      platforms: ['windows'],
+      urls: { windows: 'https://getsolara.dev/download/' }
+    },
+    {
+      name: 'Ronix', downloads: '1.5m+', status: 'active',
+      img: 'https://obj.wearedevs.net/images/software/ronix/ronix-020426.webp',
+      desc: '100% UNC, free powerful executor for Windows, Android, iOS & macOS. Fast, stable, advanced bypass.',
+      platforms: ['windows','android','ios','mac'],
+      urls: { windows: 'https://ronix-executor.com/ronix-windows-download/', android: 'https://ronix-executor.com/ronix-android/', ios: 'https://wearedevs.net/d/Ronix', mac: 'https://wearedevs.net/d/Ronix' }
+    },
+    {
+      name: 'Delta', downloads: '1.6m+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/delta-120425.webp',
+      desc: "ALL SCRIPTS WORK! Free and easy to use with 1 AD ONLY! Everyone's favourite choice on Mobile!",
+      platforms: ['android','ios'],
+      urls: { android: 'https://deltaexploits.gg/delta-executor-android', ios: 'https://deltaexploits.gg/delta-executor-ios' }
+    },
+    {
+      name: 'Xeno', downloads: '443.9k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/xeno-112025.webp',
+      desc: 'An original Lua executor that brought back the scene in full bloom.',
+      platforms: ['windows'],
+      urls: { windows: 'https://getxeno.net/' }
+    },
+    {
+      name: 'Fluxus Z', downloads: '348.9k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/fluxus-z-111125.webp',
+      desc: '90% UNC, fast executor, easy to use, 1-step 40-hour key system. Free to use, clean UI.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/Fluxus%20Z' }
+    },
+    {
+      name: 'LX63', downloads: '110.7k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/lx6-080225.webp',
+      desc: 'The only free keyless 100% UNC executor right now. Fast, secure, powerful, less crashes.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/LX63' }
+    },
+    {
+      name: 'Valex', downloads: '124.1k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/valex.webp',
+      desc: 'Undetected external with aimbot, ESP, kill-all, player exploits, and 24/7 anti-cheat protection.',
+      platforms: ['windows'],
+      urls: { windows: 'https://valex.io/' }
+    },
+    {
+      name: 'Pluto', downloads: '93.9k+', status: 'active',
+      img: 'https://obj.wearedevs.net/images/software/pluto/pluto.webp',
+      desc: 'Seamless FREE external. Undetected, overpowered features, aimbot and ESP, game explorer.',
+      platforms: ['windows'],
+      urls: { windows: 'https://pluto.ad/' }
+    },
+    {
+      name: 'Multiple Games', downloads: '21.1m+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/multiple rbx games.webp',
+      desc: 'Usually you are limited to one game open at a time — with this you can open as many as you want.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/Multiple%20Games' }
+    },
+    {
+      name: 'Hydrogen', downloads: '15.9k+', status: 'pending',
+      img: 'https://wearedevs.net/images/thumbnails/hydrogen.webp',
+      desc: 'Achieves a 96% sUNC score, supporting most scripts, and blocks dangerous functions.',
+      platforms: ['android'],
+      urls: { android: 'https://hydrogenexecutor.com/download/' }
+    },
+    {
+      name: 'Drift', downloads: '395.7k+', status: 'pending',
+      img: 'https://wearedevs.net/images/thumbnails/drift.webp',
+      desc: 'Undetected external and executor.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/Drift' }
+    },
+    {
+      name: 'Bunni', downloads: '144.5k+', status: 'discontinued',
+      img: 'https://wearedevs.net/images/thumbnails/bunni-080125.webp',
+      desc: 'Undetected from CM bans! Free keyed Lua executor with high UNC and amazing script compatibility.',
+      platforms: [], urls: {}
+    },
+    {
+      name: 'Krnl', downloads: '37.4m+', status: 'discontinued',
+      img: 'https://wearedevs.net/images/thumbnails/krnl.jpeg',
+      desc: 'UNDETECTED, 100 sUNC, 24-hour keys, getconnections, saveinstance. — Now discontinued.',
+      platforms: [], urls: {}
+    },
+    {
+      name: 'Nihon', downloads: '446.6k+', status: 'discontinued',
+      img: 'https://wearedevs.net/images/thumbnails/nihon-102325.webp',
+      desc: 'Nihon — Discontinued.',
+      platforms: [], urls: {}
+    },
+    {
+      name: 'Punk X', downloads: '25.3k+', status: 'discontinued',
+      img: 'https://obj.wearedevs.net/images/software/punkx/punkx-012126.webp',
+      desc: 'High-performance executor. — Discontinued.',
+      platforms: [], urls: {}
+    }
+  ];
+
+  var platformIcons = {
+    windows: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.548H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg> Windows',
+    android: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.341c-.551 0-.999-.449-.999-1s.448-.999.999-.999c.551 0 .999.448.999.999 0 .551-.448 1-.999 1m-11.046 0c-.551 0-.999-.449-.999-1s.448-.999.999-.999c.551 0 .999.448.999.999 0 .551-.448 1-.999 1m11.405-6.02l1.997-3.459a.416.416 0 00-.152-.568.416.416 0 00-.568.152l-2.022 3.503C15.59 8.244 13.853 7.851 12 7.851s-3.59.393-5.137 1.099L4.841 5.447a.416.416 0 00-.568-.152.416.416 0 00-.152.568l1.997 3.459C2.689 11.187.343 14.659 0 18.761h24c-.344-4.102-2.689-7.574-6.118-9.44"/></svg> Android',
+    ios: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> iOS',
+    mac: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> macOS'
+  };
+
+  var statusLabels = { active: '✅ Active', pending: '⚠️ Pending Fixes', discontinued: '🚫 Discontinued' };
+  var execFilter = 'all';
+  var execSearch = '';
+
+  function renderExecutors() {
+    var list = EXECUTORS;
+    if (execFilter !== 'all') list = list.filter(function(e) { return e.status === execFilter; });
+    if (execSearch) {
+      var q = execSearch.toLowerCase();
+      list = list.filter(function(e) {
+        return e.name.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q);
+      });
+    }
+
+    var grid = document.getElementById('execGrid');
+    grid.innerHTML = '';
+
+    if (!list.length) {
+      grid.innerHTML = '<div class="exec-empty"><h3>No executors found</h3><p>Try a different filter or search.</p></div>';
+      return;
+    }
+
+    list.forEach(function(ex, i) {
+      var canDl = ex.status !== 'discontinued';
+      var dlHtml = '';
+      if (canDl && ex.platforms.length) {
+        dlHtml = ex.platforms.map(function(p) {
+          var url = ex.urls[p] || 'https://wearedevs.net/exploits';
+          return '<a class="exec-platform-btn exec-platform-' + p + '" href="' + url + '" target="_blank" rel="noopener">' + (platformIcons[p] || p) + '</a>';
+        }).join('');
+      } else {
+        dlHtml = '<span class="exec-unavailable">Unavailable</span>';
+      }
+
+      var card = document.createElement('div');
+      card.className = 'exec-card ' + ex.status;
+      card.style.animationDelay = (i * 0.04) + 's';
+      card.innerHTML = [
+        '<div class="exec-thumb-wrap">',
+          '<img class="exec-thumbnail" src="' + ex.img + '" alt="' + ex.name + '" onerror="this.closest(\'.exec-thumb-wrap\').style.display=\'none\'">',
+        '</div>',
+        '<div class="exec-body">',
+          '<div class="exec-status-bar">',
+            '<span class="exec-status ' + ex.status + '">' + statusLabels[ex.status] + '</span>',
+            '<span class="exec-downloads">',
+              '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+              ex.downloads,
+            '</span>',
+          '</div>',
+          '<div class="exec-title">' + ex.name + '</div>',
+          '<div class="exec-desc">' + ex.desc + '</div>',
+          '<div class="exec-platform-btns">' + dlHtml + '</div>',
+        '</div>'
+      ].join('');
+      grid.appendChild(card);
+    });
+  }
+
+  document.querySelectorAll('.exec-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.exec-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      execFilter = btn.dataset.filter;
+      renderExecutors();
+    });
   });
+
+  document.getElementById('execSearch').addEventListener('input', function() {
+    execSearch = this.value.trim();
+    renderExecutors();
+  });
+
+  // render executors on first load so they're ready
+  renderExecutors();
 
   // ── Init ─────────────────────────────────────────────────────
   showPage('intro');
-  handleHash();
 });
 </script>
 </body>
