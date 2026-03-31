@@ -1,70 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XENO | Documentation</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet" id="hljs-theme" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
   <style>
-    /* ── TOKENS ── */
     :root {
       --bg: #0b0b0e;
       --surface: #16161a;
       --border: #23232a;
       --accent: #a78bfa;
-      --accent-dim: #1a1428;
       --text: #ffffff;
       --text-muted: #94a3b8;
       --header-h: 64px;
       --sidebar-w: 280px;
-      --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
     }
-    [data-theme="light"] {
-      --bg: #f8f8fc;
-      --surface: #ededf5;
-      --border: #dddde8;
-      --accent: #7c3aed;
-      --accent-dim: #ede9fe;
-      --text: #0f0f14;
-      --text-muted: #5a5a78;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Inter', sans-serif;
-      transition: background var(--transition), color var(--transition);
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
 
-    /* ── HEADER ── */
     header {
       height: var(--header-h); background: var(--bg);
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 20px; position: fixed; top: 0; width: 100%; z-index: 1000;
-      transition: background var(--transition), border-color var(--transition);
     }
     .header-left { display: flex; align-items: center; gap: 10px; }
     .logo-img { width: 28px; height: 28px; object-fit: contain; }
     .logo-name { font-weight: 700; }
-    .header-right { display: flex; align-items: center; gap: 10px; }
-
-    /* ── THEME TOGGLE ── */
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: var(--surface); border: 1px solid var(--border);
-      color: var(--text-muted); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all var(--transition); font-size: 1rem;
-    }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .theme-toggle .icon-sun  { display: none; }
-    .theme-toggle .icon-moon { display: block; }
-    [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
-    [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
     .discord-btn {
       display: flex; align-items: center; gap: 8px;
@@ -74,153 +37,334 @@
     }
     .discord-btn:hover { background: #4752c4; }
 
-    /* ── SIDEBAR ── */
     .sidebar {
       width: var(--sidebar-w); height: calc(100vh - var(--header-h));
       position: fixed; top: var(--header-h); left: 0;
       border-right: 1px solid var(--border); padding: 24px;
       background: var(--bg); z-index: 999; overflow-y: auto;
-      transition: transform 0.3s ease, background var(--transition), border-color var(--transition);
+      transition: transform 0.3s ease;
     }
     .nav-section-label {
       font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      color: var(--text-muted); opacity: 0.5;
-      text-transform: uppercase; margin: 20px 0 8px;
+      color: #4a4a5a; text-transform: uppercase; margin: 20px 0 8px;
     }
     .nav-section-label:first-child { margin-top: 0; }
     .nav-item { margin-bottom: 2px; }
     .nav-link {
       display: block; padding: 9px 10px; color: var(--text-muted);
-      font-size: 0.9rem; cursor: pointer;
-      transition: color var(--transition), background var(--transition);
+      font-size: 0.9rem; cursor: pointer; transition: color 0.2s, background 0.2s;
       border-radius: 7px;
     }
-    .nav-link:hover { color: var(--text); background: var(--surface); }
-    .nav-link.active { color: var(--accent); font-weight: 600; background: var(--accent-dim); }
+    .nav-link:hover { color: var(--text); background: #13131a; }
+    .nav-link.active { color: var(--accent); font-weight: 600; background: #1a1428; }
     .sub-nav { display: none; margin-left: 10px; margin-bottom: 4px; border-left: 1px solid var(--border); padding-left: 12px; }
     .sub-nav.open { display: block; }
-    .sub-link { display: block; padding: 5px 0; color: var(--text-muted); font-size: 0.83rem; cursor: pointer; transition: color 0.2s; opacity: 0.7; }
-    .sub-link:hover { color: var(--text); opacity: 1; }
+    .sub-link { display: block; padding: 5px 0; color: #64748b; font-size: 0.83rem; cursor: pointer; transition: color 0.2s; }
+    .sub-link:hover { color: var(--text); }
 
-    /* ── MAIN ── */
     main { margin-left: var(--sidebar-w); padding: 100px 40px 60px; max-width: 900px; min-height: 100vh; }
+    .page { display: none; }
+    .page.active { display: block; }
 
-    /* ── PAGE TRANSITIONS ── */
-    .page { display: none; opacity: 0; transform: translateY(10px); }
-    .page.active {
-      display: block;
-      animation: pageIn 0.28s cubic-bezier(0.4,0,0.2,1) forwards;
-    }
-    @keyframes pageIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── TYPOGRAPHY ── */
     .breadcrumbs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 30px; }
     .breadcrumbs .cur { color: var(--accent); font-weight: 500; }
     h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
     p { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
-    code {
-      background: var(--surface); border: 1px solid var(--border);
-      padding: 2px 6px; border-radius: 4px; font-size: 0.88em;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      color: var(--accent);
-    }
+    code { background: #1a1a1f; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
 
-    .hero-image-container {
-      margin: 28px 0 36px; border-radius: 14px; overflow: hidden;
-      border: 1px solid var(--border); box-shadow: 0 8px 48px rgba(0,0,0,0.4);
-      transition: border-color var(--transition);
-    }
+    .hero-image-container { margin: 28px 0 36px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 8px 48px rgba(0,0,0,0.6); }
     .hero-image-container img { width: 100%; display: block; }
+    .section-label { font-size: 1.5rem; font-weight: 700; margin: 48px 0 20px; scroll-margin-top: 80px; }
 
-    /* ── SECTION HEADINGS WITH ANCHOR ── */
-    .section-label {
-      font-size: 1.5rem; font-weight: 700; margin: 48px 0 20px;
-      scroll-margin-top: 80px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .anchor-link {
-      opacity: 0; font-size: 1rem; color: var(--accent);
-      text-decoration: none; transition: opacity 0.2s;
-      user-select: none;
-    }
-    .section-label:hover .anchor-link { opacity: 1; }
-
-    /* ── CODE BLOCKS ── */
     .code-container { position: relative; margin: 20px 0; }
-    .code-container pre {
-      border-radius: 12px; border: 1px solid var(--border);
-      overflow-x: auto; line-height: 1.55; margin: 0;
-      font-size: 0.85rem;
-      transition: border-color var(--transition);
-    }
-    /* override hljs padding to make room for copy btn */
-    .code-container pre code.hljs { padding: 44px 20px 20px !important; border-radius: 12px; }
+    .code-container pre { background: #000; padding: 45px 20px 20px; border-radius: 12px; border: 1px solid var(--border); color: #d4d4d4; font-size: 0.85rem; overflow-x: auto; line-height: 1.5; white-space: pre; }
+    .code-copy { position: absolute; top: 10px; right: 10px; background: #1e1e24; border: 1px solid #33333c; color: var(--text-muted); padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .code-copy:hover, .code-copy.copied { background: var(--surface); border-color: var(--accent); color: white; }
 
-    .code-copy {
-      position: absolute; top: 10px; right: 10px; z-index: 2;
-      background: rgba(30,30,36,0.85); border: 1px solid #33333c;
-      color: var(--text-muted); padding: 5px 12px;
-      border-radius: 6px; font-size: 0.72rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s;
-      backdrop-filter: blur(4px);
-      font-family: 'Inter', sans-serif;
-    }
-    [data-theme="light"] .code-copy { background: rgba(240,238,248,0.9); border-color: var(--border); }
-    .code-copy:hover, .code-copy.copied {
-      background: var(--accent-dim); border-color: var(--accent); color: var(--accent);
-    }
-    .code-lang-tag {
-      position: absolute; top: 11px; left: 14px; z-index: 2;
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--text-muted); opacity: 0.5;
-      font-family: 'Inter', sans-serif; pointer-events: none;
-    }
-
-    /* ── FOOTER NAV ── */
-    .footer-nav { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; gap: 20px; transition: border-color var(--transition); }
-    .nav-btn {
-      flex: 1; background: var(--surface); border: 1px solid var(--border);
-      color: var(--text); padding: 16px; border-radius: 10px;
-      cursor: pointer; transition: all var(--transition);
-      display: flex; flex-direction: column; text-align: left; font-family: inherit;
-    }
+    .footer-nav { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; gap: 20px; }
+    .nav-btn { flex: 1; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 16px; border-radius: 10px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; text-align: left; font-family: inherit; }
     .nav-btn.right { text-align: right; }
-    .nav-btn:hover { border-color: var(--accent); background: var(--accent-dim); }
+    .nav-btn:hover { border-color: var(--accent); background: #1c1c22; }
     .nav-btn span { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; display: block; }
     .nav-btn strong { font-size: 1rem; display: block; }
     .nav-spacer { flex: 1; }
 
-< truncated lines 196-346 >
-      Dropdowns
-      <a class="anchor-link" href="#elem-drop" title="Copy link">#</a>
+    /* ── OBFUSCATOR ── */
+    .obf-box { background: #000; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 20px 0; }
+    .obf-box-header { padding: 10px 16px; background: #111116; border-bottom: 1px solid var(--border); font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+    .obf-textarea { width: 100%; background: transparent; border: none; outline: none; color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; padding: 16px; resize: vertical; min-height: 200px; }
+    .obf-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 16px 0; }
+    .tool-btn { background: var(--accent); color: #0b0b0e; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: opacity 0.2s; font-family: inherit; }
+    .tool-btn:hover { opacity: 0.85; }
+    .tool-btn.secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .tool-btn.secondary:hover { border-color: var(--accent); opacity: 1; }
+    .obf-strength { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+    .obf-strength label { font-size: 0.8rem; color: var(--text-muted); }
+    .obf-strength select { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-family: inherit; cursor: pointer; }
+    .obf-status { font-size: 0.8rem; color: var(--accent); margin-top: 4px; min-height: 20px; }
+
+    /* ── EXECUTORS ── */
+    #executors { max-width: 860px; }
+    .exec-wad-credit {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: var(--text-muted);
+      background: #111116; border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 8px; margin-bottom: 28px;
+    }
+    .exec-wad-credit a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .exec-wad-credit a:hover { text-decoration: underline; }
+
+    .exec-filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .exec-filter-btn {
+      padding: 7px 16px; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-muted); font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .exec-filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .exec-filter-btn.active {
+      background: #1a1428; border-color: var(--accent); color: var(--accent);
+    }
+
+    .exec-search-wrap { margin-bottom: 24px; }
+    .exec-search-input {
+      width: 100%; background: #111116; border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 16px; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none;
+      transition: border-color 0.2s;
+    }
+    .exec-search-input:focus { border-color: var(--accent); }
+    .exec-search-input::placeholder { color: #4a4a5a; }
+
+    .exec-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .exec-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      transition: all 0.25s ease; position: relative;
+    }
+    .exec-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .exec-card:hover { border-color: #3d2554; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+    .exec-card:hover::before { opacity: 1; }
+    .exec-card.discontinued { opacity: 0.55; }
+    .exec-card.discontinued:hover { transform: none; }
+    .exec-card.pending { opacity: 0.8; }
+
+    .exec-thumb-wrap {
+      width: 100%; padding: 20px 20px 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: #0d0d10;
+    }
+    .exec-thumbnail {
+      max-width: 100%; height: auto; max-height: 90px;
+      object-fit: contain; display: block; border-radius: 6px;
+    }
+
+    .exec-body { padding: 14px 16px 16px; }
+
+    .exec-status-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .exec-status {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 5px;
+    }
+    .exec-status.active   { background: rgba(16,185,129,0.12); color: #10b981; }
+    .exec-status.discontinued { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .exec-status.pending  { background: rgba(245,158,11,0.12); color: #f59e0b; }
+
+    .exec-downloads {
+      font-size: 0.72rem; color: var(--text-muted); font-weight: 600;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .exec-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+    .exec-desc {
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.55;
+      margin-bottom: 14px;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    .exec-platform-btns { display: flex; flex-direction: column; gap: 6px; }
+    .exec-platform-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 12px; border-radius: 8px; border: none;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700;
+      text-decoration: none; cursor: pointer; transition: all 0.2s ease;
+    }
+    .exec-platform-windows { background: #0078d4; color: white; }
+    .exec-platform-windows:hover { background: #106ebe; transform: translateY(-1px); }
+    .exec-platform-android { background: #3ddc84; color: #111; }
+    .exec-platform-android:hover { background: #2fc870; transform: translateY(-1px); }
+    .exec-platform-ios { background: #555; color: white; }
+    .exec-platform-ios:hover { background: #444; transform: translateY(-1px); }
+    .exec-platform-mac { background: #444; color: white; }
+    .exec-platform-mac:hover { background: #333; transform: translateY(-1px); }
+    .exec-unavailable {
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px; border-radius: 8px; background: #111116;
+      border: 1px solid var(--border); color: #4a4a5a;
+      font-size: 0.82rem; font-weight: 600;
+    }
+
+    .exec-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .exec-empty h3 { font-size: 1.4rem; margin-bottom: 8px; }
+
+    .menu-toggle { display: none; background: none; border: none; color: white; cursor: pointer; }
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); width: 100%; }
+      .sidebar.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 90px 20px 60px; }
+      .menu-toggle { display: block; }
+    }
+    @media (max-width: 600px) {
+      .exec-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <button class="menu-toggle" id="menuBtn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <img class="logo-img" src="https://raw.githubusercontent.com/jayzioncheeks/XENO-Docs/refs/heads/main/X%20logo.png" alt="XENO" />
+    <span class="logo-name">XENO</span>
+  </div>
+  <a class="discord-btn" href="https://discord.gg/TdaWNwNAMa" target="_blank" rel="noopener noreferrer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+    </svg>
+    Discord
+  </a>
+</header>
+
+<aside class="sidebar" id="sidebar">
+  <div class="nav-section-label">Docs</div>
+  <div class="nav-item"><div class="nav-link active" data-page="intro">Introduction</div></div>
+  <div class="nav-item">
+    <div class="nav-link" data-page="setup">Getting Started</div>
+    <div class="sub-nav" id="sub-setup">
+      <div class="sub-link" data-page="setup" data-section="setup-init">Initialization</div>
+      <div class="sub-link" data-page="setup" data-section="setup-config">Configuration</div>
+      <div class="sub-link" data-page="setup" data-section="setup-theming">Theming</div>
     </div>
+  </div>
+  <div class="nav-item">
+    <div class="nav-link" data-page="elements">Elements &amp; Commands</div>
+    <div class="sub-nav" id="sub-elements">
+      <div class="sub-link" data-page="elements" data-section="elem-status">Status Bar &amp; Search</div>
+      <div class="sub-link" data-page="elements" data-section="elem-drop">Dropdowns</div>
+      <div class="sub-link" data-page="elements" data-section="elem-interact">Interactive Elements</div>
+    </div>
+  </div>
+  <div class="nav-item"><div class="nav-link" data-page="example">Full Code Script</div></div>
+  <div class="nav-section-label" style="margin-top:28px;">Tools</div>
+  <div class="nav-item"><div class="nav-link" data-page="obfuscator">Obfuscator</div></div>
+  <div class="nav-item"><div class="nav-link" data-page="executors">Executors</div></div>
+</aside>
+
+<main>
+
+  <!-- INTRO -->
+  <section id="intro" class="page active">
+    <div class="breadcrumbs">Overview › <span class="cur">Introduction</span></div>
+    <h1>Introduction</h1>
+    <p>XENO is a refined UI library for Roblox scripts, optimized for performance and production use. It gives you a complete set of UI primitives like windows, tabs, elements, search bars, and notifications.</p>
+    <div class="hero-image-container">
+      <img src="https://raw.githubusercontent.com/jayzioncheeks/XENO-Docs/refs/heads/main/file_00000000e848722fa317a5000be6ece3.png" alt="XENO UI Preview" />
+    </div>
+    <div class="code-container">
+      <button class="code-copy">Copy</button>
+      <pre>local XENO = loadstring(game:HttpGet(('https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC')))()</pre>
+    </div>
+    <div class="footer-nav">
+      <div class="nav-spacer"></div>
+      <button class="nav-btn right" data-page="setup"><span>Next Page</span><strong>Getting Started</strong></button>
+    </div>
+  </section>
+
+  <!-- SETUP -->
+  <section id="setup" class="page">
+    <div class="breadcrumbs">Overview › <span class="cur">Getting Started</span></div>
+    <h1>Getting Started</h1>
+    <div class="section-label" id="setup-init">Initialization</div>
+    <p>Include the library and wait for the game environment to initialize. The <code>wait(6)</code> ensures everything loads smoothly.</p>
+    <div class="code-container">
+      <button class="code-copy">Copy</button>
+      <pre>local XENO = loadstring(game:HttpGet(('https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC')))()
+wait(6)</pre>
+    </div>
+    <div class="section-label" id="setup-config">Configuration</div>
+    <p>Before building your UI, you can easily set your script's title and link a community Discord server.</p>
+    <div class="code-container">
+      <button class="code-copy">Copy</button>
+      <pre>--- Configuration ---
+_G.dc = "https://discord.gg/yourdc"
+_G.XENOGUINAME = "name"</pre>
+    </div>
+    <div class="section-label" id="setup-theming">Theming</div>
+    <p>XENO allows you to adjust the visual style dynamically. You can enforce a default theme using <code>SetTheme()</code>, or provide users with buttons to change it themselves.</p>
+    <div class="code-container">
+      <button class="code-copy">Copy</button>
+      <pre>SetTheme("Purple")
+
+AddThemeBtn("Purple", Themes.Purple.Accent1)
+AddThemeBtn("Green", Themes.Green.Accent1)
+AddThemeBtn("Blue", Themes.Blue.Accent1)
+AddThemeBtn("Red", Themes.Red.Accent1)</pre>
+    </div>
+    <div class="footer-nav">
+      <button class="nav-btn" data-page="intro"><span>Previous Page</span><strong>Introduction</strong></button>
+      <button class="nav-btn right" data-page="elements"><span>Next Page</span><strong>Elements &amp; Commands</strong></button>
+    </div>
+  </section>
+
+  <!-- ELEMENTS -->
+  <section id="elements" class="page">
+    <div class="breadcrumbs">Elements › <span class="cur">Commands</span></div>
+    <h1>Elements &amp; Commands</h1>
+    <p>XENO includes several components to build out your interface. The final boolean argument usually determines if a notification is triggered.</p>
+    <div class="section-label" id="elem-status">Status Bar &amp; Search</div>
+    <p>Adds a search bar to the top of your UI to filter through features easily.</p>
+    <div class="code-container">
+      <button class="code-copy">Copy</button>
+      <pre>XENO:AddSearchBar()
+XENO:AddHeader("NORMAL FEATURES")
+XENO:AddLabel("Standard interactions without alerts")</pre>
+    </div>
+    <div class="section-label" id="elem-drop">Dropdowns</div>
     <p>Standard dropdowns allow single selection, while Multi-Select dropdowns return a table of chosen strings.</p>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
       <button class="code-copy">Copy</button>
-      <pre><code class="language-lua">XENO:AddDropdown("Teleport List", {"Spawn", "Bank", "Safe Zone"}, "Spawn", function(opt)
+      <pre>XENO:AddDropdown("Teleport List", {"Spawn", "Bank", "Safe Zone"}, "Spawn", function(opt)
     print("Teleporting to:", opt)
 end, false)
 
 XENO:AddMultiSelectDropdown("Select Zones", {"Spawn", "Bank", "Arena"}, {"Spawn"}, function(selected)
     print("Selected:", table.concat(selected, ", "))
-end, false)</code></pre>
+end, false)</pre>
     </div>
-
-    <div class="section-label" id="elem-interact">
-      Interactive Elements
-      <a class="anchor-link" href="#elem-interact" title="Copy link">#</a>
-    </div>
+    <div class="section-label" id="elem-interact">Interactive Elements</div>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
       <button class="code-copy">Copy</button>
-      <pre><code class="language-lua">XENO:AddSwitch("Auto-Farm", function(state) end, true)
-XENO:AddSlider("WalkSpeed", 16, 100, 16, function(val) end)</code></pre>
+      <pre>XENO:AddSwitch("Auto-Farm", function(state) end, true)
+XENO:AddSlider("WalkSpeed", 16, 100, 16, function(val) end)</pre>
     </div>
-
     <div class="footer-nav">
       <button class="nav-btn" data-page="setup"><span>Previous Page</span><strong>Getting Started</strong></button>
       <button class="nav-btn right" data-page="example"><span>Next Page</span><strong>Full Code Script</strong></button>
@@ -233,9 +377,8 @@ XENO:AddSlider("WalkSpeed", 16, 100, 16, function(val) end)</code></pre>
     <h1>Full Implementation</h1>
     <p>This script includes <strong>Configuration</strong>, <strong>ToggleUI logic</strong>, and <strong>Player Variable</strong> handling to ensure it works in-game immediately.</p>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
       <button class="code-copy">Copy Script</button>
-      <pre><code class="language-lua">--- Configuration ---
+      <pre>--- Configuration ---
 _G.dc = "https://discord.gg/yourdc"
 _G.XENOGUINAME = "name"
 
@@ -272,12 +415,12 @@ end)
 XENO:AddHeader("SETTINGS & THEMES")
 
 AddThemeBtn("Purple", Themes.Purple.Accent1)
-AddThemeBtn("Green",  Themes.Green.Accent1)
-AddThemeBtn("Red",    Themes.Red.Accent1)
+AddThemeBtn("Green", Themes.Green.Accent1)
+AddThemeBtn("Red", Themes.Red.Accent1)
 
 XENO:AddKeybind("Toggle Interface", Enum.KeyCode.RightControl, function()
     ToggleUI()
-end, true)</code></pre>
+end, true)</pre>
     </div>
     <div class="footer-nav">
       <button class="nav-btn" data-page="elements"><span>Previous Page</span><strong>Elements &amp; Commands</strong></button>
@@ -285,51 +428,80 @@ end, true)</code></pre>
     </div>
   </section>
 
+  <!-- OBFUSCATOR -->
+  <section id="obfuscator" class="page">
+    <div class="breadcrumbs">Tools › <span class="cur">Obfuscator</span></div>
+    <h1>Lua Obfuscator</h1>
+    <p>Paste your Lua script below and hit Obfuscate. Your code will be transformed to make it harder to read while remaining fully functional.</p>
+    <div class="obf-box">
+      <div class="obf-box-header">Input — Your Script</div>
+      <textarea class="obf-textarea" id="obfInput" placeholder="-- Paste your Lua script here..."></textarea>
+    </div>
+    <div class="obf-controls">
+      <button class="tool-btn" id="obfBtn">⚡ Obfuscate</button>
+      <button class="tool-btn secondary" id="obfClearBtn">Clear</button>
+      <div class="obf-strength">
+        <label for="obfLevel">Strength</label>
+        <select id="obfLevel">
+          <option value="light">Light</option>
+          <option value="medium" selected>Medium</option>
+          <option value="heavy">Heavy</option>
+        </select>
+      </div>
+    </div>
+    <div class="obf-status" id="obfStatus"></div>
+    <div class="obf-box" id="obfOutputBox" style="display:none;">
+      <div class="obf-box-header">Output — Obfuscated</div>
+      <textarea class="obf-textarea" id="obfOutput" readonly></textarea>
+    </div>
+    <div class="obf-controls" id="obfOutputControls" style="display:none;">
+      <button class="tool-btn secondary" id="obfCopyBtn">Copy Output</button>
+    </div>
+  </section>
+
+  <!-- EXECUTORS -->
+  <section id="executors" class="page">
+    <div class="breadcrumbs">Tools › <span class="cur">Executors</span></div>
+    <h1>Executors</h1>
+    <p>Recommended executors for running XENO scripts. Download links go directly to the official source.</p>
+
+    <div class="exec-wad-credit">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Data sourced from <a href="https://wearedevs.net/exploits" target="_blank" rel="noopener">WeAreDevs ↗</a>
+    </div>
+
+    <div class="exec-search-wrap">
+      <input type="search" class="exec-search-input" id="execSearch" placeholder="Search executors…" />
+    </div>
+
+    <div class="exec-filter-bar">
+      <button class="exec-filter-btn active" data-filter="all">All</button>
+      <button class="exec-filter-btn" data-filter="active">✅ Active</button>
+      <button class="exec-filter-btn" data-filter="pending">⚠️ Pending Fixes</button>
+      <button class="exec-filter-btn" data-filter="discontinued">🚫 Discontinued</button>
+    </div>
+
+    <div class="exec-grid" id="execGrid"></div>
+  </section>
+
 </main>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ── Syntax highlighting ──────────────────────────────────────
-  hljs.highlightAll();
-
-  // ── Theme toggle ─────────────────────────────────────────────
-  var html = document.documentElement;
-  var themeBtn = document.getElementById('themeToggle');
-  var hljsLight = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css';
-  var hljsDark  = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css';
-  var hljsEl = document.getElementById('hljs-theme');
-
-  var saved = localStorage.getItem('xeno-theme') || 'dark';
-  applyTheme(saved);
-
-  themeBtn.addEventListener('click', function () {
-    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-    localStorage.setItem('xeno-theme', next);
-  });
-
-  function applyTheme(t) {
-    html.setAttribute('data-theme', t);
-    hljsEl.href = t === 'light' ? hljsLight : hljsDark;
-  }
-
   // ── Page navigation ──────────────────────────────────────────
   function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(function (p) {
-      p.classList.remove('active');
-    });
+    document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
     var target = document.getElementById(pageId);
-    if (target) {
-      target.classList.add('active');
-      window.scrollTo(0, 0);
-    }
+    if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
+
     document.querySelectorAll('.nav-link').forEach(function (link) {
       link.classList.toggle('active', link.dataset.page === pageId);
     });
     document.querySelectorAll('.sub-nav').forEach(function (sub) { sub.classList.remove('open'); });
     var subNav = document.getElementById('sub-' + pageId);
     if (subNav) subNav.classList.add('open');
+
     document.getElementById('sidebar').classList.remove('open');
   }
 
@@ -350,39 +522,291 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.nav-btn[data-page]').forEach(function (btn) {
     btn.addEventListener('click', function () { showPage(btn.dataset.page); });
   });
-
-  // ── Copy buttons ─────────────────────────────────────────────
   document.querySelectorAll('.code-copy').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var codeEl = btn.parentElement.querySelector('code');
-      if (!codeEl) return;
-      navigator.clipboard.writeText(codeEl.innerText).then(function () {
+      var pre = btn.nextElementSibling;
+      if (!pre) return;
+      navigator.clipboard.writeText(pre.innerText).then(function () {
         var orig = btn.textContent;
-        btn.textContent = '✓ Copied';
-        btn.classList.add('copied');
+        btn.textContent = 'Copied!'; btn.classList.add('copied');
         setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
       });
     });
   });
-
-  // ── Anchor copy-link ─────────────────────────────────────────
-  document.querySelectorAll('.anchor-link').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      var url = window.location.href.split('#')[0] + a.getAttribute('href');
-      navigator.clipboard.writeText(url).then(function () {
-        var orig = a.textContent;
-        a.textContent = '✓';
-        setTimeout(function () { a.textContent = orig; }, 1500);
-      });
-    });
-  });
-
-  // ── Mobile menu ──────────────────────────────────────────────
   document.getElementById('menuBtn').addEventListener('click', function () {
     document.getElementById('sidebar').classList.toggle('open');
   });
 
+  // ── OBFUSCATOR ───────────────────────────────────────────────
+  function obfuscateLua(code, level) {
+    var varMap = {}, varCounter = 0;
+    function makeVarName() {
+      var chars = ['l','I','ll','lI','Il','II','lll','lIl','IlI','III'];
+      varCounter++;
+      var name = '_', n = varCounter;
+      while (n > 0) { name += chars[(n-1) % chars.length]; n = Math.floor((n-1)/chars.length); }
+      return name;
+    }
+    code = code.replace(/\blocal\s+([a-zA-Z_][a-zA-Z0-9_]*)\b/g, function(match, v) {
+      if (!varMap[v]) varMap[v] = makeVarName();
+      return 'local ' + varMap[v];
+    });
+    Object.keys(varMap).forEach(function(orig) {
+      code = code.replace(new RegExp('\\b' + orig + '\\b', 'g'), varMap[orig]);
+    });
+    code = code.replace(/"([^"\\]*(\\.[^"\\]*)*)"|'([^'\\]*(\\.[^'\\]*)*)'/g, function(match) {
+      var inner = match.slice(1,-1), encoded = '';
+      for (var i = 0; i < inner.length; i++) encoded += '\\' + inner.charCodeAt(i);
+      return '"' + encoded + '"';
+    });
+    code = code.replace(/--[^\n]*/g,'').replace(/--\[\[[\s\S]*?\]\]/g,'');
+    code = code.replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim();
+    if (level === 'light') return code;
+    var b64 = btoa(unescape(encodeURIComponent(code)));
+    var chunks = [];
+    for (var i = 0; i < b64.length; i += 76) chunks.push('"' + b64.slice(i,i+76) + '"');
+    var medium = [
+      'local function _D(s) local b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" s=s:gsub("[^"..b.."=]","") local r,p,v="",0,0 for i=1,#s do local c=b:find(s:sub(i,i))-1 if c then v,p=v*64+c,p+6 if p>=8 then p=p-8 r=r..string.char(math.floor(v/2^p)%256) end end end return r end',
+      'loadstring(_D(' + chunks.join('..') + '))()'
+    ].join('\n');
+    if (level === 'medium') return medium;
+    var b64_2 = btoa(unescape(encodeURIComponent(medium)));
+    var chunks2 = [];
+    for (var j = 0; j < b64_2.length; j += 60) chunks2.push('"' + b64_2.slice(j,j+60) + '"');
+    var noise = [];
+    for (var k = 0; k < 6; k++) noise.push('local _n'+k+'='+Math.floor(Math.random()*99999));
+    return noise.join(' ')+'\n'+
+      'local function _D(s) local b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" s=s:gsub("[^"..b.."=]","") local r,p,v="",0,0 for i=1,#s do local c=b:find(s:sub(i,i))-1 if c then v,p=v*64+c,p+6 if p>=8 then p=p-8 r=r..string.char(math.floor(v/2^p)%256) end end end return r end\n'+
+      'loadstring(_D('+chunks2.join('..')+'))()';
+  }
+
+  document.getElementById('obfBtn').addEventListener('click', function () {
+    var input = document.getElementById('obfInput').value.trim();
+    var status = document.getElementById('obfStatus');
+    if (!input) { status.textContent = '⚠ Please paste a script first.'; return; }
+    status.textContent = '⚙ Obfuscating...';
+    setTimeout(function () {
+      try {
+        var result = obfuscateLua(input, document.getElementById('obfLevel').value);
+        document.getElementById('obfOutput').value = result;
+        document.getElementById('obfOutputBox').style.display = 'block';
+        document.getElementById('obfOutputControls').style.display = 'flex';
+        status.textContent = '✓ Done! ' + input.length + ' → ' + result.length + ' chars';
+      } catch(e) { status.textContent = '✗ Error: ' + e.message; }
+    }, 80);
+  });
+
+  document.getElementById('obfClearBtn').addEventListener('click', function () {
+    document.getElementById('obfInput').value = '';
+    document.getElementById('obfOutput').value = '';
+    document.getElementById('obfOutputBox').style.display = 'none';
+    document.getElementById('obfOutputControls').style.display = 'none';
+    document.getElementById('obfStatus').textContent = '';
+  });
+
+  document.getElementById('obfCopyBtn').addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('obfOutput').value).then(function () {
+      var btn = document.getElementById('obfCopyBtn');
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = 'Copy Output'; }, 2000);
+    });
+  });
+
+  // ── EXECUTORS ────────────────────────────────────────────────
+  var EXECUTORS = [
+    {
+      name: 'JJSploit', downloads: '66.7m+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/JJSploit.webp',
+      desc: 'Undetected Lua executor with click teleport, ESP, speed, fly, infinite jump, aimbot, and more.',
+      platforms: ['windows','android'],
+      urls: { windows: 'https://wearedevs.net/d/JJSploit', android: 'https://wearedevs.net/d/JJSploit-Android' }
+    },
+    {
+      name: 'Solara', downloads: '11.3m+', status: 'active',
+      img: 'https://obj.wearedevs.net/images/software/solara/solara-011026.webp',
+      desc: 'Free and keyless executor — the first & best external executor after Hyperion.',
+      platforms: ['windows'],
+      urls: { windows: 'https://getsolara.dev/download/' }
+    },
+    {
+      name: 'Ronix', downloads: '1.5m+', status: 'active',
+      img: 'https://obj.wearedevs.net/images/software/ronix/ronix-020426.webp',
+      desc: '100% UNC, free powerful executor for Windows, Android, iOS & macOS. Fast, stable, advanced bypass.',
+      platforms: ['windows','android','ios','mac'],
+      urls: { windows: 'https://ronix-executor.com/ronix-windows-download/', android: 'https://ronix-executor.com/ronix-android/', ios: 'https://wearedevs.net/d/Ronix', mac: 'https://wearedevs.net/d/Ronix' }
+    },
+    {
+      name: 'Delta', downloads: '1.6m+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/delta-120425.webp',
+      desc: "ALL SCRIPTS WORK! Free and easy to use with 1 AD ONLY! Everyone's favourite choice on Mobile!",
+      platforms: ['android','ios'],
+      urls: { android: 'https://deltaexploits.gg/delta-executor-android', ios: 'https://deltaexploits.gg/delta-executor-ios' }
+    },
+    {
+      name: 'Xeno', downloads: '443.9k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/xeno-112025.webp',
+      desc: 'An original Lua executor that brought back the scene in full bloom.',
+      platforms: ['windows'],
+      urls: { windows: 'https://getxeno.net/' }
+    },
+    {
+      name: 'Fluxus Z', downloads: '348.9k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/fluxus-z-111125.webp',
+      desc: '90% UNC, fast executor, easy to use, 1-step 40-hour key system. Free to use, clean UI.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/Fluxus%20Z' }
+    },
+    {
+      name: 'LX63', downloads: '110.7k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/lx6-080225.webp',
+      desc: 'The only free keyless 100% UNC executor right now. Fast, secure, powerful, less crashes.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/LX63' }
+    },
+    {
+      name: 'Valex', downloads: '124.1k+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/valex.webp',
+      desc: 'Undetected external with aimbot, ESP, kill-all, player exploits, and 24/7 anti-cheat protection.',
+      platforms: ['windows'],
+      urls: { windows: 'https://valex.io/' }
+    },
+    {
+      name: 'Pluto', downloads: '93.9k+', status: 'active',
+      img: 'https://obj.wearedevs.net/images/software/pluto/pluto.webp',
+      desc: 'Seamless FREE external. Undetected, overpowered features, aimbot and ESP, game explorer.',
+      platforms: ['windows'],
+      urls: { windows: 'https://pluto.ad/' }
+    },
+    {
+      name: 'Multiple Games', downloads: '21.1m+', status: 'active',
+      img: 'https://wearedevs.net/images/thumbnails/multiple rbx games.webp',
+      desc: 'Usually you are limited to one game open at a time — with this you can open as many as you want.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/Multiple%20Games' }
+    },
+    {
+      name: 'Hydrogen', downloads: '15.9k+', status: 'pending',
+      img: 'https://wearedevs.net/images/thumbnails/hydrogen.webp',
+      desc: 'Achieves a 96% sUNC score, supporting most scripts, and blocks dangerous functions.',
+      platforms: ['android'],
+      urls: { android: 'https://hydrogenexecutor.com/download/' }
+    },
+    {
+      name: 'Drift', downloads: '395.7k+', status: 'pending',
+      img: 'https://wearedevs.net/images/thumbnails/drift.webp',
+      desc: 'Undetected external and executor.',
+      platforms: ['windows'],
+      urls: { windows: 'https://wearedevs.net/d/Drift' }
+    },
+    {
+      name: 'Bunni', downloads: '144.5k+', status: 'discontinued',
+      img: 'https://wearedevs.net/images/thumbnails/bunni-080125.webp',
+      desc: 'Undetected from CM bans! Free keyed Lua executor with high UNC and amazing script compatibility.',
+      platforms: [], urls: {}
+    },
+    {
+      name: 'Krnl', downloads: '37.4m+', status: 'discontinued',
+      img: 'https://wearedevs.net/images/thumbnails/krnl.jpeg',
+      desc: 'UNDETECTED, 100 sUNC, 24-hour keys, getconnections, saveinstance. — Now discontinued.',
+      platforms: [], urls: {}
+    },
+    {
+      name: 'Nihon', downloads: '446.6k+', status: 'discontinued',
+      img: 'https://wearedevs.net/images/thumbnails/nihon-102325.webp',
+      desc: 'Nihon — Discontinued.',
+      platforms: [], urls: {}
+    },
+    {
+      name: 'Punk X', downloads: '25.3k+', status: 'discontinued',
+      img: 'https://obj.wearedevs.net/images/software/punkx/punkx-012126.webp',
+      desc: 'High-performance executor. — Discontinued.',
+      platforms: [], urls: {}
+    }
+  ];
+
+  var platformIcons = {
+    windows: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.548H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg> Windows',
+    android: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.341c-.551 0-.999-.449-.999-1s.448-.999.999-.999c.551 0 .999.448.999.999 0 .551-.448 1-.999 1m-11.046 0c-.551 0-.999-.449-.999-1s.448-.999.999-.999c.551 0 .999.448.999.999 0 .551-.448 1-.999 1m11.405-6.02l1.997-3.459a.416.416 0 00-.152-.568.416.416 0 00-.568.152l-2.022 3.503C15.59 8.244 13.853 7.851 12 7.851s-3.59.393-5.137 1.099L4.841 5.447a.416.416 0 00-.568-.152.416.416 0 00-.152.568l1.997 3.459C2.689 11.187.343 14.659 0 18.761h24c-.344-4.102-2.689-7.574-6.118-9.44"/></svg> Android',
+    ios: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> iOS',
+    mac: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> macOS'
+  };
+
+  var statusLabels = { active: '✅ Active', pending: '⚠️ Pending Fixes', discontinued: '🚫 Discontinued' };
+  var execFilter = 'all';
+  var execSearch = '';
+
+  function renderExecutors() {
+    var list = EXECUTORS;
+    if (execFilter !== 'all') list = list.filter(function(e) { return e.status === execFilter; });
+    if (execSearch) {
+      var q = execSearch.toLowerCase();
+      list = list.filter(function(e) {
+        return e.name.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q);
+      });
+    }
+
+    var grid = document.getElementById('execGrid');
+    grid.innerHTML = '';
+
+    if (!list.length) {
+      grid.innerHTML = '<div class="exec-empty"><h3>No executors found</h3><p>Try a different filter or search.</p></div>';
+      return;
+    }
+
+    list.forEach(function(ex, i) {
+      var canDl = ex.status !== 'discontinued';
+      var dlHtml = '';
+      if (canDl && ex.platforms.length) {
+        dlHtml = ex.platforms.map(function(p) {
+          var url = ex.urls[p] || 'https://wearedevs.net/exploits';
+          return '<a class="exec-platform-btn exec-platform-' + p + '" href="' + url + '" target="_blank" rel="noopener">' + (platformIcons[p] || p) + '</a>';
+        }).join('');
+      } else {
+        dlHtml = '<span class="exec-unavailable">Unavailable</span>';
+      }
+
+      var card = document.createElement('div');
+      card.className = 'exec-card ' + ex.status;
+      card.style.animationDelay = (i * 0.04) + 's';
+      card.innerHTML = [
+        '<div class="exec-thumb-wrap">',
+          '<img class="exec-thumbnail" src="' + ex.img + '" alt="' + ex.name + '" onerror="this.closest(\'.exec-thumb-wrap\').style.display=\'none\'">',
+        '</div>',
+        '<div class="exec-body">',
+          '<div class="exec-status-bar">',
+            '<span class="exec-status ' + ex.status + '">' + statusLabels[ex.status] + '</span>',
+            '<span class="exec-downloads">',
+              '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+              ex.downloads,
+            '</span>',
+          '</div>',
+          '<div class="exec-title">' + ex.name + '</div>',
+          '<div class="exec-desc">' + ex.desc + '</div>',
+          '<div class="exec-platform-btns">' + dlHtml + '</div>',
+        '</div>'
+      ].join('');
+      grid.appendChild(card);
+    });
+  }
+
+  document.querySelectorAll('.exec-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.exec-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      execFilter = btn.dataset.filter;
+      renderExecutors();
+    });
+  });
+
+  document.getElementById('execSearch').addEventListener('input', function() {
+    execSearch = this.value.trim();
+    renderExecutors();
+  });
+
+  // render executors on first load so they're ready
+  renderExecutors();
+
+  // ── Init ─────────────────────────────────────────────────────
   showPage('intro');
 });
 </script>
