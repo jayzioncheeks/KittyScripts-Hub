@@ -122,21 +122,21 @@
       position: sticky; top: 0;
       background: #0f0f13;
       border-bottom: 1px solid var(--border);
-      padding: 0 20px;
-      height: 56px;
-      display: flex; align-items: center; gap: 16px;
-      flex-shrink: 0;
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0; flex-wrap: wrap;
     }
-    .paste-topbar-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.95rem; }
-    .paste-topbar-logo img { width: 22px; height: 22px; object-fit: contain; }
-    .paste-topbar-divider { width: 1px; height: 24px; background: var(--border); }
-    .paste-topbar-id { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); flex: 1; }
-    .paste-topbar-actions { display: flex; gap: 8px; }
+    .paste-topbar-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .paste-topbar-logo img { width: 20px; height: 20px; object-fit: contain; }
+    .paste-topbar-divider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+    .paste-topbar-id { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .paste-topbar-actions { display: flex; gap: 6px; flex-wrap: wrap; width: 100%; }
+    .paste-topbar-actions .tool-btn { font-size: 0.78rem; padding: 7px 12px; flex: 1; text-align: center; }
 
     .paste-fullscreen-code {
       flex: 1;
       overflow: auto;
-      padding: 28px 32px;
+      padding: 20px 16px;
     }
     .paste-fullscreen-code pre {
       color: #d4d4d4;
@@ -145,6 +145,24 @@
       line-height: 1.75;
       white-space: pre-wrap;
       word-break: break-all;
+    }
+
+    .paste-loadstring-bar {
+      background: #0a0a0d;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0; flex-wrap: wrap;
+    }
+    .paste-loadstring-bar code {
+      flex: 1; min-width: 0; background: transparent; color: var(--accent);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      padding: 0;
+    }
+    .paste-loadstring-label {
+      font-size: 0.7rem; font-weight: 700; color: #4a4a5a;
+      text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
     }
 
     /* ── RAW VIEW — pure text, full screen ── */
@@ -210,6 +228,11 @@
       <button class="tool-btn secondary" id="pasteNewBtn">+ New</button>
       <button class="tool-btn secondary" id="pasteCloseBtn">← Docs</button>
     </div>
+  </div>
+  <div class="paste-loadstring-bar">
+    <span class="paste-loadstring-label">Loadstring</span>
+    <code id="paste-loadstring-text"></code>
+    <button class="tool-btn secondary" id="pasteCopyLoadstringBtn" style="font-size:0.78rem;padding:6px 14px;">Copy</button>
   </div>
   <div class="paste-fullscreen-code">
     <pre id="paste-code-content"></pre>
@@ -530,9 +553,12 @@ document.addEventListener('DOMContentLoaded', function () {
     currentPasteId = id;
     var code = getPaste(id) || '';
     var normalUrl = getBaseUrl() + '#paste-' + id;
+    var rawUrl = getBaseUrl() + '#paste-' + id + '/raw';
+    var loadstring = 'loadstring(game:HttpGet("' + rawUrl + '"))()';
 
     document.getElementById('paste-topbar-id').textContent = normalUrl;
     document.getElementById('paste-code-content').textContent = code;
+    document.getElementById('paste-loadstring-text').textContent = loadstring;
     document.getElementById('paste-fullscreen').classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -541,6 +567,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('paste-fullscreen').classList.remove('active');
     document.body.style.overflow = '';
   }
+
+  document.getElementById('pasteCopyLoadstringBtn').addEventListener('click', function () {
+    var ls = document.getElementById('paste-loadstring-text').textContent;
+    navigator.clipboard.writeText(ls).then(function () {
+      var btn = document.getElementById('pasteCopyLoadstringBtn');
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+    });
+  });
 
   document.getElementById('pasteRawBtn').addEventListener('click', function () {
     if (currentPasteId) {
