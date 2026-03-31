@@ -4,62 +4,145 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XENO | Documentation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet" id="hljs-theme" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
   <style>
-    /* ── TOKENS ── */
     :root {
-      --bg: #0b0b0e;
-      --surface: #16161a;
-      --border: #23232a;
-      --accent: #a78bfa;
-      --accent-dim: #1a1428;
-      --text: #ffffff;
-      --text-muted: #94a3b8;
+      --bg: #08080c;
+      --surface: #111118;
+      --surface-2: #18181f;
+      --border: #1e1e28;
+      --border-bright: #2e2e3e;
+      --accent: #c084fc;
+      --accent-2: #818cf8;
+      --accent-dim: #1a1030;
+      --glow: rgba(192, 132, 252, 0.15);
+      --glow-strong: rgba(192, 132, 252, 0.3);
+      --text: #f0eeff;
+      --text-muted: #6e6e8e;
+      --text-soft: #9898b8;
       --header-h: 64px;
-      --sidebar-w: 280px;
+      --sidebar-w: 268px;
       --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+      --radius: 10px;
     }
     [data-theme="light"] {
-      --bg: #f8f8fc;
-      --surface: #ededf5;
-      --border: #dddde8;
-      --accent: #7c3aed;
-      --accent-dim: #ede9fe;
-      --text: #0f0f14;
-      --text-muted: #5a5a78;
+      --bg: #f5f4fa;
+      --surface: #eceaf5;
+      --surface-2: #e4e2f0;
+      --border: #d8d5ec;
+      --border-bright: #c0bce0;
+      --accent: #8b3cf7;
+      --accent-2: #4f5de8;
+      --accent-dim: #ede8fc;
+      --glow: rgba(139, 60, 247, 0.08);
+      --glow-strong: rgba(139, 60, 247, 0.15);
+      --text: #0d0c18;
+      --text-muted: #6e6e90;
+      --text-soft: #4e4e70;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
       transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.6;
+    }
+    [data-theme="light"] body::before { opacity: 0.2; }
+
+    .ambient-glow {
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,132,252,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      top: -200px; left: -100px;
+      animation: driftGlow 12s ease-in-out infinite alternate;
+    }
+    .ambient-glow-2 {
+      position: fixed;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(129,140,248,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      bottom: 0; right: 0;
+      animation: driftGlow2 15s ease-in-out infinite alternate;
+    }
+    @keyframes driftGlow {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(80px, 60px) scale(1.15); }
+    }
+    @keyframes driftGlow2 {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(-60px, -40px) scale(1.1); }
     }
 
     /* ── HEADER ── */
     header {
-      height: var(--header-h); background: var(--bg);
+      height: var(--header-h);
+      background: rgba(8,8,12,0.85);
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px; position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 0 24px;
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
       transition: background var(--transition), border-color var(--transition);
     }
-    .header-left { display: flex; align-items: center; gap: 10px; }
-    .logo-img { width: 28px; height: 28px; object-fit: contain; }
-    .logo-name { font-weight: 700; }
+    [data-theme="light"] header { background: rgba(245,244,250,0.88); }
+
+    .header-left { display: flex; align-items: center; gap: 12px; }
+
+    .logo-img {
+      width: 26px; height: 26px; object-fit: contain;
+      filter: drop-shadow(0 0 8px var(--glow-strong));
+      transition: filter 0.3s;
+    }
+    .logo-img:hover { filter: drop-shadow(0 0 16px var(--accent)); }
+
+    .logo-name {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700; font-size: 1rem; letter-spacing: 0.12em;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo-divider { width: 1px; height: 18px; background: var(--border-bright); opacity: 0.5; }
+    .logo-tag {
+      font-size: 0.7rem; font-family: 'Space Mono', monospace;
+      color: var(--text-muted); letter-spacing: 0.08em;
+    }
+
     .header-right { display: flex; align-items: center; gap: 10px; }
 
-    /* ── THEME TOGGLE ── */
     .theme-toggle {
-      width: 36px; height: 36px; border-radius: 8px;
+      width: 36px; height: 36px; border-radius: var(--radius);
       background: var(--surface); border: 1px solid var(--border);
       color: var(--text-muted); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: all var(--transition); font-size: 1rem;
+      position: relative; overflow: hidden;
     }
+    .theme-toggle::after {
+      content: ''; position: absolute; inset: 0;
+      background: var(--glow); opacity: 0; transition: opacity 0.2s;
+    }
+    .theme-toggle:hover::after { opacity: 1; }
     .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
     .theme-toggle .icon-sun  { display: none; }
     .theme-toggle .icon-moon { display: block; }
@@ -67,153 +150,327 @@
     [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
     .discord-btn {
-      display: flex; align-items: center; gap: 8px;
-      background: #5865F2; color: white; text-decoration: none;
-      padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
-      transition: background 0.2s;
+      display: flex; align-items: center; gap: 7px;
+      background: linear-gradient(135deg, #5865F2, #4a54e0);
+      color: white; text-decoration: none;
+      padding: 8px 16px; border-radius: var(--radius);
+      font-size: 0.83rem; font-weight: 600; transition: all 0.2s;
+      box-shadow: 0 2px 16px rgba(88,101,242,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    .discord-btn:hover { background: #4752c4; }
+    .discord-btn:hover {
+      background: linear-gradient(135deg, #4752c4, #3c45c4);
+      box-shadow: 0 4px 24px rgba(88,101,242,0.5);
+      transform: translateY(-1px);
+    }
 
     /* ── SIDEBAR ── */
     .sidebar {
-      width: var(--sidebar-w); height: calc(100vh - var(--header-h));
+      width: var(--sidebar-w);
+      height: calc(100vh - var(--header-h));
       position: fixed; top: var(--header-h); left: 0;
-      border-right: 1px solid var(--border); padding: 24px;
+      border-right: 1px solid var(--border);
+      padding: 28px 16px 28px 20px;
       background: var(--bg); z-index: 999; overflow-y: auto;
-      transition: transform 0.3s ease, background var(--transition), border-color var(--transition);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background var(--transition), border-color var(--transition);
     }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 4px; }
+
     .nav-section-label {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      color: var(--text-muted); opacity: 0.5;
-      text-transform: uppercase; margin: 20px 0 8px;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+      color: var(--text-muted); text-transform: uppercase; margin: 22px 0 8px;
+      font-family: 'Space Mono', monospace;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-section-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-bright), transparent);
     }
     .nav-section-label:first-child { margin-top: 0; }
-    .nav-item { margin-bottom: 2px; }
+    .nav-item { margin-bottom: 1px; }
+
     .nav-link {
-      display: block; padding: 9px 10px; color: var(--text-muted);
-      font-size: 0.9rem; cursor: pointer;
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px; color: var(--text-muted);
+      font-size: 0.88rem; cursor: pointer;
       transition: color var(--transition), background var(--transition);
-      border-radius: 7px;
+      border-radius: 7px; font-weight: 400;
+    }
+    .nav-link::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--text-muted); opacity: 0.3; flex-shrink: 0;
+      transition: all 0.2s;
     }
     .nav-link:hover { color: var(--text); background: var(--surface); }
-    .nav-link.active { color: var(--accent); font-weight: 600; background: var(--accent-dim); }
-    .sub-nav { display: none; margin-left: 10px; margin-bottom: 4px; border-left: 1px solid var(--border); padding-left: 12px; }
+    .nav-link:hover::before { opacity: 0.7; }
+    .nav-link.active { color: var(--accent); font-weight: 500; background: var(--accent-dim); }
+    .nav-link.active::before { background: var(--accent); opacity: 1; box-shadow: 0 0 6px var(--accent); }
+
+    .sub-nav { display: none; margin-left: 14px; margin-bottom: 4px; border-left: 1px solid var(--border); padding-left: 14px; }
     .sub-nav.open { display: block; }
-    .sub-link { display: block; padding: 5px 0; color: var(--text-muted); font-size: 0.83rem; cursor: pointer; transition: color 0.2s; opacity: 0.7; }
-    .sub-link:hover { color: var(--text); opacity: 1; }
+    .sub-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 4px; color: var(--text-muted);
+      font-size: 0.82rem; cursor: pointer;
+      transition: color 0.2s, padding-left 0.2s; opacity: 0.65;
+    }
+    .sub-link:hover { color: var(--text); opacity: 1; padding-left: 4px; }
 
     /* ── MAIN ── */
-    main { margin-left: var(--sidebar-w); padding: 100px 40px 60px; max-width: 900px; min-height: 100vh; }
+    main {
+      margin-left: var(--sidebar-w);
+      padding: 100px 52px 80px;
+      max-width: 960px; min-height: 100vh;
+      position: relative;
+    }
 
     /* ── PAGE TRANSITIONS ── */
     .page { display: none; opacity: 0; transform: translateY(10px); }
     .page.active {
       display: block;
-      animation: pageIn 0.28s cubic-bezier(0.4,0,0.2,1) forwards;
+      animation: pageIn 0.35s cubic-bezier(0.4,0,0.2,1) forwards;
     }
     @keyframes pageIn {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── TYPOGRAPHY ── */
-    .breadcrumbs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 30px; }
-    .breadcrumbs .cur { color: var(--accent); font-weight: 500; }
-    h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
-    p { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+    .breadcrumbs {
+      font-size: 0.8rem; color: var(--text-muted); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Space Mono', monospace; letter-spacing: 0.04em;
+    }
+    .breadcrumbs .sep { opacity: 0.4; }
+    .breadcrumbs .cur { color: var(--accent); }
+
+    h1 {
+      font-size: 2.8rem; font-weight: 300;
+      margin-bottom: 18px; letter-spacing: -0.03em;
+      line-height: 1.1; color: var(--text);
+    }
+    h1 strong {
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      color: var(--text-soft); line-height: 1.75; margin-bottom: 22px;
+      font-weight: 300; font-size: 0.97rem;
+    }
+    p strong { color: var(--text); font-weight: 600; }
+
     code {
-      background: var(--surface); border: 1px solid var(--border);
-      padding: 2px 6px; border-radius: 4px; font-size: 0.88em;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      color: var(--accent);
+      background: var(--surface-2); border: 1px solid var(--border-bright);
+      padding: 2px 7px; border-radius: 5px; font-size: 0.86em;
+      font-family: 'Space Mono', monospace; color: var(--accent);
     }
 
+    /* ── HERO IMAGE ── */
     .hero-image-container {
-      margin: 28px 0 36px; border-radius: 14px; overflow: hidden;
-      border: 1px solid var(--border); box-shadow: 0 8px 48px rgba(0,0,0,0.4);
-      transition: border-color var(--transition);
+      margin: 32px 0 40px; border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 64px rgba(0,0,0,0.5), 0 0 0 1px var(--border);
+      transition: border-color var(--transition), box-shadow 0.4s;
+      position: relative;
     }
-    .hero-image-container img { width: 100%; display: block; }
+    .hero-image-container::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(8,8,12,0.3) 0%, transparent 50%);
+      z-index: 1; pointer-events: none;
+    }
+    .hero-image-container:hover {
+      border-color: var(--border-bright);
+      box-shadow: 0 8px 80px rgba(0,0,0,0.6), 0 0 0 1px var(--border-bright), 0 0 40px var(--glow);
+    }
+    .hero-image-container img { width: 100%; display: block; transition: transform 0.5s ease; }
+    .hero-image-container:hover img { transform: scale(1.01); }
 
-    /* ── SECTION HEADINGS WITH ANCHOR ── */
+    /* ── SECTION HEADINGS ── */
     .section-label {
-      font-size: 1.5rem; font-weight: 700; margin: 48px 0 20px;
-      scroll-margin-top: 80px;
-      display: flex; align-items: center; gap: 8px;
+      font-size: 1.4rem; font-weight: 600;
+      margin: 52px 0 18px; scroll-margin-top: 84px;
+      display: flex; align-items: center; gap: 10px;
+      color: var(--text); letter-spacing: -0.02em;
+    }
+    .section-label-icon {
+      width: 28px; height: 28px;
+      background: var(--accent-dim); border: 1px solid var(--border-bright);
+      border-radius: 7px; display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: var(--accent); flex-shrink: 0;
+      font-family: 'Space Mono', monospace; transition: all 0.2s;
+    }
+    .section-label:hover .section-label-icon {
+      background: var(--glow); border-color: var(--accent);
+      box-shadow: 0 0 12px var(--glow);
     }
     .anchor-link {
-      opacity: 0; font-size: 1rem; color: var(--accent);
+      opacity: 0; font-size: 0.9rem; color: var(--accent);
       text-decoration: none; transition: opacity 0.2s;
-      user-select: none;
+      user-select: none; margin-left: auto;
     }
-    .section-label:hover .anchor-link { opacity: 1; }
+    .section-label:hover .anchor-link { opacity: 0.7; }
 
     /* ── CODE BLOCKS ── */
-    .code-container { position: relative; margin: 20px 0; }
-    .code-container pre {
+    .code-container {
+      position: relative; margin: 20px 0;
       border-radius: 12px; border: 1px solid var(--border);
-      overflow-x: auto; line-height: 1.55; margin: 0;
-      font-size: 0.85rem;
-      transition: border-color var(--transition);
+      background: var(--surface); overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-    /* override hljs padding to make room for copy btn */
-    .code-container pre code.hljs { padding: 44px 20px 20px !important; border-radius: 12px; }
-
+    .code-container:hover {
+      border-color: var(--border-bright);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+    }
+    .code-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .code-dots span:nth-child(1) { background: #ff5f57; }
+    .code-dots span:nth-child(2) { background: #febc2e; }
+    .code-dots span:nth-child(3) { background: #28c840; }
+    .code-lang-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+    }
     .code-copy {
-      position: absolute; top: 10px; right: 10px; z-index: 2;
-      background: rgba(30,30,36,0.85); border: 1px solid #33333c;
-      color: var(--text-muted); padding: 5px 12px;
-      border-radius: 6px; font-size: 0.72rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s;
-      backdrop-filter: blur(4px);
-      font-family: 'Inter', sans-serif;
+      background: transparent; border: 1px solid var(--border-bright);
+      color: var(--text-muted); padding: 4px 12px; border-radius: 6px;
+      font-size: 0.71rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; font-family: 'Space Mono', monospace;
+      letter-spacing: 0.06em; text-transform: uppercase;
     }
-    [data-theme="light"] .code-copy { background: rgba(240,238,248,0.9); border-color: var(--border); }
     .code-copy:hover, .code-copy.copied {
       background: var(--accent-dim); border-color: var(--accent); color: var(--accent);
     }
-    .code-lang-tag {
-      position: absolute; top: 11px; left: 14px; z-index: 2;
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--text-muted); opacity: 0.5;
-      font-family: 'Inter', sans-serif; pointer-events: none;
+    .code-copy.copied { animation: copyPop 0.2s ease; }
+    @keyframes copyPop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(0.94); }
+      100% { transform: scale(1); }
+    }
+    .code-container pre {
+      border-radius: 0; overflow-x: auto; line-height: 1.6;
+      margin: 0; font-size: 0.84rem; border: none;
+    }
+    .code-container pre code.hljs {
+      padding: 20px 20px 22px !important;
+      border-radius: 0; background: transparent !important;
+    }
+
+    /* ── FEATURE CHIPS ── */
+    .feature-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0; }
+    .feature-chip {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--surface); border: 1px solid var(--border-bright);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 0.82rem; color: var(--text-soft);
+      transition: all 0.2s; cursor: default;
+    }
+    .feature-chip:hover { border-color: var(--accent); color: var(--text); background: var(--accent-dim); }
+    .feature-chip-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 6px var(--accent); flex-shrink: 0;
+    }
+
+    /* ── VERSION BADGE ── */
+    .version-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-dim); border: 1px solid rgba(192,132,252,0.3);
+      border-radius: 999px; padding: 4px 12px;
+      font-size: 0.72rem; font-family: 'Space Mono', monospace;
+      color: var(--accent); margin-bottom: 20px; letter-spacing: 0.06em;
+    }
+    .version-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
     }
 
     /* ── FOOTER NAV ── */
-    .footer-nav { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; gap: 20px; transition: border-color var(--transition); }
+    .footer-nav {
+      margin-top: 64px; padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 16px;
+      transition: border-color var(--transition);
+    }
     .nav-btn {
       flex: 1; background: var(--surface); border: 1px solid var(--border);
-      color: var(--text); padding: 16px; border-radius: 10px;
+      color: var(--text); padding: 16px 20px; border-radius: 12px;
       cursor: pointer; transition: all var(--transition);
-      display: flex; flex-direction: column; text-align: left; font-family: inherit;
+      display: flex; flex-direction: column; text-align: left;
+      font-family: 'DM Sans', sans-serif; position: relative; overflow: hidden;
+    }
+    .nav-btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--glow), transparent);
+      opacity: 0; transition: opacity 0.3s;
     }
     .nav-btn.right { text-align: right; }
-    .nav-btn:hover { border-color: var(--accent); background: var(--accent-dim); }
-    .nav-btn span { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; display: block; }
-    .nav-btn strong { font-size: 1rem; display: block; }
+    .nav-btn:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .nav-btn:hover::after { opacity: 1; }
+    .nav-btn span {
+      font-size: 0.72rem; color: var(--text-muted); margin-bottom: 5px; display: block;
+      font-family: 'Space Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .nav-btn strong { font-size: 0.97rem; display: block; font-weight: 500; }
     .nav-spacer { flex: 1; }
 
+    /* ── STAGGER ── */
+    .stagger > * { opacity: 0; transform: translateY(10px); animation: staggerIn 0.4s ease forwards; }
+    .stagger > *:nth-child(1) { animation-delay: 0.05s; }
+    .stagger > *:nth-child(2) { animation-delay: 0.12s; }
+    .stagger > *:nth-child(3) { animation-delay: 0.19s; }
+    .stagger > *:nth-child(4) { animation-delay: 0.26s; }
+    .stagger > *:nth-child(5) { animation-delay: 0.33s; }
+    @keyframes staggerIn { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 6px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
     /* ── MOBILE ── */
-    .menu-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; }
+    .menu-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 4px; }
     @media (max-width: 900px) {
       .sidebar { transform: translateX(-100%); width: 100%; }
       .sidebar.open { transform: translateX(0); }
       main { margin-left: 0; padding: 90px 20px 60px; }
       .menu-toggle { display: block; }
+      h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
 
+<div class="ambient-glow"></div>
+<div class="ambient-glow-2"></div>
+
 <header>
   <div class="header-left">
     <button class="menu-toggle" id="menuBtn">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
     <img class="logo-img" src="https://raw.githubusercontent.com/jayzioncheeks/XENO-Docs/refs/heads/main/X%20logo.png" alt="XENO" />
     <span class="logo-name">XENO</span>
+    <div class="logo-divider"></div>
+    <span class="logo-tag">docs</span>
   </div>
   <div class="header-right">
     <button class="theme-toggle" id="themeToggle" title="Toggle theme">
@@ -221,7 +478,7 @@
       <span class="icon-sun">☀️</span>
     </button>
     <a class="discord-btn" href="https://discord.gg/TdaWNwNAMa" target="_blank" rel="noopener noreferrer">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
         <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
       </svg>
       Discord
@@ -255,61 +512,91 @@
 
   <!-- INTRO -->
   <section id="intro" class="page active">
-    <div class="breadcrumbs">Overview › <span class="cur">Introduction</span></div>
-    <h1>Introduction</h1>
-    <p>XENO is a refined UI library for Roblox scripts, optimized for performance and production use. It gives you a complete set of UI primitives like windows, tabs, elements, search bars, and notifications.</p>
-    <div class="hero-image-container">
-      <img src="https://raw.githubusercontent.com/jayzioncheeks/XENO-Docs/refs/heads/main/file_00000000e848722fa317a5000be6ece3.png" alt="XENO UI Preview" />
-    </div>
-    <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy</button>
-      <pre><code class="language-lua">local XENO = loadstring(game:HttpGet(('https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC')))()</code></pre>
+    <div class="stagger">
+      <div class="breadcrumbs">Overview <span class="sep">›</span> <span class="cur">Introduction</span></div>
+      <div>
+        <div class="version-badge"><span class="version-dot"></span> Public Release</div>
+        <h1><strong>XENO</strong> UI Library</h1>
+        <p>A refined UI library for Roblox scripts — optimized for performance and production use. Ships with a complete set of primitives: windows, tabs, elements, search bars, and notifications.</p>
+      </div>
+      <div class="feature-row">
+        <div class="feature-chip"><div class="feature-chip-dot"></div> Lightweight</div>
+        <div class="feature-chip"><div class="feature-chip-dot"></div> Themeable</div>
+        <div class="feature-chip"><div class="feature-chip-dot"></div> Search Built-in</div>
+        <div class="feature-chip"><div class="feature-chip-dot"></div> Multi-Select</div>
+        <div class="feature-chip"><div class="feature-chip-dot"></div> Notifications</div>
+        <div class="feature-chip"><div class="feature-chip-dot"></div> Keybinds</div>
+      </div>
+      <div class="hero-image-container">
+        <img src="https://raw.githubusercontent.com/jayzioncheeks/XENO-Docs/refs/heads/main/file_00000000e848722fa317a5000be6ece3.png" alt="XENO UI Preview" />
+      </div>
+      <div class="code-container">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang-tag">lua</span>
+          <button class="code-copy">Copy</button>
+        </div>
+        <pre><code class="language-lua">local XENO = loadstring(game:HttpGet(('https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC')))()</code></pre>
+      </div>
     </div>
     <div class="footer-nav">
       <div class="nav-spacer"></div>
-      <button class="nav-btn right" data-page="setup"><span>Next Page</span><strong>Getting Started</strong></button>
+      <button class="nav-btn right" data-page="setup"><span>Next Page</span><strong>Getting Started →</strong></button>
     </div>
   </section>
 
   <!-- SETUP -->
   <section id="setup" class="page">
-    <div class="breadcrumbs">Overview › <span class="cur">Getting Started</span></div>
-    <h1>Getting Started</h1>
+    <div class="stagger">
+      <div class="breadcrumbs">Overview <span class="sep">›</span> <span class="cur">Getting Started</span></div>
+      <h1>Getting <strong>Started</strong></h1>
+    </div>
 
     <div class="section-label" id="setup-init">
+      <div class="section-label-icon">01</div>
       Initialization
       <a class="anchor-link" href="#setup-init" title="Copy link">#</a>
     </div>
     <p>Include the library and wait for the game environment to initialize. The <code>wait(6)</code> ensures everything loads smoothly.</p>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy</button>
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang-tag">lua</span>
+        <button class="code-copy">Copy</button>
+      </div>
       <pre><code class="language-lua">local XENO = loadstring(game:HttpGet(('https://raw.githubusercontent.com/zxkuhl/XENO/refs/heads/main/XENO-PUBLIC')))()
 wait(6)</code></pre>
     </div>
 
     <div class="section-label" id="setup-config">
+      <div class="section-label-icon">02</div>
       Configuration
       <a class="anchor-link" href="#setup-config" title="Copy link">#</a>
     </div>
-    <p>Before building your UI, you can easily set your script's title and link a community Discord server.</p>
+    <p>Before building your UI, set your script's title and link a community Discord server.</p>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy</button>
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang-tag">lua</span>
+        <button class="code-copy">Copy</button>
+      </div>
       <pre><code class="language-lua">--- Configuration ---
 _G.dc = "https://discord.gg/yourdc"
 _G.XENOGUINAME = "name"</code></pre>
     </div>
 
     <div class="section-label" id="setup-theming">
+      <div class="section-label-icon">03</div>
       Theming
       <a class="anchor-link" href="#setup-theming" title="Copy link">#</a>
     </div>
-    <p>XENO allows you to adjust the visual style dynamically. You can enforce a default theme using <code>SetTheme()</code>, or provide users with buttons to change it themselves.</p>
+    <p>XENO allows you to adjust the visual style dynamically. Enforce a default theme using <code>SetTheme()</code>, or give users buttons to change it themselves.</p>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy</button>
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang-tag">lua</span>
+        <button class="code-copy">Copy</button>
+      </div>
       <pre><code class="language-lua">SetTheme("Purple")
 
 AddThemeBtn("Purple", Themes.Purple.Accent1)
@@ -319,38 +606,48 @@ AddThemeBtn("Red",    Themes.Red.Accent1)</code></pre>
     </div>
 
     <div class="footer-nav">
-      <button class="nav-btn" data-page="intro"><span>Previous Page</span><strong>Introduction</strong></button>
-      <button class="nav-btn right" data-page="elements"><span>Next Page</span><strong>Elements &amp; Commands</strong></button>
+      <button class="nav-btn" data-page="intro"><span>Previous Page</span><strong>← Introduction</strong></button>
+      <button class="nav-btn right" data-page="elements"><span>Next Page</span><strong>Elements &amp; Commands →</strong></button>
     </div>
   </section>
 
   <!-- ELEMENTS -->
   <section id="elements" class="page">
-    <div class="breadcrumbs">Elements › <span class="cur">Commands</span></div>
-    <h1>Elements &amp; Commands</h1>
-    <p>XENO includes several components to build out your interface. The final boolean argument usually determines if a notification is triggered.</p>
+    <div class="stagger">
+      <div class="breadcrumbs">Elements <span class="sep">›</span> <span class="cur">Commands</span></div>
+      <h1>Elements &amp; <strong>Commands</strong></h1>
+      <p>XENO includes several components to build out your interface. The final boolean argument usually determines if a notification is triggered.</p>
+    </div>
 
     <div class="section-label" id="elem-status">
+      <div class="section-label-icon">→</div>
       Status Bar &amp; Search
       <a class="anchor-link" href="#elem-status" title="Copy link">#</a>
     </div>
     <p>Adds a search bar to the top of your UI to filter through features easily.</p>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy</button>
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang-tag">lua</span>
+        <button class="code-copy">Copy</button>
+      </div>
       <pre><code class="language-lua">XENO:AddSearchBar()
 XENO:AddHeader("NORMAL FEATURES")
 XENO:AddLabel("Standard interactions without alerts")</code></pre>
     </div>
 
     <div class="section-label" id="elem-drop">
+      <div class="section-label-icon">↓</div>
       Dropdowns
       <a class="anchor-link" href="#elem-drop" title="Copy link">#</a>
     </div>
     <p>Standard dropdowns allow single selection, while Multi-Select dropdowns return a table of chosen strings.</p>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy</button>
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang-tag">lua</span>
+        <button class="code-copy">Copy</button>
+      </div>
       <pre><code class="language-lua">XENO:AddDropdown("Teleport List", {"Spawn", "Bank", "Safe Zone"}, "Spawn", function(opt)
     print("Teleporting to:", opt)
 end, false)
@@ -361,30 +658,39 @@ end, false)</code></pre>
     </div>
 
     <div class="section-label" id="elem-interact">
+      <div class="section-label-icon">⚡</div>
       Interactive Elements
       <a class="anchor-link" href="#elem-interact" title="Copy link">#</a>
     </div>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy</button>
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang-tag">lua</span>
+        <button class="code-copy">Copy</button>
+      </div>
       <pre><code class="language-lua">XENO:AddSwitch("Auto-Farm", function(state) end, true)
 XENO:AddSlider("WalkSpeed", 16, 100, 16, function(val) end)</code></pre>
     </div>
 
     <div class="footer-nav">
-      <button class="nav-btn" data-page="setup"><span>Previous Page</span><strong>Getting Started</strong></button>
-      <button class="nav-btn right" data-page="example"><span>Next Page</span><strong>Full Code Script</strong></button>
+      <button class="nav-btn" data-page="setup"><span>Previous Page</span><strong>← Getting Started</strong></button>
+      <button class="nav-btn right" data-page="example"><span>Next Page</span><strong>Full Code Script →</strong></button>
     </div>
   </section>
 
   <!-- EXAMPLE -->
   <section id="example" class="page">
-    <div class="breadcrumbs">Guide › <span class="cur">Full Code Script</span></div>
-    <h1>Full Implementation</h1>
-    <p>This script includes <strong>Configuration</strong>, <strong>ToggleUI logic</strong>, and <strong>Player Variable</strong> handling to ensure it works in-game immediately.</p>
+    <div class="stagger">
+      <div class="breadcrumbs">Guide <span class="sep">›</span> <span class="cur">Full Code Script</span></div>
+      <h1>Full <strong>Implementation</strong></h1>
+      <p>This script includes <strong>Configuration</strong>, <strong>ToggleUI logic</strong>, and <strong>Player Variable</strong> handling to ensure it works in-game immediately.</p>
+    </div>
     <div class="code-container">
-      <span class="code-lang-tag">lua</span>
-      <button class="code-copy">Copy Script</button>
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang-tag">lua</span>
+        <button class="code-copy">Copy Script</button>
+      </div>
       <pre><code class="language-lua">--- Configuration ---
 _G.dc = "https://discord.gg/yourdc"
 _G.XENOGUINAME = "name"
@@ -430,7 +736,7 @@ XENO:AddKeybind("Toggle Interface", Enum.KeyCode.RightControl, function()
 end, true)</code></pre>
     </div>
     <div class="footer-nav">
-      <button class="nav-btn" data-page="elements"><span>Previous Page</span><strong>Elements &amp; Commands</strong></button>
+      <button class="nav-btn" data-page="elements"><span>Previous Page</span><strong>← Elements &amp; Commands</strong></button>
       <div class="nav-spacer"></div>
     </div>
   </section>
@@ -440,10 +746,8 @@ end, true)</code></pre>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ── Syntax highlighting ──────────────────────────────────────
   hljs.highlightAll();
 
-  // ── Theme toggle ─────────────────────────────────────────────
   var html = document.documentElement;
   var themeBtn = document.getElementById('themeToggle');
   var hljsLight = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css';
@@ -464,14 +768,17 @@ document.addEventListener('DOMContentLoaded', function () {
     hljsEl.href = t === 'light' ? hljsLight : hljsDark;
   }
 
-  // ── Page navigation ──────────────────────────────────────────
   function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(function (p) {
-      p.classList.remove('active');
-    });
+    document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
     var target = document.getElementById(pageId);
     if (target) {
       target.classList.add('active');
+      var stagger = target.querySelector('.stagger');
+      if (stagger) {
+        stagger.classList.remove('stagger');
+        void stagger.offsetWidth;
+        stagger.classList.add('stagger');
+      }
       window.scrollTo(0, 0);
     }
     document.querySelectorAll('.nav-link').forEach(function (link) {
@@ -487,7 +794,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!document.getElementById(pageId).classList.contains('active')) showPage(pageId);
     setTimeout(function () {
       var el = document.getElementById(sectionId);
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 84, behavior: 'smooth' });
     }, 60);
   }
 
@@ -501,10 +808,9 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.addEventListener('click', function () { showPage(btn.dataset.page); });
   });
 
-  // ── Copy buttons ─────────────────────────────────────────────
   document.querySelectorAll('.code-copy').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var codeEl = btn.parentElement.querySelector('code');
+      var codeEl = btn.closest('.code-container').querySelector('code');
       if (!codeEl) return;
       navigator.clipboard.writeText(codeEl.innerText).then(function () {
         var orig = btn.textContent;
@@ -515,7 +821,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ── Anchor copy-link ─────────────────────────────────────────
   document.querySelectorAll('.anchor-link').forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
@@ -528,7 +833,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ── Mobile menu ──────────────────────────────────────────────
   document.getElementById('menuBtn').addEventListener('click', function () {
     document.getElementById('sidebar').classList.toggle('open');
   });
